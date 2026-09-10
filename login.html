@@ -8,6 +8,7 @@
 <title>Study Vision - Login</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -25,14 +26,14 @@ body{
     padding:20px;
 }
 
-.login-box{
+.box{
     width:100%;
     max-width:420px;
     background:#111620;
-    border:1px solid #242b38;
-    border-radius:20px;
+    border:1px solid #252d3a;
+    border-radius:22px;
     padding:30px;
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
 }
 
 .logo{
@@ -62,7 +63,7 @@ label{
 input{
     width:100%;
     padding:14px;
-    margin-bottom:16px;
+    margin-bottom:15px;
     border-radius:10px;
     border:1px solid #2b3445;
     background:#171d29;
@@ -72,13 +73,13 @@ input{
 }
 
 input:focus{
-    border-color:#667085;
+    border-color:#7d8799;
 }
 
 button{
     width:100%;
     padding:14px;
-    border:0;
+    border:none;
     border-radius:10px;
     background:white;
     color:#080b12;
@@ -91,188 +92,237 @@ button:hover{
     opacity:.9;
 }
 
+.link{
+    color:#bfc8d8;
+    cursor:pointer;
+    font-size:14px;
+    text-align:center;
+    margin-top:18px;
+}
+
+.link:hover{
+    color:white;
+}
+
 .forgot{
     text-align:right;
-    margin-top:-5px;
-    margin-bottom:18px;
     color:#aeb7c8;
     font-size:13px;
     cursor:pointer;
+    margin-top:-4px;
+    margin-bottom:18px;
 }
 
 .forgot:hover{
     color:white;
 }
 
-.switch{
-    text-align:center;
-    margin-top:20px;
-    color:#8d96a8;
-    font-size:14px;
-}
-
-.switch span{
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-}
-
 .message{
+    min-height:22px;
     text-align:center;
-    margin-top:15px;
+    margin-top:16px;
+    color:#d8deea;
     font-size:14px;
-    min-height:20px;
 }
+
+.logout-btn{
+    margin-top:10px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="box">
 
-<div class="logo">🧠 Study Vision</div>
+    <div class="logo">🧠 Study Vision</div>
 
-<div class="subtitle">
-Class 12th — JKBOSE
-</div>
-
-
-<!-- LOGIN -->
-
-<div id="loginSection">
-
-<h2>Login</h2>
-
-<label>Email</label>
-
-<input
-type="email"
-id="loginEmail"
-placeholder="Enter your email"
->
-
-<label>Password</label>
-
-<input
-type="password"
-id="loginPassword"
-placeholder="Enter your password"
->
-
-<div class="forgot" onclick="showForgot()">
-Forgot password?
-</div>
-
-<button onclick="loginUser()">
-Login
-</button>
-
-<div class="switch">
-Don't have an account?
-<span onclick="showSignup()">Sign Up</span>
-</div>
-
-</div>
+    <div class="subtitle">
+        Class 12th — JKBOSE
+    </div>
 
 
-<!-- SIGN UP -->
+    <!-- LOGIN -->
 
-<div id="signupSection" style="display:none;">
+    <div id="loginBox">
 
-<h2>Create Account</h2>
+        <h2>Login</h2>
 
-<label>Email</label>
+        <label>Email</label>
 
-<input
-type="email"
-id="signupEmail"
-placeholder="Enter your email"
->
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+        >
 
-<label>Password</label>
+        <label>Password</label>
 
-<input
-type="password"
-id="signupPassword"
-placeholder="Create a password"
->
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+        >
 
-<button onclick="signupUser()">
-Create Account
-</button>
+        <div
+            class="forgot"
+            onclick="showForgot()"
+        >
+            Forgot password?
+        </div>
 
-<div class="switch">
-Already have an account?
-<span onclick="showLogin()">Login</span>
-</div>
+        <button onclick="loginUser()">
+            Login
+        </button>
 
-</div>
+        <div
+            class="link"
+            onclick="showSignup()"
+        >
+            Don't have an account? Sign Up
+        </div>
 
-
-<!-- FORGOT PASSWORD -->
-
-<div id="forgotSection" style="display:none;">
-
-<h2>Forgot Password</h2>
-
-<label>Email</label>
-
-<input
-type="email"
-id="forgotEmail"
-placeholder="Enter your registered email"
->
-
-<button onclick="sendResetLink()">
-Send Reset Link
-</button>
-
-<div class="switch">
-Remember your password?
-<span onclick="showLogin()">Login</span>
-</div>
-
-</div>
+    </div>
 
 
-<!-- NEW PASSWORD -->
+    <!-- SIGN UP -->
 
-<div id="resetSection" style="display:none;">
+    <div
+        id="signupBox"
+        style="display:none;"
+    >
 
-<h2>Set New Password</h2>
+        <h2>Create Account</h2>
 
-<label>New Password</label>
+        <label>Email</label>
 
-<input
-type="password"
-id="newPassword"
-placeholder="Enter new password"
->
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+        >
 
-<label>Confirm Password</label>
+        <label>Password</label>
 
-<input
-type="password"
-id="confirmPassword"
-placeholder="Confirm new password"
->
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create password"
+        >
 
-<button onclick="updatePassword()">
-Update Password
-</button>
+        <button onclick="signupUser()">
+            Create Account
+        </button>
 
-</div>
+        <div
+            class="link"
+            onclick="showLogin()"
+        >
+            Already have an account? Login
+        </div>
+
+    </div>
 
 
-<div class="message" id="message"></div>
+    <!-- FORGOT PASSWORD -->
+
+    <div
+        id="forgotBox"
+        style="display:none;"
+    >
+
+        <h2>Forgot Password</h2>
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="forgotEmail"
+            placeholder="Enter your account email"
+        >
+
+        <button onclick="sendResetLink()">
+            Send Reset Link
+        </button>
+
+        <div
+            class="link"
+            onclick="showLogin()"
+        >
+            ← Back to Login
+        </div>
+
+    </div>
+
+
+    <!-- NEW PASSWORD -->
+
+    <div
+        id="resetBox"
+        style="display:none;"
+    >
+
+        <h2>New Password</h2>
+
+        <label>New Password</label>
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="Enter new password"
+        >
+
+        <label>Confirm Password</label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm new password"
+        >
+
+        <button onclick="updatePassword()">
+            Update Password
+        </button>
+
+    </div>
+
+
+    <!-- LOGOUT -->
+
+    <div
+        id="logoutBox"
+        style="display:none;"
+    >
+
+        <h2>You're Logged In</h2>
+
+        <button onclick="goDashboard()">
+            Open Dashboard
+        </button>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()"
+        >
+            Logout
+        </button>
+
+    </div>
+
+
+    <div
+        class="message"
+        id="message"
+    ></div>
 
 </div>
 
 
 <script type="module">
 
-import { createClient } from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { createClient }
+from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
 const SUPABASE_URL =
@@ -285,121 +335,66 @@ const SUPABASE_KEY =
 
 const supabase =
 createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
-
-// SHOW LOGIN
-
-window.showLogin = function(){
-
-document.getElementById("loginSection").style.display="block";
-document.getElementById("signupSection").style.display="none";
-document.getElementById("forgotSection").style.display="none";
-document.getElementById("resetSection").style.display="none";
-
-document.getElementById("message").innerText="";
-
-};
-
-
-// SHOW SIGNUP
-
-window.showSignup = function(){
-
-document.getElementById("loginSection").style.display="none";
-document.getElementById("signupSection").style.display="block";
-document.getElementById("forgotSection").style.display="none";
-document.getElementById("resetSection").style.display="none";
-
-document.getElementById("message").innerText="";
-
-};
-
-
-// SHOW FORGOT
-
-window.showForgot = function(){
-
-document.getElementById("loginSection").style.display="none";
-document.getElementById("signupSection").style.display="none";
-document.getElementById("forgotSection").style.display="block";
-document.getElementById("resetSection").style.display="none";
-
-document.getElementById("message").innerText="";
-
-};
-
-
-// SIGN UP
-
-window.signupUser = async function(){
-
-const email =
-document.getElementById("signupEmail").value.trim();
-
-const password =
-document.getElementById("signupPassword").value;
 
 const message =
 document.getElementById("message");
 
 
-if(!email || !password){
+function hideAll(){
 
-message.innerText =
-"Please enter email and password.";
+    document.getElementById("loginBox").style.display="none";
 
-return;
+    document.getElementById("signupBox").style.display="none";
 
-}
+    document.getElementById("forgotBox").style.display="none";
 
+    document.getElementById("resetBox").style.display="none";
 
-if(password.length < 6){
-
-message.innerText =
-"Password must be at least 6 characters.";
-
-return;
+    document.getElementById("logoutBox").style.display="none";
 
 }
 
 
-message.innerText =
-"Creating account...";
+window.showLogin = function(){
+
+    hideAll();
+
+    document.getElementById("loginBox").style.display="block";
+
+    message.innerText="";
+
+};
 
 
-const {data,error} =
-await supabase.auth.signUp({
+window.showSignup = function(){
 
-email:email,
-password:password
+    hideAll();
 
-});
+    document.getElementById("signupBox").style.display="block";
 
+    message.innerText="";
 
-if(error){
-
-message.innerText =
-error.message;
-
-return;
-
-}
+};
 
 
-if(data.session){
+window.showForgot = function(){
 
-window.location.href =
-"index.html";
+    hideAll();
 
-}else{
+    document.getElementById("forgotBox").style.display="block";
 
-message.innerText =
-"Account created! Check your email.";
+    message.innerText="";
 
-}
+};
+
+
+window.goDashboard = function(){
+
+    window.location.href="index.html";
 
 };
 
@@ -408,102 +403,270 @@ message.innerText =
 
 window.loginUser = async function(){
 
-const email =
-document.getElementById("loginEmail").value.trim();
+    const email =
+    document.getElementById("loginEmail").value.trim();
 
-const password =
-document.getElementById("loginPassword").value;
-
-const message =
-document.getElementById("message");
+    const password =
+    document.getElementById("loginPassword").value;
 
 
-if(!email || !password){
+    if(!email || !password){
 
-message.innerText =
-"Please enter email and password.";
+        message.innerText =
+        "Please enter email and password.";
 
-return;
-
-}
-
-
-message.innerText =
-"Logging in...";
+        return;
+    }
 
 
-const {data,error} =
-await supabase.auth.signInWithPassword({
-
-email:email,
-password:password
-
-});
+    message.innerText =
+    "Logging in...";
 
 
-if(error){
+    const {error} =
+    await supabase.auth.signInWithPassword({
 
-message.innerText =
-error.message;
+        email:email,
 
-return;
+        password:password
 
-}
+    });
 
 
-window.location.href =
-"index.html";
+    if(error){
+
+        message.innerText =
+        error.message;
+
+        return;
+    }
+
+
+    message.innerText =
+    "Login successful!";
+
+
+    setTimeout(function(){
+
+        window.location.href="index.html";
+
+    },500);
 
 };
 
 
-// SEND RESET LINK
+// SIGN UP
+
+window.signupUser = async function(){
+
+    const email =
+    document.getElementById("signupEmail").value.trim();
+
+    const password =
+    document.getElementById("signupPassword").value;
+
+
+    if(!email || !password){
+
+        message.innerText =
+        "Please enter email and password.";
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        message.innerText =
+        "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    message.innerText =
+    "Creating account...";
+
+
+    const {data,error} =
+    await supabase.auth.signUp({
+
+        email:email,
+
+        password:password
+
+    });
+
+
+    if(error){
+
+        message.innerText =
+        error.message;
+
+        return;
+    }
+
+
+    if(data.session){
+
+        window.location.href="index.html";
+
+    }else{
+
+        message.innerText =
+        "Account created! Check your email to verify it.";
+
+    }
+
+};
+
+
+// FORGOT PASSWORD
 
 window.sendResetLink = async function(){
 
-const email =
-document.getElementById("forgotEmail").value.trim();
-
-const message =
-document.getElementById("message");
+    const email =
+    document.getElementById("forgotEmail").value.trim();
 
 
-if(!email){
+    if(!email){
 
-message.innerText =
-"Please enter your email.";
+        message.innerText =
+        "Please enter your email.";
 
-return;
-
-}
-
-
-message.innerText =
-"Sending reset link...";
+        return;
+    }
 
 
-const {error} =
-await supabase.auth.resetPasswordForEmail(
-email,
-{
-redirectTo:
-"https://hamidfurqan918-svg.github.io/StudyVision/login.html"
-}
-);
+    message.innerText =
+    "Sending reset link...";
 
 
-if(error){
+    const {error} =
+    await supabase.auth.resetPasswordForEmail(
 
-message.innerText =
-error.message;
+        email,
 
-return;
+        {
+            redirectTo:
+            "https://hamidfurqan918-svg.github.io/StudyVision/login.html"
+        }
 
-}
+    );
 
 
-message.innerText =
-"Reset link sent! Check your email.";
+    if(error){
+
+        message.innerText =
+        error.message;
+
+        return;
+    }
+
+
+    message.innerText =
+    "Reset link sent! Check your email.";
+
+};
+
+
+// NEW PASSWORD
+
+window.updatePassword = async function(){
+
+    const password =
+    document.getElementById("newPassword").value;
+
+    const confirm =
+    document.getElementById("confirmPassword").value;
+
+
+    if(!password || !confirm){
+
+        message.innerText =
+        "Please fill both password fields.";
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        message.innerText =
+        "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    if(password !== confirm){
+
+        message.innerText =
+        "Passwords do not match.";
+
+        return;
+    }
+
+
+    message.innerText =
+    "Updating password...";
+
+
+    const {error} =
+    await supabase.auth.updateUser({
+
+        password:password
+
+    });
+
+
+    if(error){
+
+        message.innerText =
+        error.message;
+
+        return;
+    }
+
+
+    message.innerText =
+    "Password updated successfully!";
+
+
+    setTimeout(function(){
+
+        showLogin();
+
+    },1500);
+
+};
+
+
+// LOGOUT
+
+window.logoutUser = async function(){
+
+    message.innerText =
+    "Logging out...";
+
+
+    const {error} =
+    await supabase.auth.signOut();
+
+
+    if(error){
+
+        message.innerText =
+        error.message;
+
+        return;
+    }
+
+
+    showLogin();
+
+    message.innerText =
+    "Logged out successfully.";
 
 };
 
@@ -511,105 +674,26 @@ message.innerText =
 // PASSWORD RECOVERY
 
 supabase.auth.onAuthStateChange(
-async function(event){
 
-if(event === "PASSWORD_RECOVERY"){
+    function(event){
 
-document.getElementById("loginSection").style.display="none";
-document.getElementById("signupSection").style.display="none";
-document.getElementById("forgotSection").style.display="none";
-document.getElementById("resetSection").style.display="block";
+        if(event === "PASSWORD_RECOVERY"){
 
-document.getElementById("message").innerText =
-"Enter your new password.";
+            hideAll();
 
-}
+            document.getElementById("resetBox").style.display="block";
 
-}
+            message.innerText =
+            "Enter your new password.";
+
+        }
+
+    }
+
 );
 
 
-// UPDATE PASSWORD
-
-window.updatePassword = async function(){
-
-const password =
-document.getElementById("newPassword").value;
-
-const confirm =
-document.getElementById("confirmPassword").value;
-
-const message =
-document.getElementById("message");
-
-
-if(!password || !confirm){
-
-message.innerText =
-"Please fill both password fields.";
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-message.innerText =
-"Password must be at least 6 characters.";
-
-return;
-
-}
-
-
-if(password !== confirm){
-
-message.innerText =
-"Passwords do not match.";
-
-return;
-
-}
-
-
-message.innerText =
-"Updating password...";
-
-
-const {error} =
-await supabase.auth.updateUser({
-
-password:password
-
-});
-
-
-if(error){
-
-message.innerText =
-error.message;
-
-return;
-
-}
-
-
-message.innerText =
-"Password updated successfully!";
-
-
-setTimeout(function(){
-
-window.location.href =
-"index.html";
-
-},1500);
-
-};
-
-
-// CHECK SESSION
+// CHECK CURRENT SESSION
 
 const {data} =
 await supabase.auth.getSession();
@@ -617,8 +701,9 @@ await supabase.auth.getSession();
 
 if(data.session){
 
-window.location.href =
-"index.html";
+    hideAll();
+
+    document.getElementById("logoutBox").style.display="block";
 
 }
 
@@ -627,4 +712,3 @@ window.location.href =
 </body>
 </html>
 ```
-

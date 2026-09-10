@@ -1,22 +1,25 @@
 {
   "name": "Study Vision",
   "short_name": "Study Vision",
-  "id": "./",
-  "start_url": "./index.html",
+  "id": "/StudyVision/",
+  "start_url": "/StudyVision/",
+  "scope": "/StudyVision/",
   "display": "standalone",
   "background_color": "#080b12",
   "theme_color": "#080b12",
   "description": "Class 12th JKBOSE Study App",
   "icons": [
     {
-      "src": "./study-vision-icon-192.png",
+      "src": "/StudyVision/study-vision-icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "./study-vision-icon-512.png",
+      "src": "/StudyVision/study-vision-icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

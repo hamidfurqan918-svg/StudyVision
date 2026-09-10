@@ -1,9 +1,10 @@
-const CACHE_NAME = "study-vision-v1";
+const CACHE_NAME = "study-vision-v2";
 
 const FILES = [
     "./",
     "./index.html",
     "./manifest.json",
+    "./sw.js",
     "./notes.html",
     "./subjects.html",
     "./physics.html",
@@ -11,13 +12,16 @@ const FILES = [
     "./quiz.html",
     "./revision.html",
     "./progress.html",
-    "./chapter.html"
+    "./chapter.html",
+    "./study-vision-icon-192.png",
+    "./study-vision-icon-512.png"
 ];
 
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => cache.addAll(FILES))
     );
+    self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
@@ -32,6 +36,7 @@ self.addEventListener("activate", event => {
             )
         )
     );
+    self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {

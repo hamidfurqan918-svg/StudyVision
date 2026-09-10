@@ -2,7 +2,7 @@
   "name": "Study Vision",
   "short_name": "Study Vision",
   "id": "/StudyVision/",
-  "start_url": "/StudyVision/",
+  "start_url": "/StudyVision/login.html",
   "scope": "/StudyVision/",
   "display": "standalone",
   "background_color": "#080b12",

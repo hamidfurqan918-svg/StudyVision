@@ -1,8 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Study Vision - Login</title>
@@ -76,6 +78,39 @@ input:focus{
     border-color:#7d8799;
 }
 
+/* PASSWORD */
+
+.password-box{
+    position:relative;
+    width:100%;
+}
+
+.password-box input{
+    padding-right:52px;
+}
+
+.eye-btn{
+    position:absolute;
+    right:7px;
+    top:50%;
+    transform:translateY(-50%);
+    width:40px;
+    height:40px;
+    padding:0;
+    margin:0;
+    background:transparent;
+    border:none;
+    color:#aeb7c8;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.eye-btn:hover{
+    background:transparent;
+    color:white;
+    opacity:1;
+}
+
 button{
     width:100%;
     padding:14px;
@@ -130,26 +165,38 @@ button:hover{
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 <div class="box">
 
-    <div class="logo">🧠 Study Vision</div>
+
+    <!-- LOGO -->
+
+    <div class="logo">
+        🧠 Study Vision
+    </div>
 
     <div class="subtitle">
         Class 12th — JKBOSE
     </div>
 
 
-    <!-- LOGIN -->
+    <!-- ================= LOGIN ================= -->
 
     <div id="loginBox">
 
-        <h2>Login</h2>
+        <h2>
+            Login
+        </h2>
 
-        <label>Email</label>
+
+        <label>
+            Email
+        </label>
 
         <input
             type="email"
@@ -157,13 +204,29 @@ button:hover{
             placeholder="Enter your email"
         >
 
-        <label>Password</label>
 
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Enter your password"
-        >
+        <label>
+            Password
+        </label>
+
+        <div class="password-box">
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+            >
+
+            <button
+                type="button"
+                class="eye-btn"
+                onclick="togglePassword('loginPassword', this)"
+            >
+                👁️
+            </button>
+
+        </div>
+
 
         <div
             class="forgot"
@@ -172,9 +235,11 @@ button:hover{
             Forgot password?
         </div>
 
+
         <button onclick="loginUser()">
             Login
         </button>
+
 
         <div
             class="link"
@@ -186,16 +251,21 @@ button:hover{
     </div>
 
 
-    <!-- SIGN UP -->
+    <!-- ================= SIGN UP ================= -->
 
     <div
         id="signupBox"
         style="display:none;"
     >
 
-        <h2>Create Account</h2>
+        <h2>
+            Create Account
+        </h2>
 
-        <label>Email</label>
+
+        <label>
+            Email
+        </label>
 
         <input
             type="email"
@@ -203,17 +273,34 @@ button:hover{
             placeholder="Enter your email"
         >
 
-        <label>Password</label>
 
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="Create password"
-        >
+        <label>
+            Password
+        </label>
+
+        <div class="password-box">
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create password"
+            >
+
+            <button
+                type="button"
+                class="eye-btn"
+                onclick="togglePassword('signupPassword', this)"
+            >
+                👁️
+            </button>
+
+        </div>
+
 
         <button onclick="signupUser()">
             Create Account
         </button>
+
 
         <div
             class="link"
@@ -225,16 +312,21 @@ button:hover{
     </div>
 
 
-    <!-- FORGOT PASSWORD -->
+    <!-- ================= FORGOT PASSWORD ================= -->
 
     <div
         id="forgotBox"
         style="display:none;"
     >
 
-        <h2>Forgot Password</h2>
+        <h2>
+            Forgot Password
+        </h2>
 
-        <label>Email</label>
+
+        <label>
+            Email
+        </label>
 
         <input
             type="email"
@@ -242,9 +334,11 @@ button:hover{
             placeholder="Enter your account email"
         >
 
+
         <button onclick="sendResetLink()">
             Send Reset Link
         </button>
+
 
         <div
             class="link"
@@ -256,30 +350,63 @@ button:hover{
     </div>
 
 
-    <!-- NEW PASSWORD -->
+    <!-- ================= NEW PASSWORD ================= -->
 
     <div
         id="resetBox"
         style="display:none;"
     >
 
-        <h2>New Password</h2>
+        <h2>
+            New Password
+        </h2>
 
-        <label>New Password</label>
 
-        <input
-            type="password"
-            id="newPassword"
-            placeholder="Enter new password"
-        >
+        <label>
+            New Password
+        </label>
 
-        <label>Confirm Password</label>
+        <div class="password-box">
 
-        <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm new password"
-        >
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Enter new password"
+            >
+
+            <button
+                type="button"
+                class="eye-btn"
+                onclick="togglePassword('newPassword', this)"
+            >
+                👁️
+            </button>
+
+        </div>
+
+
+        <label>
+            Confirm Password
+        </label>
+
+        <div class="password-box">
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm new password"
+            >
+
+            <button
+                type="button"
+                class="eye-btn"
+                onclick="togglePassword('confirmPassword', this)"
+            >
+                👁️
+            </button>
+
+        </div>
+
 
         <button onclick="updatePassword()">
             Update Password
@@ -288,18 +415,22 @@ button:hover{
     </div>
 
 
-    <!-- LOGOUT -->
+    <!-- ================= LOGOUT ================= -->
 
     <div
         id="logoutBox"
         style="display:none;"
     >
 
-        <h2>You're Logged In</h2>
+        <h2>
+            You're Logged In
+        </h2>
+
 
         <button onclick="goDashboard()">
             Open Dashboard
         </button>
+
 
         <button
             class="logout-btn"
@@ -311,18 +442,26 @@ button:hover{
     </div>
 
 
+    <!-- MESSAGE -->
+
     <div
         class="message"
         id="message"
     ></div>
+
 
 </div>
 
 
 <script type="module">
 
-import { createClient }
-from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+import { createClient } from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
 const SUPABASE_URL =
@@ -344,293 +483,390 @@ const message =
 document.getElementById("message");
 
 
+/* =========================================
+   HIDE ALL BOXES
+========================================= */
+
 function hideAll(){
 
-    document.getElementById("loginBox").style.display="none";
+    document.getElementById("loginBox")
+        .style.display = "none";
 
-    document.getElementById("signupBox").style.display="none";
+    document.getElementById("signupBox")
+        .style.display = "none";
 
-    document.getElementById("forgotBox").style.display="none";
+    document.getElementById("forgotBox")
+        .style.display = "none";
 
-    document.getElementById("resetBox").style.display="none";
+    document.getElementById("resetBox")
+        .style.display = "none";
 
-    document.getElementById("logoutBox").style.display="none";
+    document.getElementById("logoutBox")
+        .style.display = "none";
 
 }
 
+
+/* =========================================
+   LOGIN PAGE
+========================================= */
 
 window.showLogin = function(){
 
     hideAll();
 
-    document.getElementById("loginBox").style.display="block";
+    document.getElementById("loginBox")
+        .style.display = "block";
 
-    message.innerText="";
+    message.innerText = "";
 
 };
 
+
+/* =========================================
+   SIGN UP PAGE
+========================================= */
 
 window.showSignup = function(){
 
     hideAll();
 
-    document.getElementById("signupBox").style.display="block";
+    document.getElementById("signupBox")
+        .style.display = "block";
 
-    message.innerText="";
+    message.innerText = "";
 
 };
 
+
+/* =========================================
+   FORGOT PASSWORD PAGE
+========================================= */
 
 window.showForgot = function(){
 
     hideAll();
 
-    document.getElementById("forgotBox").style.display="block";
+    document.getElementById("forgotBox")
+        .style.display = "block";
 
-    message.innerText="";
+    message.innerText = "";
 
 };
 
+
+/* =========================================
+   OPEN DASHBOARD
+========================================= */
 
 window.goDashboard = function(){
 
-    window.location.href="index.html";
+    window.location.href =
+        "index.html";
 
 };
 
 
-// LOGIN
+/* =========================================
+   PASSWORD SHOW / HIDE
+========================================= */
+
+window.togglePassword = function(
+    inputId,
+    button
+){
+
+    const input =
+        document.getElementById(inputId);
+
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.innerText = "🙈";
+
+    }
+    else{
+
+        input.type = "password";
+
+        button.innerText = "👁️";
+
+    }
+
+};
+
+
+/* =========================================
+   LOGIN
+========================================= */
 
 window.loginUser = async function(){
 
     const email =
-    document.getElementById("loginEmail").value.trim();
+        document.getElementById("loginEmail")
+        .value
+        .trim();
+
 
     const password =
-    document.getElementById("loginPassword").value;
+        document.getElementById("loginPassword")
+        .value;
 
 
     if(!email || !password){
 
         message.innerText =
-        "Please enter email and password.";
+            "Please enter email and password.";
 
         return;
+
     }
 
 
     message.innerText =
-    "Logging in...";
+        "Logging in...";
 
 
-    const {error} =
-    await supabase.auth.signInWithPassword({
+    const { error } =
+        await supabase.auth.signInWithPassword({
 
-        email:email,
+            email: email,
 
-        password:password
+            password: password
 
-    });
+        });
 
 
     if(error){
 
         message.innerText =
-        error.message;
+            error.message;
 
         return;
+
     }
 
 
     message.innerText =
-    "Login successful!";
+        "Login successful!";
 
 
     setTimeout(function(){
 
-        window.location.href="index.html";
+        window.location.href =
+            "index.html";
 
     },500);
 
 };
 
 
-// SIGN UP
+/* =========================================
+   SIGN UP
+========================================= */
 
 window.signupUser = async function(){
 
     const email =
-    document.getElementById("signupEmail").value.trim();
+        document.getElementById("signupEmail")
+        .value
+        .trim();
+
 
     const password =
-    document.getElementById("signupPassword").value;
+        document.getElementById("signupPassword")
+        .value;
 
 
     if(!email || !password){
 
         message.innerText =
-        "Please enter email and password.";
+            "Please enter email and password.";
 
         return;
+
     }
 
 
     if(password.length < 6){
 
         message.innerText =
-        "Password must be at least 6 characters.";
+            "Password must be at least 6 characters.";
 
         return;
+
     }
 
 
     message.innerText =
-    "Creating account...";
+        "Creating account...";
 
 
-    const {data,error} =
-    await supabase.auth.signUp({
+    const { data, error } =
+        await supabase.auth.signUp({
 
-        email:email,
+            email: email,
 
-        password:password
+            password: password
 
-    });
+        });
 
 
     if(error){
 
         message.innerText =
-        error.message;
+            error.message;
 
         return;
+
     }
 
 
     if(data.session){
 
-        window.location.href="index.html";
+        window.location.href =
+            "index.html";
 
-    }else{
+    }
+    else{
 
         message.innerText =
-        "Account created! Check your email to verify it.";
+            "Account created! Check your email to verify it.";
 
     }
 
 };
 
 
-// FORGOT PASSWORD
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
 
 window.sendResetLink = async function(){
 
     const email =
-    document.getElementById("forgotEmail").value.trim();
+        document.getElementById("forgotEmail")
+        .value
+        .trim();
 
 
     if(!email){
 
         message.innerText =
-        "Please enter your email.";
+            "Please enter your email.";
 
         return;
+
     }
 
 
     message.innerText =
-    "Sending reset link...";
+        "Sending reset link...";
 
 
-    const {error} =
-    await supabase.auth.resetPasswordForEmail(
+    const { error } =
+        await supabase.auth.resetPasswordForEmail(
 
-        email,
+            email,
 
-        {
-            redirectTo:
-            "https://hamidfurqan918-svg.github.io/StudyVision/login.html"
-        }
+            {
 
-    );
+                redirectTo:
+                "https://hamidfurqan918-svg.github.io/StudyVision/login.html"
+
+            }
+
+        );
 
 
     if(error){
 
         message.innerText =
-        error.message;
+            error.message;
 
         return;
+
     }
 
 
     message.innerText =
-    "Reset link sent! Check your email.";
+        "Reset link sent! Check your email.";
 
 };
 
 
-// NEW PASSWORD
+/* =========================================
+   UPDATE PASSWORD
+========================================= */
 
 window.updatePassword = async function(){
 
     const password =
-    document.getElementById("newPassword").value;
+        document.getElementById("newPassword")
+        .value;
+
 
     const confirm =
-    document.getElementById("confirmPassword").value;
+        document.getElementById("confirmPassword")
+        .value;
 
 
     if(!password || !confirm){
 
         message.innerText =
-        "Please fill both password fields.";
+            "Please fill both password fields.";
 
         return;
+
     }
 
 
     if(password.length < 6){
 
         message.innerText =
-        "Password must be at least 6 characters.";
+            "Password must be at least 6 characters.";
 
         return;
+
     }
 
 
     if(password !== confirm){
 
         message.innerText =
-        "Passwords do not match.";
+            "Passwords do not match.";
 
         return;
+
     }
 
 
     message.innerText =
-    "Updating password...";
+        "Updating password...";
 
 
-    const {error} =
-    await supabase.auth.updateUser({
+    const { error } =
+        await supabase.auth.updateUser({
 
-        password:password
+            password: password
 
-    });
+        });
 
 
     if(error){
 
         message.innerText =
-        error.message;
+            error.message;
 
         return;
+
     }
 
 
     message.innerText =
-    "Password updated successfully!";
+        "Password updated successfully!";
 
 
     setTimeout(function(){
@@ -642,36 +878,42 @@ window.updatePassword = async function(){
 };
 
 
-// LOGOUT
+/* =========================================
+   LOGOUT
+========================================= */
 
 window.logoutUser = async function(){
 
     message.innerText =
-    "Logging out...";
+        "Logging out...";
 
 
-    const {error} =
-    await supabase.auth.signOut();
+    const { error } =
+        await supabase.auth.signOut();
 
 
     if(error){
 
         message.innerText =
-        error.message;
+            error.message;
 
         return;
+
     }
 
 
     showLogin();
 
+
     message.innerText =
-    "Logged out successfully.";
+        "Logged out successfully.";
 
 };
 
 
-// PASSWORD RECOVERY
+/* =========================================
+   PASSWORD RECOVERY
+========================================= */
 
 supabase.auth.onAuthStateChange(
 
@@ -681,10 +923,12 @@ supabase.auth.onAuthStateChange(
 
             hideAll();
 
-            document.getElementById("resetBox").style.display="block";
+            document.getElementById("resetBox")
+                .style.display = "block";
+
 
             message.innerText =
-            "Enter your new password.";
+                "Enter your new password.";
 
         }
 
@@ -693,22 +937,25 @@ supabase.auth.onAuthStateChange(
 );
 
 
-// CHECK CURRENT SESSION
+/* =========================================
+   CHECK CURRENT SESSION
+========================================= */
 
-const {data} =
-await supabase.auth.getSession();
+const { data } =
+    await supabase.auth.getSession();
 
 
 if(data.session){
 
     hideAll();
 
-    document.getElementById("logoutBox").style.display="block";
+    document.getElementById("logoutBox")
+        .style.display = "block";
 
 }
 
 </script>
 
 </body>
+
 </html>
-```

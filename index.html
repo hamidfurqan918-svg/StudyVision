@@ -1,4 +1,3 @@
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,7 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -48,14 +47,15 @@ header{
 .header-buttons button{
     background:#1b2332;
     color:white;
-    border:1px solid #30394b;
-    padding:10px 14px;
+    border:1px solid #3a465b;
+    padding:11px 15px;
     border-radius:10px;
     cursor:pointer;
+    font-size:14px;
 }
 
 .header-buttons button:hover{
-    background:#273247;
+    background:#29364b;
 }
 
 .container{
@@ -153,18 +153,21 @@ header{
     font-size:14px;
 }
 
+/* SETTINGS */
+
 #settingsPanel{
     display:none;
     position:fixed;
     top:0;
     right:0;
-    width:330px;
+    width:350px;
     height:100%;
     background:#101622;
     border-left:1px solid #30394b;
     padding:25px;
     z-index:1000;
-    box-shadow:-10px 0 30px rgba(0,0,0,.4);
+    box-shadow:-10px 0 30px rgba(0,0,0,.5);
+    overflow-y:auto;
 }
 
 #settingsPanel h2{
@@ -178,6 +181,10 @@ header{
     margin-bottom:15px;
 }
 
+.setting-box strong{
+    font-size:15px;
+}
+
 .setting-box p{
     color:#aeb7c8;
     font-size:14px;
@@ -187,13 +194,18 @@ header{
 
 .settings-btn{
     width:100%;
-    padding:12px;
+    padding:13px;
     margin-top:10px;
     border:none;
     border-radius:10px;
     cursor:pointer;
     background:#273247;
     color:white;
+    font-size:14px;
+}
+
+.settings-btn:hover{
+    background:#34425a;
 }
 
 .logout-btn{
@@ -209,7 +221,7 @@ header{
     background:none;
     border:none;
     color:white;
-    font-size:24px;
+    font-size:28px;
     cursor:pointer;
 }
 
@@ -217,11 +229,12 @@ header{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.55);
+    background:rgba(0,0,0,.6);
     z-index:999;
 }
 
 @media(max-width:800px){
+
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
@@ -232,12 +245,33 @@ header{
 }
 
 @media(max-width:500px){
-    .stats{
-        grid-template-columns:1fr 1fr;
+
+    header{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .header-buttons button{
+        padding:9px 10px;
+    }
+
+    .container{
+        padding:15px;
+    }
+
+    .hero{
+        padding:22px;
+    }
+
+    .hero h1{
+        font-size:24px;
     }
 
     #settingsPanel{
-        width:85%;
+        width:88%;
     }
 }
 </style>
@@ -246,20 +280,40 @@ header{
 <body>
 
 <header>
-    <div class="logo">📚 Study Vision</div>
+
+    <div class="logo">
+        📚 Study Vision
+    </div>
 
     <div class="header-buttons">
-        <button onclick="openSettings()">⚙️ Settings</button>
+
+        <button onclick="openSettings()">
+            ⚙️ Settings
+        </button>
+
     </div>
+
 </header>
+
 
 <div class="container">
 
     <section class="hero">
-        <h1 id="greeting">Good Morning Furqan Hamid 👋</h1>
-        <p>🎓 Class 12th — JKBOSE</p>
-        <p style="margin-top:8px;">Your personal study dashboard</p>
+
+        <h1 id="greeting">
+            Good Morning Furqan Hamid 👋
+        </h1>
+
+        <p>
+            🎓 Class 12th — JKBOSE
+        </p>
+
+        <p style="margin-top:8px;">
+            Your personal study dashboard
+        </p>
+
     </section>
+
 
     <section class="stats">
 
@@ -285,6 +339,7 @@ header{
 
     </section>
 
+
     <section class="mission">
 
         <h2>🎯 Today's Mission</h2>
@@ -302,6 +357,7 @@ header{
         </div>
 
     </section>
+
 
     <section class="features">
 
@@ -339,56 +395,105 @@ header{
 
 </div>
 
-<div class="overlay" id="overlay" onclick="closeSettings()"></div>
+
+<!-- OVERLAY -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeSettings()">
+</div>
+
+
+<!-- SETTINGS PANEL -->
 
 <div id="settingsPanel">
 
-    <button class="close-btn" onclick="closeSettings()">×</button>
+    <button
+        class="close-btn"
+        onclick="closeSettings()">
+        ×
+    </button>
 
     <h2>⚙️ Settings</h2>
 
+
     <div class="setting-box">
+
         <strong>👤 Account</strong>
-        <p id="userEmail">Checking login...</p>
+
+        <p id="userEmail">
+            Checking login...
+        </p>
+
     </div>
 
+
     <div class="setting-box">
+
         <strong>📚 Class</strong>
-        <p>Class 12th — JKBOSE</p>
+
+        <p>
+            Class 12th — JKBOSE
+        </p>
+
     </div>
+
 
     <div class="setting-box">
+
         <strong>🌙 Appearance</strong>
-        <p>Dark Mode</p>
+
+        <p>
+            Dark Mode
+        </p>
+
     </div>
 
-    <button class="settings-btn" onclick="location.href='subjects.html'">
+
+    <button
+        class="settings-btn"
+        onclick="location.href='subjects.html'">
+
         📚 Manage Subjects
+
     </button>
 
-    <button class="settings-btn logout-btn" onclick="logout()">
+
+    <button
+        class="settings-btn logout-btn"
+        onclick="logout()">
+
         🚪 Logout
+
     </button>
 
 </div>
 
+
 <script type="module">
 
-import { createClient } from
+import { createClient }
+from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
 
 const SUPABASE_URL =
 'https://qnjfvoskjnyzrvrebdna.supabase.co';
 
+
 const SUPABASE_KEY =
 'sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9';
 
-const supabase = createClient(
+
+const supabase =
+createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
-/* LOGIN PROTECTION */
+
+/* CHECK LOGIN */
 
 async function checkLogin(){
 
@@ -396,16 +501,27 @@ async function checkLogin(){
         data: { session }
     } = await supabase.auth.getSession();
 
+
     if(!session){
 
-        window.location.href = 'login.html';
+        window.location.href =
+        'login.html';
 
         return;
     }
 
-    document.getElementById("userEmail").textContent =
-        session.user.email || "Logged in user";
+
+    const email =
+    session.user.email ||
+    "Logged in user";
+
+
+    document.getElementById(
+        "userEmail"
+    ).textContent = email;
+
 }
+
 
 checkLogin();
 
@@ -414,85 +530,137 @@ checkLogin();
 
 window.logout = async function(){
 
-    const { error } = await supabase.auth.signOut();
+    const { error } =
+    await supabase.auth.signOut();
+
 
     if(error){
 
-        alert("Logout failed. Please try again.");
+        alert(
+            "Logout failed. Please try again."
+        );
 
         return;
     }
 
-    window.location.href = 'login.html';
+
+    window.location.href =
+    'login.html';
+
 };
 
 
-/* SETTINGS */
+/* SETTINGS OPEN */
 
 window.openSettings = function(){
 
-    document.getElementById("settingsPanel").style.display = "block";
+    document.getElementById(
+        "settingsPanel"
+    ).style.display = "block";
 
-    document.getElementById("overlay").style.display = "block";
+
+    document.getElementById(
+        "overlay"
+    ).style.display = "block";
+
 };
+
+
+/* SETTINGS CLOSE */
 
 window.closeSettings = function(){
 
-    document.getElementById("settingsPanel").style.display = "none";
+    document.getElementById(
+        "settingsPanel"
+    ).style.display = "none";
 
-    document.getElementById("overlay").style.display = "none";
+
+    document.getElementById(
+        "overlay"
+    ).style.display = "none";
+
 };
 
 
 /* GREETING */
 
-const hour = new Date().getHours();
+const hour =
+new Date().getHours();
+
 
 let greeting;
 
+
 if(hour < 12){
 
-    greeting = "Good Morning Furqan Hamid 👋";
+    greeting =
+    "Good Morning Furqan Hamid 👋";
 
 }
 else if(hour < 17){
 
-    greeting = "Good Afternoon Furqan Hamid 👋";
+    greeting =
+    "Good Afternoon Furqan Hamid 👋";
 
 }
 else{
 
-    greeting = "Good Evening Furqan Hamid 👋";
+    greeting =
+    "Good Evening Furqan Hamid 👋";
 
 }
 
-document.getElementById("greeting").textContent = greeting;
+
+document.getElementById(
+    "greeting"
+).textContent = greeting;
 
 
 /* STUDY TIME */
 
 let studyTime =
-parseInt(localStorage.getItem("studyTime") || "0");
+parseInt(
+    localStorage.getItem(
+        "studyTime"
+    ) || "0"
+);
 
-document.getElementById("studyTime").textContent =
+
+document.getElementById(
+    "studyTime"
+).textContent =
 studyTime + " min";
 
 
 /* STREAK */
 
 let streak =
-parseInt(localStorage.getItem("streak") || "0");
+parseInt(
+    localStorage.getItem(
+        "streak"
+    ) || "0"
+);
 
-document.getElementById("streak").textContent =
+
+document.getElementById(
+    "streak"
+).textContent =
 streak + " Days";
 
 
 /* EXPERIENCE */
 
 let experience =
-parseInt(localStorage.getItem("experience") || "0");
+parseInt(
+    localStorage.getItem(
+        "experience"
+    ) || "0"
+);
 
-document.getElementById("experience").textContent =
+
+document.getElementById(
+    "experience"
+).textContent =
 experience + " XP";
 
 
@@ -500,26 +668,30 @@ experience + " XP";
 
 if("serviceWorker" in navigator){
 
-    window.addEventListener("load", function(){
+    window.addEventListener(
+        "load",
+        function(){
 
-        navigator.serviceWorker.register("./sw.js")
-        .then(function(){
+            navigator.serviceWorker
+            .register("./sw.js")
+            .then(function(){
 
-            console.log(
-                "Study Vision Service Worker Registered"
-            );
+                console.log(
+                    "Study Vision Service Worker Registered"
+                );
 
-        })
-        .catch(function(error){
+            })
+            .catch(function(error){
 
-            console.log(
-                "Service Worker Error:",
-                error
-            );
+                console.log(
+                    "Service Worker Error:",
+                    error
+                );
 
-        });
+            });
 
-    });
+        }
+    );
 
 }
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "study-vision-v2";
+const CACHE_NAME = "study-vision-v3";
 
 const FILES = [
     "./",

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Vision - Login</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#080b12;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#111620;
+    border:1px solid #242b38;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.logo{
+    text-align:center;
+    font-size:30px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#8d96a8;
+    margin-bottom:30px;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    color:#bfc8d8;
+    font-size:14px;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:16px;
+    border-radius:10px;
+    border:1px solid #2b3445;
+    background:#171d29;
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+input:focus{
+    border-color:#667085;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:10px;
+    background:#ffffff;
+    color:#080b12;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.switch{
+    text-align:center;
+    margin-top:20px;
+    color:#8d96a8;
+    font-size:14px;
+}
+
+.switch span{
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.message{
+    text-align:center;
+    margin-top:15px;
+    font-size:14px;
+    min-height:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">🧠 Study Vision</div>
+
+    <div class="subtitle">
+        Class 12th — JKBOSE
+    </div>
+
+    <div id="loginSection">
+
+        <h2>Login</h2>
+
+        <label>Email</label>
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+        >
+
+        <button onclick="loginUser()">
+            Login
+        </button>
+
+        <div class="switch">
+            Don't have an account?
+            <span onclick="showSignup()">Sign Up</span>
+        </div>
+
+    </div>
+
+
+    <div id="signupSection" style="display:none;">
+
+        <h2>Create Account</h2>
+
+        <label>Email</label>
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+        >
+
+        <button onclick="signupUser()">
+            Create Account
+        </button>
+
+        <div class="switch">
+            Already have an account?
+            <span onclick="showLogin()">Login</span>
+        </div>
+
+    </div>
+
+    <div class="message" id="message"></div>
+
+</div>
+
+
+<script type="module">
+
+import { createClient } from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+const SUPABASE_URL =
+"https://qnjfvoskjnyzrvrebdna.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9";
+
+
+const supabase =
+createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+window.showSignup = function(){
+
+    document.getElementById("loginSection").style.display = "none";
+
+    document.getElementById("signupSection").style.display = "block";
+
+    document.getElementById("message").innerText = "";
+};
+
+
+window.showLogin = function(){
+
+    document.getElementById("signupSection").style.display = "none";
+
+    document.getElementById("loginSection").style.display = "block";
+
+    document.getElementById("message").innerText = "";
+};
+
+
+window.signupUser = async function(){
+
+    const email =
+        document.getElementById("signupEmail").value.trim();
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if(!email || !password){
+
+        message.innerText =
+            "Please enter email and password.";
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        message.innerText =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    message.innerText =
+        "Creating account...";
+
+
+    const { data, error } =
+        await supabase.auth.signUp({
+
+            email:email,
+            password:password
+
+        });
+
+
+    if(error){
+
+        message.innerText =
+            error.message;
+
+        return;
+    }
+
+
+    if(data.session){
+
+        window.location.href =
+            "index.html";
+
+    }else{
+
+        message.innerText =
+            "Account created! Check your email to verify your account.";
+
+    }
+
+};
+
+
+window.loginUser = async function(){
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+
+    const message =
+        document.getElementById("message");
+
+
+    if(!email || !password){
+
+        message.innerText =
+            "Please enter email and password.";
+
+        return;
+    }
+
+
+    message.innerText =
+        "Logging in...";
+
+
+    const { data, error } =
+        await supabase.auth.signInWithPassword({
+
+            email:email,
+            password:password
+
+        });
+
+
+    if(error){
+
+        message.innerText =
+            error.message;
+
+        return;
+    }
+
+
+    window.location.href =
+        "index.html";
+
+};
+
+
+const { data } =
+    await supabase.auth.getSession();
+
+
+if(data.session){
+
+    window.location.href =
+        "index.html";
+}
+
+</script>
+
+</body>
+</html>

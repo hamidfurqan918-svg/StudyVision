@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -24,11 +25,12 @@
       href="./study-vision-icon-192.png">
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -232,6 +234,7 @@ button{
 }
 
 @media(max-width:750px){
+
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
@@ -248,6 +251,7 @@ button{
         font-size:24px;
     }
 }
+
 </style>
 </head>
 
@@ -256,26 +260,45 @@ button{
 <header>
 
     <div class="logo-area">
-        <img class="logo"
-             src="./study-vision-icon-192.png">
+
+        <img
+            class="logo"
+            src="./study-vision-icon-192.png"
+        >
 
         <div>
+
             <h2>Study Vision</h2>
-            <p>Class 12th JKBOSE</p>
+
+            <p>
+                Class 12th JKBOSE
+            </p>
+
         </div>
+
     </div>
 
+
     <div class="header-buttons">
-        <button id="installButton"
-                class="install-btn"
-                onclick="installApp()">
+
+        <button
+            id="installButton"
+            class="install-btn"
+            onclick="installApp()">
+
             📲 Install App
+
         </button>
 
-        <button class="icon-btn"
-                onclick="openSettings()">
+
+        <button
+            class="icon-btn"
+            onclick="openSettings()">
+
             ⚙️
+
         </button>
+
     </div>
 
 </header>
@@ -284,31 +307,75 @@ button{
 <div class="container">
 
     <div class="greeting">
-        <h1 id="greetingText">Good Morning 👋</h1>
+
+        <h1 id="greetingText">
+            Good Morning 👋
+        </h1>
+
         <p id="dateText"></p>
+
     </div>
 
 
     <div class="stats">
 
         <div class="stat">
-            <div class="stat-title">🎯 Today Goals</div>
-            <div class="stat-value" id="goals">0</div>
+
+            <div class="stat-title">
+                🎯 Today Goals
+            </div>
+
+            <div
+                class="stat-value"
+                id="goals">
+                0
+            </div>
+
         </div>
 
-        <div class="stat">
-            <div class="stat-title">⏱️ Study Time</div>
-            <div class="stat-value" id="studyTime">0 min</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-title">🔥 Streak</div>
-            <div class="stat-value" id="streak">0 days</div>
+
+            <div class="stat-title">
+                ⏱️ Study Time
+            </div>
+
+            <div
+                class="stat-value"
+                id="studyTime">
+                0 min
+            </div>
+
         </div>
 
+
         <div class="stat">
-            <div class="stat-title">⭐ Experience</div>
-            <div class="stat-value" id="xp">0 XP</div>
+
+            <div class="stat-title">
+                🔥 Streak
+            </div>
+
+            <div
+                class="stat-value"
+                id="streak">
+                0 days
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                ⭐ Experience
+            </div>
+
+            <div
+                class="stat-value"
+                id="xp">
+                0 XP
+            </div>
+
         </div>
 
     </div>
@@ -316,46 +383,118 @@ button{
 
     <div class="sections">
 
-        <div class="card"
-             onclick="location.href='subjects.html'">
-            <div class="card-icon">📚</div>
-            <h3>Subjects</h3>
-            <p>Physics, Chemistry, Maths and English</p>
+
+        <div
+            class="card"
+            onclick="location.href='subjects.html'">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <h3>
+                Subjects
+            </h3>
+
+            <p>
+                Physics, Chemistry, Maths and English
+            </p>
+
         </div>
 
-        <div class="card"
-             onclick="location.href='notes.html'">
-            <div class="card-icon">📝</div>
-            <h3>Quick Notes</h3>
-            <p>Important notes and revision material</p>
+
+        <div
+            class="card"
+            onclick="location.href='notes.html'">
+
+            <div class="card-icon">
+                📝
+            </div>
+
+            <h3>
+                Quick Notes
+            </h3>
+
+            <p>
+                Important notes and revision material
+            </p>
+
         </div>
 
-        <div class="card"
-             onclick="location.href='focus.html'">
-            <div class="card-icon">🎯</div>
-            <h3>Focus</h3>
-            <p>Study with focused sessions</p>
+
+        <div
+            class="card"
+            onclick="location.href='focus.html'">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <h3>
+                Focus
+            </h3>
+
+            <p>
+                Study with focused sessions
+            </p>
+
         </div>
 
-        <div class="card"
-             onclick="location.href='quiz.html'">
-            <div class="card-icon">🧠</div>
-            <h3>Quiz</h3>
-            <p>Test your knowledge</p>
+
+        <div
+            class="card"
+            onclick="location.href='quiz.html'">
+
+            <div class="card-icon">
+                🧠
+            </div>
+
+            <h3>
+                Quiz
+            </h3>
+
+            <p>
+                Test your knowledge
+            </p>
+
         </div>
 
-        <div class="card"
-             onclick="location.href='revision.html'">
-            <div class="card-icon">🔄</div>
-            <h3>Revision</h3>
-            <p>Revise important chapters</p>
+
+        <div
+            class="card"
+            onclick="location.href='revision.html'">
+
+            <div class="card-icon">
+                🔄
+            </div>
+
+            <h3>
+                Revision
+            </h3>
+
+            <p>
+                Revise important chapters
+            </p>
+
         </div>
 
-        <div class="card"
-             onclick="location.href='progress.html'">
-            <div class="card-icon">📊</div>
-            <h3>Progress</h3>
-            <p>Check your study progress</p>
+
+        <div
+            class="card"
+            onclick="location.href='progress.html'">
+
+            <div class="card-icon">
+                📊
+            </div>
+
+            <h3>
+                Progress
+            </h3>
+
+            <p>
+                Check your study progress
+            </p>
+
         </div>
 
     </div>
@@ -365,41 +504,92 @@ button{
 
 <!-- SETTINGS -->
 
-<div class="settings" id="settings">
+<div
+    class="settings"
+    id="settings">
 
     <div class="settings-box">
 
+
         <div class="settings-head">
-            <h2>⚙️ Settings</h2>
 
-            <button class="close"
-                    onclick="closeSettings()">
+            <h2>
+                ⚙️ Settings
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeSettings()">
+
                 ✕
+
             </button>
+
         </div>
 
+
         <div class="setting-item">
-            <small>Account</small>
-            <span id="userEmail">Checking...</span>
+
+            <small>
+                Account Name
+            </small>
+
+            <strong id="userName">
+                Loading...
+            </strong>
+
         </div>
 
+
         <div class="setting-item">
-            <small>Class</small>
-            <strong>Class 12th JKBOSE</strong>
+
+            <small>
+                Email
+            </small>
+
+            <span id="userEmail">
+                Loading...
+            </span>
+
         </div>
 
-        <div class="setting-item">
-            <small>Install Study Vision</small>
 
-            <button class="install-btn"
-                    onclick="installApp()">
+        <div class="setting-item">
+
+            <small>
+                Class
+            </small>
+
+            <strong>
+                Class 12th JKBOSE
+            </strong>
+
+        </div>
+
+
+        <div class="setting-item">
+
+            <small>
+                Install Study Vision
+            </small>
+
+            <button
+                class="install-btn"
+                onclick="installApp()">
+
                 📲 Install Study Vision
+
             </button>
+
         </div>
 
-        <button class="logout"
-                onclick="logout()">
+
+        <button
+            class="logout"
+            onclick="logout()">
+
             🚪 Logout
+
         </button>
 
     </div>
@@ -410,6 +600,9 @@ button{
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+
+/* SUPABASE */
 
 const SUPABASE_URL =
 "https://qnjfvoskjnyzrvrebdna.supabase.co";
@@ -424,7 +617,7 @@ supabase.createClient(
 );
 
 
-/* LOGIN CHECK */
+/* CHECK LOGIN + GET USER NAME */
 
 async function checkLogin(){
 
@@ -432,43 +625,108 @@ async function checkLogin(){
         data:{
             session
         }
-    } = await supabaseClient.auth.getSession();
+    } =
+    await supabaseClient.auth.getSession();
+
+
+    /* USER LOGIN NAHI HAI */
 
     if(!session){
 
-        window.location.replace("login.html");
+        window.location.replace(
+            "login.html"
+        );
+
         return;
     }
 
-    document.getElementById("userEmail")
-        .innerText = session.user.email;
+
+    const user =
+        session.user;
+
+
+    /* EMAIL */
+
+    document
+        .getElementById("userEmail")
+        .innerText =
+        user.email || "No email";
+
+
+    /* NAME */
+
+    let name =
+        user.user_metadata?.full_name;
+
+
+    /*
+       Agar naam nahi mila
+       to email ka pehla part use hoga
+    */
+
+    if(!name){
+
+        name =
+            user.email
+            ? user.email.split("@")[0]
+            : "Student";
+
+    }
+
+
+    /* NAME KO DASHBOARD PAR SHOW KARO */
+
+    document
+        .getElementById("userName")
+        .innerText = name;
+
+
+    updateGreeting(name);
 }
+
 
 checkLogin();
 
 
 /* GREETING */
 
-function updateGreeting(){
+function updateGreeting(name){
 
-    const hour = new Date().getHours();
+    const hour =
+        new Date().getHours();
+
 
     let greeting;
 
+
     if(hour < 12){
-        greeting = "Good Morning 👋";
+
+        greeting =
+            "Good Morning";
+
     }
     else if(hour < 17){
-        greeting = "Good Afternoon 👋";
+
+        greeting =
+            "Good Afternoon";
+
     }
     else{
-        greeting = "Good Evening 👋";
+
+        greeting =
+            "Good Evening";
+
     }
 
-    document.getElementById("greetingText")
-        .innerText = greeting + " Furqan Hamid";
 
-    document.getElementById("dateText")
+    document
+        .getElementById("greetingText")
+        .innerText =
+        greeting + " " + name + " 👋";
+
+
+    document
+        .getElementById("dateText")
         .innerText =
         new Date().toLocaleDateString(
             "en-IN",
@@ -481,19 +739,24 @@ function updateGreeting(){
         );
 }
 
-updateGreeting();
-
 
 /* SETTINGS */
 
 function openSettings(){
-    document.getElementById("settings")
-        .style.display = "block";
+
+    document
+        .getElementById("settings")
+        .style.display =
+        "block";
 }
 
+
 function closeSettings(){
-    document.getElementById("settings")
-        .style.display = "none";
+
+    document
+        .getElementById("settings")
+        .style.display =
+        "none";
 }
 
 
@@ -503,7 +766,9 @@ async function logout(){
 
     await supabaseClient.auth.signOut();
 
-    window.location.replace("login.html");
+    window.location.replace(
+        "login.html"
+    );
 }
 
 
@@ -511,8 +776,11 @@ async function logout(){
 
 let deferredPrompt = null;
 
+
 const installButton =
-document.getElementById("installButton");
+document.getElementById(
+    "installButton"
+);
 
 
 window.addEventListener(
@@ -521,9 +789,12 @@ window.addEventListener(
 
         event.preventDefault();
 
-        deferredPrompt = event;
+        deferredPrompt =
+            event;
 
-        installButton.style.display = "block";
+        installButton.style.display =
+            "block";
+
     }
 );
 
@@ -533,22 +804,28 @@ async function installApp(){
     if(!deferredPrompt){
 
         alert(
-            "Install option abhi browser ne ready nahi kiya. " +
+            "Install option abhi ready nahi hai. " +
             "Live Study Vision website ko ek baar refresh karo."
         );
 
         return;
     }
 
+
     deferredPrompt.prompt();
+
 
     const result =
         await deferredPrompt.userChoice;
 
+
     if(result.outcome === "accepted"){
 
-        installButton.style.display = "none";
+        installButton.style.display =
+            "none";
+
     }
+
 
     deferredPrompt = null;
 }
@@ -558,7 +835,8 @@ window.addEventListener(
     "appinstalled",
     function(){
 
-        installButton.style.display = "none";
+        installButton.style.display =
+            "none";
 
     }
 );

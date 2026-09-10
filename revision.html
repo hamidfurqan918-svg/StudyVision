@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Revision | Study Vision</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080d20;
+    color: white;
+}
+
+header {
+    padding: 20px 40px;
+    background: #111936;
+    border-bottom: 1px solid #293765;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.back {
+    background: #5865f2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 34px;
+}
+
+.subtitle {
+    color: #9ca8d0;
+    margin-bottom: 35px;
+}
+
+.revision-box {
+    background: #111936;
+    border: 1px solid #293765;
+    border-radius: 22px;
+    padding: 35px;
+}
+
+.topic {
+    color: #8ea0ff;
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+.question {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 25px 0;
+}
+
+.answer {
+    display: none;
+    background: #172343;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #dce3ff;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 14px 22px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.show {
+    background: #fbbf24;
+    color: #171000;
+}
+
+.random {
+    background: #5865f2;
+    color: white;
+}
+
+.xp {
+    margin-top: 25px;
+    color: #9ca8d0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🧠 Study Vision</div>
+    <button class="back" onclick="goBack()">← Dashboard</button>
+</header>
+
+<div class="container">
+
+    <h1>🔀 Random Revision</h1>
+
+    <p class="subtitle">
+        Randomly revise your subjects and chapters.
+    </p>
+
+    <div class="revision-box">
+
+        <div class="topic" id="topic">
+            Ready for revision?
+        </div>
+
+        <div class="question" id="question">
+            Click "Give Me a Question" to start.
+        </div>
+
+        <div class="answer" id="answer"></div>
+
+        <div class="buttons">
+            <button class="random" onclick="newQuestion()">
+                🎲 Give Me a Question
+            </button>
+
+            <button class="show" onclick="showAnswer()">
+                💡 Show Answer
+            </button>
+        </div>
+
+        <div class="xp" id="xpText">
+            ⭐ Revision XP: 0
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const revisionData = [
+
+    {
+        subject: "Physics",
+        chapter: "Electric Charges and Fields",
+        question: "What is the SI unit of electric charge?",
+        answer: "The SI unit of electric charge is Coulomb (C)."
+    },
+
+    {
+        subject: "Physics",
+        chapter: "Electric Charges and Fields",
+        question: "What does Coulomb's Law describe?",
+        answer: "Coulomb's Law describes the electrostatic force between two point charges."
+    },
+
+    {
+        subject: "Physics",
+        chapter: "Current Electricity",
+        question: "What is the SI unit of electric current?",
+        answer: "The SI unit of electric current is Ampere (A)."
+    },
+
+    {
+        subject: "Chemistry",
+        chapter: "Solutions",
+        question: "What is a solution?",
+        answer: "A solution is a homogeneous mixture of two or more substances."
+    },
+
+    {
+        subject: "Chemistry",
+        chapter: "Chemical Kinetics",
+        question: "What is the rate of a chemical reaction?",
+        answer: "It is the change in concentration of a reactant or product per unit time."
+    },
+
+    {
+        subject: "Mathematics",
+        chapter: "Relations and Functions",
+        question: "What is a function?",
+        answer: "A function is a relation in which every element of the domain has exactly one image in the codomain."
+    },
+
+    {
+        subject: "Mathematics",
+        chapter: "Matrices",
+        question: "What is a matrix?",
+        answer: "A matrix is a rectangular arrangement of numbers or elements in rows and columns."
+    },
+
+    {
+        subject: "Mathematics",
+        chapter: "Probability",
+        question: "What is the probability of a sure event?",
+        answer: "The probability of a sure event is 1."
+    },
+
+    {
+        subject: "English",
+        chapter: "Grammar",
+        question: "What is a noun?",
+        answer: "A noun is a word used to name a person, place, thing, or idea."
+    }
+
+];
+
+let currentQuestion = null;
+let revisionXP =
+    Number(localStorage.getItem("revisionXP")) || 0;
+
+function newQuestion() {
+
+    const randomIndex =
+        Math.floor(Math.random() * revisionData.length);
+
+    currentQuestion = revisionData[randomIndex];
+
+    document.getElementById("topic").textContent =
+        currentQuestion.subject +
+        " • " +
+        currentQuestion.chapter;
+
+    document.getElementById("question").textContent =
+        currentQuestion.question;
+
+    document.getElementById("answer").textContent =
+        currentQuestion.answer;
+
+    document.getElementById("answer").style.display = "none";
+
+    revisionXP += 5;
+
+    localStorage.setItem("revisionXP", revisionXP);
+
+    document.getElementById("xpText").textContent =
+        "⭐ Revision XP: " + revisionXP;
+}
+
+function showAnswer() {
+
+    if (currentQuestion === null) {
+        alert("🎲 Pehle ek question generate karo!");
+        return;
+    }
+
+    document.getElementById("answer").style.display =
+        "block";
+}
+
+function goBack() {
+
+    window.location.href = "index.html";
+}
+
+document.getElementById("xpText").textContent =
+    "⭐ Revision XP: " + revisionXP;
+
+</script>
+
+</body>
+</html>

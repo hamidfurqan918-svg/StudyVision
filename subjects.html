@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Class 12th JKBOSE - Subjects</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0b1020;
+    color:white;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    background:#11182d;
+    border-bottom:1px solid #202b48;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#7c5cff;
+}
+
+.back{
+    background:#1a2440;
+    color:white;
+    border:1px solid #2b395c;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.back:hover{
+    background:#253252;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:35px;
+}
+
+/* TITLE */
+
+.title-box{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.title-box h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.title-box h1 span{
+    color:#7c5cff;
+}
+
+.title-box p{
+    color:#9ca8c3;
+    font-size:15px;
+}
+
+/* SUBJECT */
+
+.subject{
+    margin-bottom:30px;
+}
+
+.subject-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.subject-icon{
+    font-size:30px;
+}
+
+.subject-header h2{
+    font-size:24px;
+}
+
+.chapter-count{
+    color:#8995b2;
+    font-size:13px;
+}
+
+/* CHAPTER GRID */
+
+.chapters{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.chapter{
+    background:#11182d;
+    border:1px solid #202b48;
+    border-radius:14px;
+    padding:17px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.chapter:hover{
+    transform:translateY(-3px);
+    border-color:#7c5cff;
+    background:#151d34;
+}
+
+.chapter-number{
+    color:#7c5cff;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.chapter-name{
+    font-size:15px;
+    line-height:1.4;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#69758f;
+    padding:20px;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .chapters{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .container{
+        padding:20px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .chapters{
+        grid-template-columns:1fr;
+    }
+
+    .title-box h1{
+        font-size:27px;
+    }
+
+    header{
+        padding:0 18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🧠 Study <span>Vision</span>
+    </div>
+
+    <button class="back" onclick="goBack()">
+        ← Dashboard
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <!-- TITLE -->
+
+    <div class="title-box">
+
+        <h1>
+            Class 12th — <span>JKBOSE</span>
+        </h1>
+
+        <p>
+            Choose your subject and start studying chapter-wise 📚
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         MATHEMATICS
+    ========================== -->
+
+    <div class="subject">
+
+        <div class="subject-header">
+
+            <div class="subject-icon">
+                📐
+            </div>
+
+            <div>
+                <h2>Mathematics</h2>
+                <div class="chapter-count">
+                    13 Chapters
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chapters" id="mathsChapters"></div>
+
+    </div>
+
+
+    <!-- =========================
+         PHYSICS
+    ========================== -->
+
+    <div class="subject">
+
+        <div class="subject-header">
+
+            <div class="subject-icon">
+                ⚡
+            </div>
+
+            <div>
+                <h2>Physics</h2>
+                <div class="chapter-count">
+                    14 Chapters
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chapters" id="physicsChapters"></div>
+
+    </div>
+
+
+    <!-- =========================
+         CHEMISTRY
+    ========================== -->
+
+    <div class="subject">
+
+        <div class="subject-header">
+
+            <div class="subject-icon">
+                🧪
+            </div>
+
+            <div>
+                <h2>Chemistry</h2>
+                <div class="chapter-count">
+                    10 Chapters
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chapters" id="chemistryChapters"></div>
+
+    </div>
+
+
+    <!-- =========================
+         ENGLISH
+    ========================== -->
+
+    <div class="subject">
+
+        <div class="subject-header">
+
+            <div class="subject-icon">
+                📖
+            </div>
+
+            <div>
+                <h2>English</h2>
+                <div class="chapter-count">
+                    5 Sections
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chapters" id="englishChapters"></div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 Study Vision • Class 12th JKBOSE 🎓
+</footer>
+
+
+<script>
+
+/* =========================
+   SUBJECT DATA
+========================= */
+
+const subjects = {
+
+    "Mathematics": [
+
+        "Relations and Functions",
+        "Inverse Trigonometric Functions",
+        "Matrices",
+        "Determinants",
+        "Continuity and Differentiability",
+        "Applications of Derivatives",
+        "Integrals",
+        "Applications of Integrals",
+        "Differential Equations",
+        "Vector Algebra",
+        "Three Dimensional Geometry",
+        "Linear Programming",
+        "Probability"
+
+    ],
+
+
+    "Physics": [
+
+        "Electric Charges and Fields",
+        "Electrostatic Potential and Capacitance",
+        "Current Electricity",
+        "Moving Charges and Magnetism",
+        "Magnetism and Matter",
+        "Electromagnetic Induction",
+        "Alternating Current",
+        "Electromagnetic Waves",
+        "Ray Optics",
+        "Wave Optics",
+        "Dual Nature of Radiation",
+        "Atoms",
+        "Nuclei",
+        "Semiconductor Electronics"
+
+    ],
+
+
+    "Chemistry": [
+
+        "Solutions",
+        "Electrochemistry",
+        "Chemical Kinetics",
+        "d and f Block Elements",
+        "Coordination Compounds",
+        "Haloalkanes and Haloarenes",
+        "Alcohols, Phenols and Ethers",
+        "Aldehydes, Ketones and Carboxylic Acids",
+        "Amines",
+        "Biomolecules"
+
+    ],
+
+
+    "English": [
+
+        "Reading Comprehension",
+        "Writing Skills",
+        "Literature",
+        "Poetry",
+        "Grammar"
+
+    ]
+
+};
+
+
+/* =========================
+   CREATE CHAPTERS
+========================= */
+
+function createChapters(subject, elementId){
+
+    const container =
+        document.getElementById(elementId);
+
+    subjects[subject].forEach(
+        function(chapter,index){
+
+            const div =
+                document.createElement("div");
+
+            div.className = "chapter";
+
+            div.innerHTML = `
+
+                <div class="chapter-number">
+                    CHAPTER ${index + 1}
+                </div>
+
+                <div class="chapter-name">
+                    ${chapter}
+                </div>
+
+            `;
+
+
+            div.onclick = function(){
+
+                window.location.href =
+                    "chapter.html?subject=" +
+                    encodeURIComponent(subject) +
+                    "&chapter=" +
+                    encodeURIComponent(chapter);
+
+            };
+
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* =========================
+   LOAD ALL SUBJECTS
+========================= */
+
+createChapters(
+    "Mathematics",
+    "mathsChapters"
+);
+
+createChapters(
+    "Physics",
+    "physicsChapters"
+);
+
+createChapters(
+    "Chemistry",
+    "chemistryChapters"
+);
+
+createChapters(
+    "English",
+    "englishChapters"
+);
+
+
+/* =========================
+   BACK TO DASHBOARD
+========================= */
+
+function goBack(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+</body>
+</html>

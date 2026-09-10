@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Vision - Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0b1020;
+    color:white;
+    min-height:100vh;
+}
+
+.header{
+    background:#11182d;
+    padding:20px 35px;
+    border-bottom:1px solid #252d48;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.back{
+    background:#252d48;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.back:hover{
+    background:#303957;
+}
+
+.container{
+    max-width:900px;
+    margin:35px auto;
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    font-size:34px;
+    margin-bottom:8px;
+}
+
+.title p{
+    color:#9da7c2;
+}
+
+/* FILTERS */
+
+.filters{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+select{
+    width:100%;
+    padding:14px;
+
+    background:#151d35;
+    color:white;
+
+    border:1px solid #303957;
+    border-radius:12px;
+
+    outline:none;
+    cursor:pointer;
+}
+
+/* QUIZ */
+
+.quiz-card{
+    background:#151d35;
+
+    border:1px solid #252d48;
+    border-radius:20px;
+
+    padding:28px;
+}
+
+.info{
+    display:flex;
+    justify-content:space-between;
+
+    color:#9da7c2;
+
+    margin-bottom:22px;
+}
+
+.question{
+    font-size:21px;
+    line-height:1.5;
+
+    margin-bottom:25px;
+}
+
+/* OPTIONS */
+
+.option{
+    background:#0f162b;
+
+    border:1px solid #303957;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    margin:12px 0;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#6675ff;
+    transform:translateX(3px);
+}
+
+.option.correct{
+    background:#123526;
+    border-color:#35d07f;
+}
+
+.option.wrong{
+    background:#3a1717;
+    border-color:#ff5c5c;
+}
+
+.next{
+    width:100%;
+
+    margin-top:20px;
+
+    background:#6675ff;
+    color:white;
+
+    border:none;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.next:hover{
+    background:#7885ff;
+}
+
+/* RESULT */
+
+.result{
+    text-align:center;
+    padding:35px;
+}
+
+.result h2{
+    font-size:32px;
+    margin-bottom:18px;
+}
+
+.result p{
+    color:#c7cde0;
+    margin:10px;
+    font-size:18px;
+}
+
+.restart{
+    margin-top:20px;
+
+    background:#6675ff;
+    color:white;
+
+    border:none;
+
+    padding:13px 25px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+.hidden{
+    display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .header{
+        padding:18px;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:15px;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .title h1{
+        font-size:28px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="logo">
+        🧠 Study Vision
+    </div>
+
+    <button class="back" onclick="goBack()">
+        ← Back
+    </button>
+
+</div>
+
+
+
+<div class="container">
+
+
+<!-- TITLE -->
+
+<div class="title">
+
+    <h1>🧠 Study Quiz</h1>
+
+    <p>
+        Test your knowledge from all subjects
+    </p>
+
+</div>
+
+
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+    <select id="subjectFilter" onchange="changeSubject()">
+
+        <option value="All">
+            📚 All Subjects
+        </option>
+
+        <option value="Physics">
+            ⚡ Physics
+        </option>
+
+        <option value="Maths">
+            📐 Maths
+        </option>
+
+        <option value="Chemistry">
+            🧪 Chemistry
+        </option>
+
+        <option value="English">
+            📖 English
+        </option>
+
+    </select>
+
+
+    <select id="chapterFilter" onchange="startQuiz()">
+
+        <option value="All">
+            📚 All Chapters
+        </option>
+
+    </select>
+
+</div>
+
+
+
+<!-- QUIZ BOX -->
+
+<div class="quiz-card" id="quizBox">
+
+
+    <div class="info">
+
+        <span id="subjectName">
+            Subject
+        </span>
+
+        <span id="score">
+            Score: 0
+        </span>
+
+    </div>
+
+
+    <div class="question" id="question">
+
+        Loading question...
+
+    </div>
+
+
+    <div id="options">
+
+    </div>
+
+
+    <button
+        class="next"
+        onclick="nextQuestion()">
+
+        Next Question →
+
+    </button>
+
+
+</div>
+
+
+
+<!-- RESULT -->
+
+<div
+    class="quiz-card result hidden"
+    id="resultBox">
+
+
+    <h2>
+        🎉 Quiz Complete!
+    </h2>
+
+
+    <p id="finalScore">
+        Your Score: 0
+    </p>
+
+
+    <p id="finalXP">
+        ⭐ XP Earned: 0
+    </p>
+
+
+    <button
+        class="restart"
+        onclick="startQuiz()">
+
+        🔄 Try Again
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   QUESTION BANK
+===================================================== */
+
+
+const questions = [
+
+
+
+/* =====================================================
+   PHYSICS
+===================================================== */
+
+
+/* Electric Charges and Fields */
+
+{
+    subject:"Physics",
+    chapter:"Electric Charges and Fields",
+
+    q:"The SI unit of electric charge is:",
+
+    options:[
+        "Volt",
+        "Coulomb",
+        "Ampere",
+        "Ohm"
+    ],
+
+    answer:1
+},
+
+{
+    subject:"Physics",
+    chapter:"Electric Charges and Fields",
+
+    q:"The SI unit of electric field is:",
+
+    options:[
+        "N/C",
+        "J/C",
+        "C/N",
+        "N/m"
+    ],
+
+    answer:0
+},
+
+{
+    subject:"Physics",
+    chapter:"Electric Charges and Fields",
+
+    q:"According to Coulomb's law, electrostatic force is proportional to:",
+
+    options:[
+        "Product of charges",
+        "Sum of charges",
+        "Difference of charges",
+        "Square of distance"
+    ],
+
+    answer:0
+},
+
+
+
+/* Electrostatic Potential and Capacitance */
+
+{
+    subject:"Physics",
+    chapter:"Electrostatic Potential and Capacitance",
+
+    q:"The SI unit of capacitance is:",
+
+    options:[
+        "Tesla",
+        "Farad",
+        "Henry",
+        "Weber"
+    ],
+
+    answer:1
+},
+
+{
+    subject:"Physics",
+    chapter:"Electrostatic Potential and Capacitance",
+
+    q:"A capacitor stores energy in its:",
+
+    options:[
+        "Magnetic field",
+        "Electric field",
+        "Gravitational field",
+        "Mechanical field"
+    ],
+
+    answer:1
+},
+
+
+
+/* Current Electricity */
+
+{
+    subject:"Physics",
+    chapter:"Current Electricity",
+
+    q:"The SI unit of resistance is:",
+
+    options:[
+        "Volt",
+        "Ampere",
+        "Ohm",
+        "Coulomb"
+    ],
+
+    answer:2
+},
+
+{
+    subject:"Physics",
+    chapter:"Current Electricity",
+
+    q:"Ohm's law is represented by:",
+
+    options:[
+        "V = IR",
+        "P = VI",
+        "Q = It",
+        "F = qE"
+    ],
+
+    answer:0
+},
+
+
+
+/* Moving Charges and Magnetism */
+
+{
+    subject:"Physics",
+    chapter:"Moving Charges and Magnetism",
+
+    q:"The SI unit of magnetic field is:",
+
+    options:[
+        "Tesla",
+        "Newton",
+        "Joule",
+        "Farad"
+    ],
+
+    answer:0
+},
+
+
+
+/* Magnetism and Matter */
+
+{
+    subject:"Physics",
+    chapter:"Magnetism and Matter",
+
+    q:"The SI unit of magnetic moment is:",
+
+    options:[
+        "A m²",
+        "N/C",
+        "T/m",
+        "C/V"
+    ],
+
+    answer:0
+},
+
+
+
+/* Electromagnetic Induction */
+
+{
+    subject:"Physics",
+    chapter:"Electromagnetic Induction",
+
+    q:"Faraday's law is related to:",
+
+    options:[
+        "Electromagnetic induction",
+        "Electric resistance",
+        "Heat transfer",
+        "Gravitation"
+    ],
+
+    answer:0
+},
+
+
+
+/* Alternating Current */
+
+{
+    subject:"Physics",
+    chapter:"Alternating Current",
+
+    q:"The frequency of AC supply in India is normally:",
+
+    options:[
+        "40 Hz",
+        "50 Hz",
+        "60 Hz",
+        "100 Hz"
+    ],
+
+    answer:1
+},
+
+
+
+/* Electromagnetic Waves */
+
+{
+    subject:"Physics",
+    chapter:"Electromagnetic Waves",
+
+    q:"Electromagnetic waves can travel through:",
+
+    options:[
+        "Only solids",
+        "Only liquids",
+        "Vacuum",
+        "Only metals"
+    ],
+
+    answer:2
+},
+
+
+
+/* Ray Optics */
+
+{
+    subject:"Physics",
+    chapter:"Ray Optics",
+
+    q:"The SI unit of power of a lens is:",
+
+    options:[
+        "Metre",
+        "Dioptre",
+        "Newton",
+        "Joule"
+    ],
+
+    answer:1
+},
+
+
+
+/* Wave Optics */
+
+{
+    subject:"Physics",
+    chapter:"Wave Optics",
+
+    q:"Interference is a phenomenon associated with:",
+
+    options:[
+        "Superposition of waves",
+        "Only heating",
+        "Gravitation",
+        "Electric resistance"
+    ],
+
+    answer:0
+},
+
+
+
+/* Dual Nature */
+
+{
+    subject:"Physics",
+    chapter:"Dual Nature of Radiation",
+
+    q:"The photoelectric effect supports the:",
+
+    options:[
+        "Wave nature only",
+        "Particle nature of light",
+        "Gravitational nature",
+        "Magnetic nature only"
+    ],
+
+    answer:1
+},
+
+
+
+/* Atoms */
+
+{
+    subject:"Physics",
+    chapter:"Atoms",
+
+    q:"Rutherford's model was based mainly on:",
+
+    options:[
+        "Gold foil experiment",
+        "Photoelectric effect",
+        "Millikan experiment",
+        "Faraday experiment"
+    ],
+
+    answer:0
+},
+
+
+
+/* Nuclei */
+
+{
+    subject:"Physics",
+    chapter:"Nuclei",
+
+    q:"The nucleus of an atom contains:",
+
+    options:[
+        "Only electrons",
+        "Protons and neutrons",
+        "Only neutrons",
+        "Electrons and photons"
+    ],
+
+    answer:1
+},
+
+
+
+/* Semiconductor */
+
+{
+    subject:"Physics",
+    chapter:"Semiconductor Electronics",
+
+    q:"A semiconductor has conductivity between that of:",
+
+    options:[
+        "Conductor and insulator",
+        "Two conductors",
+        "Two insulators",
+        "Vacuum and conductor"
+    ],
+
+    answer:0
+},
+
+
+
+/* =====================================================
+   MATHS
+===================================================== */
+
+
+/* Relations */
+
+{
+    subject:"Maths",
+    chapter:"Relations and Functions",
+
+    q:"A relation from A to B is a subset of:",
+
+    options:[
+        "A × B",
+        "B × A",
+        "A + B",
+        "A − B"
+    ],
+
+    answer:0
+},
+
+
+
+/* Inverse Trigonometric Functions */
+
+{
+    subject:"Maths",
+    chapter:"Inverse Trigonometric Functions",
+
+    q:"The principal value of sin⁻¹(1) is:",
+
+    options:[
+        "0",
+        "π/2",
+        "π",
+        "2π"
+    ],
+
+    answer:1
+},
+
+
+
+/* Matrices */
+
+{
+    subject:"Maths",
+    chapter:"Matrices",
+
+    q:"A matrix having the same number of rows and columns is called:",
+
+    options:[
+        "Row matrix",
+        "Column matrix",
+        "Square matrix",
+        "Zero matrix"
+    ],
+
+    answer:2
+},
+
+
+
+/* Determinants */
+
+{
+    subject:"Maths",
+    chapter:"Determinants",
+
+    q:"The determinant of a 2 × 2 matrix is:",
+
+    options:[
+        "ad + bc",
+        "ad − bc",
+        "ab − cd",
+        "ac − bd"
+    ],
+
+    answer:1
+},
+
+
+
+/* Continuity */
+
+{
+    subject:"Maths",
+    chapter:"Continuity and Differentiability",
+
+    q:"The derivative of x² is:",
+
+    options:[
+        "x",
+        "2x",
+        "x²",
+        "2"
+    ],
+
+    answer:1
+},
+
+
+
+/* Applications of Derivatives */
+
+{
+    subject:"Maths",
+    chapter:"Applications of Derivatives",
+
+    q:"The derivative of a function represents its:",
+
+    options:[
+        "Area",
+        "Slope",
+        "Volume",
+        "Constant"
+    ],
+
+    answer:1
+},
+
+
+
+/* Integrals */
+
+{
+    subject:"Maths",
+    chapter:"Integrals",
+
+    q:"∫ x dx is equal to:",
+
+    options:[
+        "x² + C",
+        "x²/2 + C",
+        "2x + C",
+        "x + C"
+    ],
+
+    answer:1
+},
+
+
+
+/* Applications of Integrals */
+
+{
+    subject:"Maths",
+    chapter:"Applications of Integrals",
+
+    q:"Definite integration can be used to find:",
+
+    options:[
+        "Area under a curve",
+        "Only slope",
+        "Only roots",
+        "Only matrices"
+    ],
+
+    answer:0
+},
+
+
+
+/* Differential Equations */
+
+{
+    subject:"Maths",
+    chapter:"Differential Equations",
+
+    q:"A differential equation contains:",
+
+    options:[
+        "Only constants",
+        "Derivatives",
+        "Only matrices",
+        "Only determinants"
+    ],
+
+    answer:1
+},
+
+
+
+/* Vector Algebra */
+
+{
+    subject:"Maths",
+    chapter:"Vector Algebra",
+
+    q:"A vector has:",
+
+    options:[
+        "Only magnitude",
+        "Only direction",
+        "Both magnitude and direction",
+        "Neither"
+    ],
+
+    answer:2
+},
+
+
+
+/* 3D Geometry */
+
+{
+    subject:"Maths",
+    chapter:"Three Dimensional Geometry",
+
+    q:"A point in three-dimensional space is represented by:",
+
+    options:[
+        "(x,y)",
+        "(x,y,z)",
+        "(x)",
+        "(x,y,z,w)"
+    ],
+
+    answer:1
+},
+
+
+
+/* Linear Programming */
+
+{
+    subject:"Maths",
+    chapter:"Linear Programming",
+
+    q:"The feasible region in a linear programming problem is determined by:",
+
+    options:[
+        "Constraints",
+        "Only objective function",
+        "Only constants",
+        "Only matrices"
+    ],
+
+    answer:0
+},
+
+
+
+/* Probability */
+
+{
+    subject:"Maths",
+    chapter:"Probability",
+
+    q:"The probability of an impossible event is:",
+
+    options:[
+        "0",
+        "1",
+        "-1",
+        "2"
+    ],
+
+    answer:0
+},
+
+
+
+/* =====================================================
+   CHEMISTRY
+===================================================== */
+
+
+/* Solutions */
+
+{
+    subject:"Chemistry",
+    chapter:"Solutions",
+
+    q:"Molarity is defined as moles of solute per:",
+
+    options:[
+        "kg of solvent",
+        "litre of solution",
+        "gram of solution",
+        "mole of solvent"
+    ],
+
+    answer:1
+},
+
+
+
+/* Electrochemistry */
+
+{
+    subject:"Chemistry",
+    chapter:"Electrochemistry",
+
+    q:"The SI unit of conductance is:",
+
+    options:[
+        "Siemens",
+        "Ohm",
+        "Volt",
+        "Tesla"
+    ],
+
+    answer:0
+},
+
+
+
+/* Chemical Kinetics */
+
+{
+    subject:"Chemistry",
+    chapter:"Chemical Kinetics",
+
+    q:"The rate of a chemical reaction generally depends on:",
+
+    options:[
+        "Temperature",
+        "Colour",
+        "Shape only",
+        "Name of reactant"
+    ],
+
+    answer:0
+},
+
+
+
+/* d and f Block */
+
+{
+    subject:"Chemistry",
+    chapter:"d and f Block Elements",
+
+    q:"Transition elements generally contain:",
+
+    options:[
+        "Partially filled d-orbitals",
+        "Only s-orbitals",
+        "Only p-orbitals",
+        "No orbitals"
+    ],
+
+    answer:0
+},
+
+
+
+/* Coordination */
+
+{
+    subject:"Chemistry",
+    chapter:"Coordination Compounds",
+
+    q:"The species attached directly to the central metal ion is called:",
+
+    options:[
+        "Ligand",
+        "Catalyst",
+        "Solvent",
+        "Electrode"
+    ],
+
+    answer:0
+},
+
+
+
+/* Haloalkanes */
+
+{
+    subject:"Chemistry",
+    chapter:"Haloalkanes and Haloarenes",
+
+    q:"Haloalkanes contain a halogen attached to:",
+
+    options:[
+        "An alkyl group",
+        "A metal",
+        "An oxygen atom",
+        "A noble gas"
+    ],
+
+    answer:0
+},
+
+
+
+/* Alcohols */
+
+{
+    subject:"Chemistry",
+    chapter:"Alcohols, Phenols and Ethers",
+
+    q:"The functional group of alcohol is:",
+
+    options:[
+        "−OH",
+        "−COOH",
+        "−CHO",
+        "−NH₂"
+    ],
+
+    answer:0
+},
+
+
+
+/* Aldehydes */
+
+{
+    subject:"Chemistry",
+    chapter:"Aldehydes, Ketones and Carboxylic Acids",
+
+    q:"The functional group −COOH represents:",
+
+    options:[
+        "Alcohol",
+        "Carboxylic acid",
+        "Amine",
+        "Ether"
+    ],
+
+    answer:1
+},
+
+
+
+/* Amines */
+
+{
+    subject:"Chemistry",
+    chapter:"Amines",
+
+    q:"The functional group of primary amines is:",
+
+    options:[
+        "−OH",
+        "−NH₂",
+        "−COOH",
+        "−CHO"
+    ],
+
+    answer:1
+},
+
+
+
+/* Biomolecules */
+
+{
+    subject:"Chemistry",
+    chapter:"Biomolecules",
+
+    q:"Glucose is a:",
+
+    options:[
+        "Monosaccharide",
+        "Disaccharide",
+        "Protein",
+        "Lipid"
+    ],
+
+    answer:0
+},
+
+
+
+/* =====================================================
+   ENGLISH
+===================================================== */
+
+
+/* Reading */
+
+{
+    subject:"English",
+    chapter:"Reading Comprehension",
+
+    q:"The main purpose of reading comprehension is to:",
+
+    options:[
+        "Understand the passage",
+        "Memorise every word",
+        "Count sentences",
+        "Ignore the context"
+    ],
+
+    answer:0
+},
+
+
+
+/* Writing */
+
+{
+    subject:"English",
+    chapter:"Writing Skills",
+
+    q:"A formal letter generally uses:",
+
+    options:[
+        "Informal slang",
+        "Formal language",
+        "Only emojis",
+        "Text-message language"
+    ],
+
+    answer:1
+},
+
+
+
+/* Literature */
+
+{
+    subject:"English",
+    chapter:"Literature",
+
+    q:"The central idea of a literary work is called its:",
+
+    options:[
+        "Theme",
+        "Paragraph",
+        "Footnote",
+        "Caption"
+    ],
+
+    answer:0
+},
+
+
+
+/* Poetry */
+
+{
+    subject:"English",
+    chapter:"Poetry",
+
+    q:"A comparison using 'like' or 'as' is called:",
+
+    options:[
+        "Metaphor",
+        "Simile",
+        "Alliteration",
+        "Personification"
+    ],
+
+    answer:1
+},
+
+
+
+/* Grammar */
+
+{
+    subject:"English",
+    chapter:"Grammar",
+
+    q:"Which word is a noun?",
+
+    options:[
+        "Quickly",
+        "Beautiful",
+        "School",
+        "Run"
+    ],
+
+    answer:2
+}
+
+];
+
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let currentQuestion;
+
+let score = 0;
+
+let answered = false;
+
+let quizQuestions = [];
+
+let questionNumber = 0;
+
+
+
+/* =====================================================
+   LOAD CHAPTERS
+===================================================== */
+
+function changeSubject(){
+
+    let subject =
+        document.getElementById("subjectFilter").value;
+
+    let chapterSelect =
+        document.getElementById("chapterFilter");
+
+
+    chapterSelect.innerHTML =
+        '<option value="All">📚 All Chapters</option>';
+
+
+    let chapters = [];
+
+
+    questions.forEach(function(item){
+
+        if(
+            subject === "All" ||
+            item.subject === subject
+        ){
+
+            if(!chapters.includes(item.chapter)){
+
+                chapters.push(item.chapter);
+
+            }
+
+        }
+
+    });
+
+
+    chapters.forEach(function(chapter){
+
+        let option =
+            document.createElement("option");
+
+        option.value = chapter;
+
+        option.textContent = chapter;
+
+        chapterSelect.appendChild(option);
+
+    });
+
+
+    startQuiz();
+
+}
+
+
+
+/* =====================================================
+   START QUIZ
+===================================================== */
+
+function startQuiz(){
+
+    document
+        .getElementById("quizBox")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("resultBox")
+        .classList.add("hidden");
+
+
+    let subject =
+        document.getElementById("subjectFilter").value;
+
+
+    let chapter =
+        document.getElementById("chapterFilter").value;
+
+
+    quizQuestions =
+        questions.filter(function(item){
+
+            let subjectMatch =
+                subject === "All" ||
+                item.subject === subject;
+
+
+            let chapterMatch =
+                chapter === "All" ||
+                item.chapter === chapter;
+
+
+            return subjectMatch && chapterMatch;
+
+        });
+
+
+    /* Randomize questions */
+
+    quizQuestions.sort(
+        () => Math.random() - 0.5
+    );
+
+
+    score = 0;
+
+    questionNumber = 0;
+
+
+    showQuestion();
+
+}
+
+
+
+/* =====================================================
+   SHOW QUESTION
+===================================================== */
+
+function showQuestion(){
+
+    if(
+        questionNumber >=
+        quizQuestions.length
+    ){
+
+        finishQuiz();
+
+        return;
+
+    }
+
+
+    currentQuestion =
+        quizQuestions[questionNumber];
+
+
+    answered = false;
+
+
+    document
+        .getElementById("subjectName")
+        .textContent =
+        currentQuestion.subject +
+        " • " +
+        currentQuestion.chapter;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        "Score: " + score;
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        (questionNumber + 1) +
+        ". " +
+        currentQuestion.q;
+
+
+    let optionsBox =
+        document.getElementById("options");
+
+
+    optionsBox.innerHTML = "";
+
+
+    currentQuestion.options.forEach(
+        function(option,index){
+
+            let div =
+                document.createElement("div");
+
+
+            div.className = "option";
+
+
+            div.textContent =
+                String.fromCharCode(65 + index) +
+                ". " +
+                option;
+
+
+            div.onclick =
+                function(){
+
+                    selectAnswer(
+                        div,
+                        index
+                    );
+
+                };
+
+
+            optionsBox.appendChild(div);
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SELECT ANSWER
+===================================================== */
+
+function selectAnswer(
+    element,
+    index
+){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    answered = true;
+
+
+    let allOptions =
+        document.querySelectorAll(".option");
+
+
+    if(
+        index ===
+        currentQuestion.answer
+    ){
+
+        element.classList.add("correct");
+
+        score++;
+
+    }
+    else{
+
+        element.classList.add("wrong");
+
+
+        allOptions[
+            currentQuestion.answer
+        ].classList.add("correct");
+
+    }
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        "Score: " + score;
+
+}
+
+
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+function nextQuestion(){
+
+    if(!answered){
+
+        alert(
+            "Pehle answer select karo 🙂"
+        );
+
+        return;
+
+    }
+
+
+    questionNumber++;
+
+    showQuestion();
+
+}
+
+
+
+/* =====================================================
+   FINISH QUIZ
+===================================================== */
+
+function finishQuiz(){
+
+    document
+        .getElementById("quizBox")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultBox")
+        .classList.remove("hidden");
+
+
+    let total =
+        quizQuestions.length;
+
+
+    let xpEarned =
+        score * 10;
+
+
+    document
+        .getElementById("finalScore")
+        .textContent =
+        "Your Score: " +
+        score +
+        " / " +
+        total;
+
+
+    document
+        .getElementById("finalXP")
+        .textContent =
+        "⭐ XP Earned: +" +
+        xpEarned;
+
+
+    /* Save XP */
+
+    let oldXP =
+        Number(
+            localStorage.getItem("studyXP")
+        ) || 0;
+
+
+    localStorage.setItem(
+        "studyXP",
+        oldXP + xpEarned
+    );
+
+}
+
+
+
+/* =====================================================
+   BACK TO DASHBOARD
+===================================================== */
+
+function goBack(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =====================================================
+   START
+===================================================== */
+
+changeSubject();
+
+</script>
+
+</body>
+</html>

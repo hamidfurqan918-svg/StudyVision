@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Vision - Chapter</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#0b1020;
+    color:white;
+    line-height:1.7;
+}
+
+header{
+    background:#11182d;
+    padding:22px 35px;
+    border-bottom:1px solid #26304d;
+}
+
+header h1{
+    font-size:28px;
+}
+
+header p{
+    color:#8995b3;
+}
+
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:30px;
+}
+
+.back{
+    background:#374151;
+    color:white;
+    border:none;
+    padding:11px 18px;
+    border-radius:9px;
+    cursor:pointer;
+    margin-bottom:25px;
+}
+
+.back:hover{
+    background:#4b5563;
+}
+
+.header-card,
+.progress-box,
+.card{
+    background:#11182d;
+    border:1px solid #26304d;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:22px;
+}
+
+.subject{
+    color:#8da0c7;
+    margin-bottom:7px;
+}
+
+.header-card h2{
+    font-size:30px;
+}
+
+.progress-bar{
+    height:13px;
+    width:100%;
+    background:#252f4d;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#2563eb;
+    transition:.5s;
+}
+
+.note,
+.formula,
+.question{
+    background:#19223b;
+    border-radius:10px;
+    padding:15px 18px;
+    margin-bottom:10px;
+}
+
+.note::before{
+    content:"✓ ";
+    color:#60a5fa;
+    font-weight:bold;
+}
+
+.formula{
+    font-family:"Courier New",monospace;
+    color:#dbeafe;
+}
+
+.question{
+    cursor:pointer;
+}
+
+.question:hover{
+    background:#222d49;
+}
+
+.mcq{
+    background:#19223b;
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.option{
+    background:#252f4d;
+    padding:11px;
+    border-radius:8px;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#374151;
+}
+
+.answer{
+    display:none;
+    background:#123b2a;
+    padding:12px;
+    border-radius:8px;
+    margin-top:10px;
+}
+
+.complete{
+    width:100%;
+    padding:16px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+    margin-bottom:30px;
+}
+
+.complete:hover{
+    background:#1d4ed8;
+}
+
+.empty{
+    color:#8995b3;
+}
+
+.section-title{
+    margin-bottom:18px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🧠 Study Vision</h1>
+    <p>Class 12 Study Material</p>
+</header>
+
+<div class="container">
+
+<button class="back" onclick="goBack()">← Back to Subjects</button>
+
+<div class="header-card">
+    <div class="subject" id="subjectName"></div>
+    <h2 id="chapterName"></h2>
+</div>
+
+<div class="progress-box">
+    <h3 class="section-title">📊 Chapter Progress</h3>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">📝 Quick Notes — Important Concepts</h3>
+    <div id="notes"></div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">📌 Important Formulas / Key Points</h3>
+    <div id="formulas"></div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">⭐ Important Questions</h3>
+    <div id="questions"></div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">🎯 Quick MCQs</h3>
+    <div id="mcqs"></div>
+</div>
+
+<button class="complete" onclick="completeChapter()">
+    ✅ Mark Chapter as Complete
+</button>
+
+</div>
+
+<script>
+
+/* =====================================================
+   URL DATA
+===================================================== */
+
+const params = new URLSearchParams(window.location.search);
+
+const subject = params.get("subject") || "Physics";
+const chapter = params.get("chapter") || "Electric Charges and Fields";
+
+document.getElementById("subjectName").innerText = "📚 " + subject;
+document.getElementById("chapterName").innerText = chapter;
+
+
+/* =====================================================
+   CHAPTER DATA
+===================================================== */
+
+const chapterData = {
+
+
+/* =====================================================
+   PHYSICS
+===================================================== */
+
+"Electric Charges and Fields":{
+notes:[
+"Electric charge is a basic property of matter. There are two types of charge: positive and negative.",
+"Like charges repel each other while unlike charges attract each other.",
+"Charge is quantised, which means q = ne, where e is the elementary charge.",
+"Charge is conserved. It can neither be created nor destroyed, only transferred.",
+"Coulomb's law gives the electrostatic force between two point charges.",
+"The electrostatic force is directly proportional to the product of charges and inversely proportional to the square of distance.",
+"Electric field is the force experienced by a unit positive test charge.",
+"Electric field is a vector quantity and its SI unit is N/C.",
+"Electric field lines start from positive charges and end on negative charges.",
+"Electric field lines never intersect each other.",
+"Electric flux represents the number of electric field lines passing through a surface.",
+"Gauss's law relates the total electric flux through a closed surface to the charge enclosed by it.",
+"Electric dipole consists of two equal and opposite charges separated by a small distance.",
+"Electric dipole moment is directed from negative charge to positive charge.",
+"The electric field due to a dipole depends on the position of the observation point."
+],
+formulas:[
+"F = (1/4πε₀)(q₁q₂/r²)",
+"E = F/q",
+"E = (1/4πε₀)(q/r²)",
+"p = q × 2a",
+"τ = pE sinθ",
+"Φ = EA cosθ",
+"∮E·dA = q/ε₀"
+],
+questions:[
+"State and explain Coulomb's law.",
+"Define electric field intensity and electric flux.",
+"Explain properties of electric field lines.",
+"Derive the electric field due to a point charge.",
+"State Gauss's law and explain its applications.",
+"Define electric dipole and electric dipole moment."
+],
+mcqs:[
+["SI unit of electric charge is:","Coulomb"],
+["SI unit of electric field is:","N/C"],
+["Electric field is a:","Vector quantity"],
+["Electric flux is a:","Scalar quantity"]
+]
+},
+
+
+"Electrostatic Potential and Capacitance":{
+notes:[
+"Electric potential at a point is the work done in bringing unit positive charge from infinity to that point.",
+"Potential difference is work done per unit charge in moving a test charge between two points.",
+"Electric potential is a scalar quantity.",
+"Equipotential surfaces have the same potential at every point.",
+"No work is done in moving a charge along an equipotential surface.",
+"Electric field is perpendicular to an equipotential surface.",
+"Capacitance is the ability of a conductor or capacitor to store electric charge.",
+"Capacitance depends on geometry and the dielectric medium.",
+"A capacitor consists of two conductors separated by an insulating medium.",
+"Capacitors can be connected in series and parallel.",
+"A dielectric increases the capacitance of a capacitor.",
+"Energy is stored in the electric field between capacitor plates.",
+"Electrostatic potential energy is the work required to assemble charges."
+],
+formulas:[
+"V = W/q",
+"V = (1/4πε₀)(q/r)",
+"C = Q/V",
+"C = ε₀A/d",
+"C = Kε₀A/d",
+"Series: 1/C = 1/C₁ + 1/C₂ + ...",
+"Parallel: C = C₁ + C₂ + ...",
+"U = 1/2 CV² = Q²/2C = 1/2 QV"
+],
+questions:[
+"Define electric potential and potential difference.",
+"What are equipotential surfaces?",
+"Derive the capacitance of a parallel plate capacitor.",
+"Explain series and parallel combination of capacitors.",
+"Explain the effect of dielectric on capacitance.",
+"Derive the energy stored in a capacitor."
+],
+mcqs:[
+["SI unit of capacitance is:","Farad"],
+["Potential is a:","Scalar quantity"],
+["Capacitance is Q divided by:","V"],
+["Energy stored in capacitor is:","1/2 CV²"]
+]
+},
+
+
+"Current Electricity":{
+notes:[
+"Electric current is the rate of flow of electric charge through a conductor.",
+"Conventional current flows from higher potential to lower potential in the external circuit.",
+"Drift velocity is the average velocity acquired by free electrons due to an electric field.",
+"Resistance is the opposition offered by a conductor to the flow of current.",
+"Ohm's law states that at constant temperature V is directly proportional to I.",
+"Resistivity is a property of the material and depends on temperature.",
+"Resistance depends on length, area and resistivity.",
+"Conductance is the reciprocal of resistance.",
+"Cells convert chemical energy into electrical energy.",
+"EMF is the energy supplied by a source per unit charge.",
+"Kirchhoff's junction rule is based on conservation of charge.",
+"Kirchhoff's loop rule is based on conservation of energy.",
+"Electrical power is the rate at which electrical energy is consumed."
+],
+formulas:[
+"I = Q/t",
+"V = IR",
+"R = ρL/A",
+"J = I/A",
+"P = VI = I²R = V²/R",
+"Series: R = R₁ + R₂ + ...",
+"Parallel: 1/R = 1/R₁ + 1/R₂ + ...",
+"V = ε - Ir"
+],
+questions:[
+"Define electric current and drift velocity.",
+"State and explain Ohm's law.",
+"Define resistance and resistivity.",
+"Derive the relation R = ρL/A.",
+"State Kirchhoff's laws.",
+"Explain EMF and internal resistance of a cell."
+],
+mcqs:[
+["SI unit of current is:","Ampere"],
+["SI unit of resistance is:","Ohm"],
+["SI unit of resistivity is:","Ohm metre"],
+["Ohm's law is:","V = IR"]
+]
+},
+
+
+"Moving Charges and Magnetism":{
+notes:[
+"A moving electric charge produces a magnetic field.",
+"Magnetic field is a vector quantity.",
+"Magnetic force acts on a charged particle moving through a magnetic field.",
+"The magnetic force is maximum when velocity is perpendicular to the magnetic field.",
+"Biot-Savart law gives the magnetic field produced by a current element.",
+"Ampere's circuital law relates magnetic field around a closed path to current enclosed.",
+"The magnetic field around a long straight current carrying conductor has circular field lines.",
+"A current carrying wire placed in a magnetic field experiences a force.",
+"Parallel current carrying conductors exert forces on each other.",
+"A charged particle moving perpendicular to a magnetic field follows a circular path.",
+"Magnetic field does no work on a charged particle because magnetic force is perpendicular to velocity.",
+"Current carrying coils behave like magnetic dipoles.",
+"Moving coil galvanometer can be converted into ammeter and voltmeter."
+],
+formulas:[
+"F = qvB sinθ",
+"F = BIL sinθ",
+"B = μ₀I/2πr",
+"B = μ₀I/2R",
+"B = μ₀nI",
+"r = mv/qB",
+"τ = NIAB sinθ"
+],
+questions:[
+"State Biot-Savart law.",
+"State Ampere's circuital law.",
+"Explain Lorentz force.",
+"Find magnetic field due to a long straight conductor.",
+"Explain motion of charged particle in magnetic field.",
+"Explain the working of a moving coil galvanometer."
+],
+mcqs:[
+["SI unit of magnetic field is:","Tesla"],
+["Magnetic force on stationary charge is:","Zero"],
+["Magnetic field is a:","Vector"],
+["Force on current carrying conductor is:","BIL sinθ"]
+]
+},
+
+
+"Magnetism and Matter":{
+notes:[
+"A magnetic dipole is a system having two equal and opposite magnetic poles.",
+"Magnetic moment represents the strength of a magnetic dipole.",
+"Torque acts on a magnetic dipole placed in an external magnetic field.",
+"Earth behaves approximately like a giant magnetic dipole.",
+"Diamagnetic substances are weakly repelled by a magnetic field.",
+"Paramagnetic substances are weakly attracted by a magnetic field.",
+"Ferromagnetic substances are strongly attracted by a magnetic field.",
+"Ferromagnetic materials can retain magnetisation and form permanent magnets.",
+"Magnetic susceptibility describes the magnetic response of a material.",
+"Magnetic permeability measures how easily magnetic field develops in a material."
+],
+formulas:[
+"τ = MB sinθ",
+"U = -MB cosθ",
+"M = m × 2l",
+"B = μ₀(H + M)"
+],
+questions:[
+"Define magnetic dipole and magnetic moment.",
+"Explain torque on a magnetic dipole.",
+"Differentiate diamagnetic, paramagnetic and ferromagnetic substances.",
+"Explain Earth's magnetism.",
+"Define magnetic susceptibility and permeability."
+],
+mcqs:[
+["SI unit of magnetic moment is:","A m²"],
+["Ferromagnetic substances are:","Strongly attracted"],
+["Diamagnetic substances are:","Weakly repelled"]
+]
+},
+
+
+"Electromagnetic Induction":{
+notes:[
+"Electromagnetic induction is the production of induced EMF due to a change in magnetic flux.",
+"Faraday's first law states that an EMF is induced whenever magnetic flux linked with a circuit changes.",
+"Faraday's second law gives the magnitude of induced EMF.",
+"Lenz's law gives the direction of induced current.",
+"Lenz's law is consistent with conservation of energy.",
+"Magnetic flux depends on magnetic field, area and angle.",
+"Self induction is the phenomenon in which changing current in a coil induces EMF in the same coil.",
+"Mutual induction occurs when changing current in one coil induces EMF in another coil.",
+"An inductor opposes changes in current.",
+"Eddy currents are circulating currents induced in conducting materials."
+],
+formulas:[
+"Φ = BA cosθ",
+"ε = -dΦ/dt",
+"ε = -N dΦ/dt",
+"ε = -L dI/dt",
+"U = 1/2 LI²"
+],
+questions:[
+"Explain electromagnetic induction.",
+"State Faraday's laws.",
+"State and explain Lenz's law.",
+"Define self induction.",
+"Define mutual induction.",
+"Explain eddy currents and their applications."
+],
+mcqs:[
+["SI unit of magnetic flux is:","Weber"],
+["SI unit of inductance is:","Henry"],
+["Lenz's law follows conservation of:","Energy"]
+]
+},
+
+
+"Alternating Current":{
+notes:[
+"Alternating current changes its magnitude and direction periodically.",
+"The instantaneous value of AC can be represented by a sine function.",
+"RMS value of AC is the equivalent DC value producing the same heating effect.",
+"In a pure resistor, voltage and current are in phase.",
+"In a pure inductor, current lags voltage by 90°.",
+"In a pure capacitor, current leads voltage by 90°.",
+"Inductive reactance increases with frequency.",
+"Capacitive reactance decreases with frequency.",
+"Impedance is the total opposition offered by an AC circuit.",
+"Resonance occurs when inductive and capacitive reactances become equal.",
+"A transformer works on mutual induction.",
+"Step-up transformer increases voltage while step-down transformer decreases voltage."
+],
+formulas:[
+"V = V₀ sinωt",
+"Vᵣₘₛ = V₀/√2",
+"Iᵣₘₛ = I₀/√2",
+"Xᴸ = ωL",
+"Xᶜ = 1/ωC",
+"Z = √(R² + (Xᴸ-Xᶜ)²)",
+"ω₀ = 1/√LC"
+],
+questions:[
+"Define alternating current.",
+"Define RMS value of AC.",
+"Explain AC through resistor, inductor and capacitor.",
+"Define inductive and capacitive reactance.",
+"Explain resonance in an LCR circuit.",
+"Explain the working of a transformer."
+],
+mcqs:[
+["RMS voltage is:","V₀/√2"],
+["Inductive reactance is:","ωL"],
+["Transformer works on:","Mutual induction"],
+["At resonance impedance is:","Minimum"]
+]
+},
+
+
+"Electromagnetic Waves":{
+notes:[
+"Electromagnetic waves consist of oscillating electric and magnetic fields.",
+"Electric and magnetic fields are mutually perpendicular.",
+"Electromagnetic waves are transverse waves.",
+"They do not require a material medium and can travel through vacuum.",
+"All electromagnetic waves travel with the same speed in vacuum.",
+"Different electromagnetic waves have different frequencies and wavelengths.",
+"Radio waves are used in communication.",
+"Microwaves are used in radar and satellite communication.",
+"Infrared radiation is associated with thermal effects.",
+"Ultraviolet radiation has higher frequency than visible light.",
+"X-rays are widely used in medical imaging.",
+"Gamma rays have very high frequency and energy."
+],
+formulas:[
+"c = 1/√(μ₀ε₀)",
+"c = νλ"
+],
+questions:[
+"What are electromagnetic waves?",
+"Why are electromagnetic waves transverse?",
+"Write the electromagnetic spectrum in order.",
+"Explain important uses of electromagnetic waves.",
+"State the speed of electromagnetic waves in vacuum."
+],
+mcqs:[
+["Electromagnetic waves are:","Transverse"],
+["Speed in vacuum is:","3 × 10⁸ m/s"],
+["Light is an:","Electromagnetic wave"]
+]
+},
+
+
+"Ray Optics":{
+notes:[
+"Ray optics studies light using the concept of rays.",
+"Reflection is the bouncing back of light from a surface.",
+"The angle of incidence is equal to the angle of reflection.",
+"Refraction is the bending of light when it passes from one medium to another.",
+"Snell's law relates the angles of incidence and refraction.",
+"Total internal reflection occurs when light travels from denser to rarer medium and the incidence angle exceeds the critical angle.",
+"Convex lens is a converging lens.",
+"Concave lens is a diverging lens.",
+"Concave mirror can form real or virtual images depending on object position.",
+"Convex mirror always forms a virtual, erect and diminished image.",
+"Lens power is measured in dioptre.",
+"Optical instruments include microscope and telescope."
+],
+formulas:[
+"1/f = 1/v - 1/u",
+"m = v/u",
+"n = sin i/sin r",
+"P = 1/f",
+"1/f = 1/v + 1/u  (mirror convention form)"
+],
+questions:[
+"State laws of reflection.",
+"State Snell's law.",
+"Explain total internal reflection.",
+"Derive the lens formula.",
+"Explain image formation by convex lens.",
+"Define power of a lens."
+],
+mcqs:[
+["SI unit of lens power is:","Dioptre"],
+["Convex lens is:","Converging"],
+["Bending of light is called:","Refraction"]
+]
+},
+
+
+"Wave Optics":{
+notes:[
+"Wave optics explains the wave nature of light.",
+"Interference is the redistribution of intensity due to superposition of coherent waves.",
+"Coherent sources have a constant phase difference.",
+"In Young's double slit experiment, interference produces bright and dark fringes.",
+"Fringe width is the distance between two successive bright or dark fringes.",
+"Diffraction is the bending or spreading of waves around obstacles and apertures.",
+"Polarisation is the restriction of vibrations of light to a particular direction.",
+"Polarisation proves that light is a transverse wave.",
+"Constructive interference produces maximum intensity.",
+"Destructive interference produces minimum intensity."
+],
+formulas:[
+"β = λD/d",
+"Bright: Δx = nλ",
+"Dark: Δx = (2n+1)λ/2",
+"I = I₁ + I₂ + 2√(I₁I₂)cosφ"
+],
+questions:[
+"Explain Young's double slit experiment.",
+"Define interference.",
+"What are coherent sources?",
+"Define diffraction.",
+"What is polarisation?",
+"Derive the expression for fringe width."
+],
+mcqs:[
+["YDSE demonstrates:","Interference"],
+["Polarisation proves light is:","Transverse"],
+["Fringe width is represented by:","β"]
+]
+},
+
+
+"Dual Nature of Radiation":{
+notes:[
+"Light shows both wave and particle nature.",
+"Photoelectric effect supports the particle nature of light.",
+"Photons are packets of electromagnetic energy.",
+"Photon energy is proportional to frequency.",
+"Work function is the minimum energy needed to remove an electron from a metal surface.",
+"Threshold frequency is the minimum frequency needed for photoelectric emission.",
+"Stopping potential is related to the maximum kinetic energy of emitted electrons.",
+"Intensity mainly affects the number of emitted electrons when frequency is above threshold.",
+"de Broglie proposed that matter particles also have wave nature.",
+"de Broglie wavelength is inversely proportional to momentum."
+],
+formulas:[
+"E = hν",
+"Kmax = hν - φ",
+"eV₀ = Kmax",
+"λ = h/p",
+"φ = hν₀"
+],
+questions:[
+"Explain the photoelectric effect.",
+"State Einstein's photoelectric equation.",
+"Define work function.",
+"Define threshold frequency.",
+"Explain the effect of intensity and frequency on photoelectric emission.",
+"Explain de Broglie hypothesis."
+],
+mcqs:[
+["Photon energy is:","hν"],
+["Photoelectric effect supports:","Particle nature"],
+["Work function is represented by:","φ"]
+]
+},
+
+
+"Atoms":{
+notes:[
+"Rutherford's model showed that an atom has a small dense positive nucleus.",
+"Bohr proposed quantised orbits to explain the stability of hydrogen atom.",
+"Electrons in stationary orbits do not continuously radiate energy.",
+"Angular momentum of an electron is quantised.",
+"Radiation is emitted or absorbed when an electron changes its energy level.",
+"Hydrogen atom has discrete energy levels.",
+"The lowest energy level is called the ground state.",
+"Transitions to higher levels correspond to absorption of energy.",
+"Transitions to lower levels result in emission of radiation.",
+"Hydrogen spectrum contains series such as Lyman, Balmer and Paschen."
+],
+formulas:[
+"mvr = nh/2π",
+"Eₙ = -13.6/n² eV",
+"rₙ = n²r₁",
+"hν = E₂-E₁"
+],
+questions:[
+"State Bohr's postulates.",
+"Explain stationary orbits.",
+"Derive the energy expression of hydrogen atom.",
+"Explain atomic spectra.",
+"Differentiate emission and absorption spectra."
+],
+mcqs:[
+["Bohr model is mainly applicable to:","Hydrogen atom"],
+["Ground state has:","n = 1"],
+["Angular momentum is:","nh/2π"]
+]
+},
+
+
+"Nuclei":{
+notes:[
+"The nucleus is the central part of an atom containing protons and neutrons.",
+"Protons are positively charged while neutrons have no charge.",
+"Atomic number Z is the number of protons.",
+"Mass number A is the total number of protons and neutrons.",
+"Isotopes have the same atomic number but different mass numbers.",
+"Isobars have the same mass number but different atomic numbers.",
+"Nuclear radius is approximately proportional to A^(1/3).",
+"Mass defect is the difference between the mass of separated nucleons and the actual nuclear mass.",
+"Binding energy is the energy required to separate a nucleus into its nucleons.",
+"Radioactivity is spontaneous disintegration of unstable nuclei.",
+"Alpha, beta and gamma are important types of radioactive emissions.",
+"Half-life is the time required for half the radioactive nuclei to decay."
+],
+formulas:[
+"A = Z + N",
+"R = R₀A^(1/3)",
+"E = mc²",
+"N = N₀e^(-λt)",
+"T₁/₂ = 0.693/λ"
+],
+questions:[
+"Define atomic number and mass number.",
+"Differentiate isotopes and isobars.",
+"Define mass defect.",
+"Define binding energy.",
+"Explain radioactivity.",
+"Derive the radioactive decay law."
+],
+mcqs:[
+["Atomic number represents:","Number of protons"],
+["Mass number equals:","Protons + neutrons"],
+["Radioactivity is:","Spontaneous"]
+]
+},
+
+
+"Semiconductor Electronics":{
+notes:[
+"Semiconductors have conductivity between conductors and insulators.",
+"An intrinsic semiconductor is a pure semiconductor.",
+"An extrinsic semiconductor is obtained by adding suitable impurities.",
+"Pentavalent impurities produce n-type semiconductors.",
+"Trivalent impurities produce p-type semiconductors.",
+"Electrons are majority carriers in n-type material.",
+"Holes are majority carriers in p-type material.",
+"A p-n junction is formed by joining p-type and n-type semiconductors.",
+"Forward bias reduces the depletion region and allows significant current.",
+"Reverse bias increases the depletion region and allows only small current.",
+"A diode is commonly used as a rectifier.",
+"LED, photodiode and solar cell are important semiconductor devices."
+],
+formulas:[
+"V = IR",
+"Diode current depends exponentially on applied voltage.",
+"n-type → electrons majority",
+"p-type → holes majority"
+],
+questions:[
+"What is a semiconductor?",
+"Differentiate intrinsic and extrinsic semiconductors.",
+"Explain p-type and n-type semiconductors.",
+"Explain formation of p-n junction.",
+"Explain forward and reverse bias.",
+"What is a rectifier?"
+],
+mcqs:[
+["p-type uses:","Trivalent impurity"],
+["n-type uses:","Pentavalent impurity"],
+["Diode mainly allows current in:","One direction"]
+]
+},
+
+
+/* =====================================================
+   MATHS
+===================================================== */
+
+"Relations and Functions":{
+notes:[
+"A relation from set A to set B is a subset of A × B.",
+"The domain is the set of first elements of ordered pairs.",
+"The range is the set of actual images obtained.",
+"A function assigns exactly one image to every element of its domain.",
+"One-one function maps different elements to different images.",
+"Many-one function allows different domain elements to have the same image.",
+"Onto function covers every element of the codomain.",
+"A bijective function is both one-one and onto.",
+"Composition of functions combines two functions.",
+"An inverse function exists when the function is bijective."
+],
+formulas:[
+"(f∘g)(x)=f(g(x))",
+"(g∘f)(x)=g(f(x))",
+"Bijective = One-one + Onto"
+],
+questions:[
+"Define relation and function.",
+"Explain domain, codomain and range.",
+"Define one-one and onto functions.",
+"What is a bijective function?",
+"Find composition of two functions.",
+"Find inverse of a function."
+],
+mcqs:[
+["One-one function is called:","Injective"],
+["Onto function is called:","Surjective"],
+["One-one and onto is:","Bijective"]
+]
+},
+
+
+"Inverse Trigonometric Functions":{
+notes:[
+"Inverse trigonometric functions are inverse mappings of restricted trigonometric functions.",
+"Principal value branches are used to make trigonometric functions invertible.",
+"sin⁻¹x has principal values from -π/2 to π/2.",
+"cos⁻¹x has principal values from 0 to π.",
+"tan⁻¹x has principal values from -π/2 to π/2.",
+"Inverse trigonometric identities are frequently used in simplification.",
+"The domain and range of inverse functions are important for solving questions."
+],
+formulas:[
+"sin⁻¹x + cos⁻¹x = π/2",
+"tan⁻¹x + cot⁻¹x = π/2",
+"sin⁻¹(-x) = -sin⁻¹x",
+"cos⁻¹(-x) = π-cos⁻¹x"
+],
+questions:[
+"Define inverse trigonometric functions.",
+"Write principal value ranges.",
+"Prove important inverse trigonometric identities.",
+"Simplify expressions involving inverse trigonometric functions.",
+"Find principal values."
+],
+mcqs:[
+["sin⁻¹x + cos⁻¹x =", "π/2"],
+["tan⁻¹x is inverse of:", "tan x"],
+["Range of sin⁻¹x is:", "[-π/2,π/2]"]
+]
+},
+
+
+"Matrices":{
+notes:[
+"A matrix is a rectangular arrangement of numbers in rows and columns.",
+"The order of a matrix is written as rows × columns.",
+"A row matrix has one row.",
+"A column matrix has one column.",
+"A square matrix has equal numbers of rows and columns.",
+"A diagonal matrix has zero elements outside the main diagonal.",
+"An identity matrix has ones on the main diagonal and zeros elsewhere.",
+"Transpose changes rows into columns.",
+"Two matrices can be added only when they have the same order.",
+"Matrix multiplication is possible when the number of columns of first matrix equals rows of second matrix."
+],
+formulas:[
+"AI = IA = A",
+"(AB)ᵀ = BᵀAᵀ",
+"(AB)⁻¹ = B⁻¹A⁻¹"
+],
+questions:[
+"Define matrix and its order.",
+"Explain different types of matrices.",
+"Find transpose of a matrix.",
+"Perform matrix addition and multiplication.",
+"Explain identity matrix.",
+"Find inverse of a matrix."
+],
+mcqs:[
+["Equal rows and columns gives:", "Square matrix"],
+["Identity matrix is represented by:", "I"],
+["Order of 3×2 matrix is:", "3 × 2"]
+]
+},
+
+
+"Determinants":{
+notes:[
+"Determinant is a scalar value associated with a square matrix.",
+"Determinants are useful for solving systems of linear equations.",
+"Minor of an element is obtained by deleting its row and column.",
+"Cofactor includes the sign factor (-1)^(i+j).",
+"A determinant becomes zero when its rows or columns are linearly dependent.",
+"A matrix with determinant zero is called singular.",
+"A non-zero determinant indicates a non-singular matrix.",
+"The inverse of a matrix exists only when its determinant is non-zero.",
+"Cramer's rule can be used to solve simultaneous linear equations.",
+"Determinants are also used to calculate areas of triangles."
+],
+formulas:[
+"|a b; c d| = ad-bc",
+"A⁻¹ = adj(A)/|A|",
+"Singular matrix: |A| = 0",
+"Non-singular matrix: |A| ≠ 0"
+],
+questions:[
+"Define determinant.",
+"Find determinant of a 2×2 matrix.",
+"Explain minors and cofactors.",
+"Find inverse using determinant.",
+"State the condition for a matrix to be singular.",
+"Use determinants to solve linear equations."
+],
+mcqs:[
+["Determinant exists for:", "Square matrix"],
+["Singular matrix has determinant:", "0"],
+["Inverse of A exists when:", "det(A) ≠ 0"]
+]
+},
+
+
+"Continuity and Differentiability":{
+notes:[
+"A function is continuous at x=a if its left-hand limit, right-hand limit and function value are equal.",
+"Differentiability means that the derivative exists at a point.",
+"Every differentiable function is continuous.",
+"A continuous function need not always be differentiable.",
+"Derivative represents instantaneous rate of change.",
+"Standard derivatives of algebraic, trigonometric, exponential and logarithmic functions are important.",
+"Chain rule is used for differentiation of composite functions.",
+"Product rule is used for the product of two functions.",
+"Quotient rule is used when one function is divided by another.",
+"Logarithmic differentiation is useful for complicated products and powers."
+],
+formulas:[
+"lim x→a f(x)=f(a)",
+"d/dx(xⁿ)=nxⁿ⁻¹",
+"d/dx(sin x)=cos x",
+"d/dx(cos x)=-sin x",
+"d/dx(eˣ)=eˣ",
+"d/dx(log x)=1/x"
+],
+questions:[
+"Define continuity.",
+"Define differentiability.",
+"Prove that differentiability implies continuity.",
+"Find derivatives using product and quotient rules.",
+"Use chain rule for composite functions.",
+"Find derivatives using logarithmic differentiation."
+],
+mcqs:[
+["Differentiability implies:", "Continuity"],
+["Derivative of sin x:", "cos x"],
+["Derivative of xⁿ:", "nxⁿ⁻¹"]
+]
+},
+
+
+"Applications of Derivatives":{
+notes:[
+"Derivative represents rate of change of one quantity with respect to another.",
+"A function is increasing where its derivative is positive.",
+"A function is decreasing where its derivative is negative.",
+"Critical points occur where derivative is zero or undefined.",
+"First derivative test can be used to identify local maxima and minima.",
+"Second derivative test can also help classify stationary points.",
+"Derivatives are used to solve maximum and minimum problems.",
+"Derivatives are used to find tangent and normal equations.",
+"Approximation can be performed using differentials."
+],
+formulas:[
+"f'(x)>0 → Increasing",
+"f'(x)<0 → Decreasing",
+"f'(x)=0 → Critical point",
+"Equation of tangent: y-y₁=m(x-x₁)"
+],
+questions:[
+"Find intervals of increasing and decreasing functions.",
+"Find local maxima and minima.",
+"Find equation of tangent.",
+"Find equation of normal.",
+"Solve maximum and minimum problems."
+],
+mcqs:[
+["f'(x)>0 means:", "Increasing"],
+["A critical point may occur when:", "f'(x)=0"],
+["Slope of tangent is:", "dy/dx"]
+]
+},
+
+
+"Integrals":{
+notes:[
+"Integration is the inverse process of differentiation.",
+"An indefinite integral contains an arbitrary constant C.",
+"Definite integration has upper and lower limits.",
+"Standard integration formulas should be memorised.",
+"Substitution method is useful when an expression and its derivative appear together.",
+"Integration by parts is useful for products of functions.",
+"Partial fractions can be used for rational functions.",
+"Definite integrals can be evaluated using properties.",
+"Integration can be used to calculate areas."
+],
+formulas:[
+"∫xⁿdx=xⁿ⁺¹/(n+1)+C",
+"∫sin x dx=-cos x+C",
+"∫cos x dx=sin x+C",
+"∫eˣdx=eˣ+C",
+"∫1/x dx=log|x|+C"
+],
+questions:[
+"Define integration.",
+"Solve standard integrals.",
+"Use substitution method.",
+"Use integration by parts.",
+"Evaluate definite integrals using properties.",
+"Solve integrals using partial fractions."
+],
+mcqs:[
+["Integration is reverse of:", "Differentiation"],
+["∫cos x dx =", "sin x+C"],
+["∫eˣ dx =", "eˣ+C"]
+]
+},
+
+
+"Applications of Integrals":{
+notes:[
+"Definite integration is used to calculate areas under curves.",
+"Area under a curve can be calculated by integrating with respect to x or y.",
+"Area between two curves is found by taking the difference between upper and lower functions.",
+"The limits of integration must be selected according to the region.",
+"Geometrical interpretation of definite integral is important.",
+"If a curve lies below the x-axis, its signed integral may be negative, but geometrical area is taken positive.",
+"Symmetry can simplify area calculations."
+],
+formulas:[
+"Area = ∫ y dx",
+"Area between curves = ∫(upper-lower)dx",
+"Area with respect to y = ∫(right-left)dy"
+],
+questions:[
+"Find area under a curve.",
+"Find area between two curves.",
+"Find area bounded by curves and coordinate axes.",
+"Use symmetry to simplify an area problem."
+],
+mcqs:[
+["Area under curve uses:", "Integration"],
+["Geometrical area is:", "Non-negative"],
+["Between curves we use:", "Difference"]
+]
+},
+
+
+"Differential Equations":{
+notes:[
+"A differential equation contains an unknown function and its derivatives.",
+"Order is the highest order derivative present in the equation.",
+"Degree is the power of the highest order derivative after removing radicals and fractions involving derivatives.",
+"A differential equation can be formed by eliminating arbitrary constants.",
+"Variable separable equations can be solved by separating variables.",
+"Homogeneous differential equations can sometimes be converted into separable form.",
+"A general solution contains arbitrary constants.",
+"A particular solution is obtained after applying given conditions."
+],
+formulas:[
+"dy/dx=f(x)",
+"dy/y=f(x)dx",
+"General solution contains arbitrary constant(s)"
+],
+questions:[
+"Define differential equation.",
+"Find order and degree.",
+"Form a differential equation.",
+"Solve variable separable equations.",
+"Find particular solution using given conditions."
+],
+mcqs:[
+["Order depends on:", "Highest derivative"],
+["Differential equation contains:", "Derivatives"],
+["General solution contains:", "Arbitrary constants"]
+]
+},
+
+
+"Vector Algebra":{
+notes:[
+"A vector has both magnitude and direction.",
+"A scalar has magnitude only.",
+"Zero vector has zero magnitude.",
+"A unit vector has magnitude one.",
+"Vectors can be added using triangle or parallelogram law.",
+"Dot product of two vectors gives a scalar.",
+"Cross product of two vectors gives a vector perpendicular to both.",
+"Parallel vectors have zero cross product.",
+"Perpendicular vectors have zero dot product.",
+"Section formula and projection are important applications of vectors."
+],
+formulas:[
+"|a|=√(a₁²+a₂²+a₃²)",
+"a·b=|a||b|cosθ",
+"|a×b|=|a||b|sinθ",
+"a·b=0 → Perpendicular"
+],
+questions:[
+"Define vector and scalar.",
+"Find magnitude of a vector.",
+"Explain dot product.",
+"Explain cross product.",
+"Find angle between two vectors.",
+"Find projection of one vector on another."
+],
+mcqs:[
+["Dot product gives:", "Scalar"],
+["Cross product gives:", "Vector"],
+["Perpendicular vectors have dot product:", "0"]
+]
+},
+
+
+"Three Dimensional Geometry":{
+notes:[
+"Three-dimensional geometry deals with points, lines and planes in space.",
+"A point is represented by three coordinates (x,y,z).",
+"Direction ratios describe the direction of a line.",
+"Direction cosines are the cosines of angles made by a line with coordinate axes.",
+"The equation of a line can be written in Cartesian or vector form.",
+"Angle between two lines can be found using their direction ratios.",
+"Shortest distance problems involve lines in three-dimensional space.",
+"Plane equations can be represented using a normal vector."
+],
+formulas:[
+"l²+m²+n²=1",
+"(x-x₁)/a=(y-y₁)/b=(z-z₁)/c",
+"r=a+λb"
+],
+questions:[
+"Define direction cosines.",
+"Find direction ratios.",
+"Find equation of a line.",
+"Find angle between two lines.",
+"Find shortest distance between lines.",
+"Write equation of a plane."
+],
+mcqs:[
+["l²+m²+n² =", "1"],
+["3D point needs:", "Three coordinates"],
+["Direction ratios describe:", "Direction of line"]
+]
+},
+
+
+"Linear Programming":{
+notes:[
+"Linear programming is a method of finding the maximum or minimum value of a linear objective function.",
+"The objective function represents the quantity to be maximised or minimised.",
+"Constraints are restrictions expressed as linear inequalities.",
+"Non-negative restrictions usually require variables to be greater than or equal to zero.",
+"The feasible region is the common region satisfying all constraints.",
+"Corner points of the feasible region are important for finding the optimum value.",
+"The graphical method is commonly used for two-variable problems.",
+"An optimum value generally occurs at a corner point when a feasible optimum exists."
+],
+formulas:[
+"Z=ax+by",
+"Maximise or minimise Z",
+"x≥0, y≥0"
+],
+questions:[
+"Define linear programming problem.",
+"Define objective function.",
+"Define constraints.",
+"What is feasible region?",
+"Solve a graphical LPP.",
+"Find maximum or minimum value."
+],
+mcqs:[
+["LPP objective function is:", "Linear"],
+["Restrictions are called:", "Constraints"],
+["Common satisfying region is:", "Feasible region"]
+]
+},
+
+
+"Probability":{
+notes:[
+"Probability measures the chance of occurrence of an event.",
+"Conditional probability is probability of an event given that another event has occurred.",
+"Two events are independent when occurrence of one does not affect the other.",
+"Bayes theorem connects conditional probabilities.",
+"The probability of an event lies between 0 and 1.",
+"Complementary event contains all outcomes where the original event does not occur.",
+"Mutually exclusive events cannot occur together.",
+"Total probability theorem is useful when an event can occur through different cases."
+],
+formulas:[
+"P(A|B)=P(A∩B)/P(B)",
+"P(A')=1-P(A)",
+"P(A∩B)=P(A)P(B) for independent events",
+"P(A∪B)=P(A)+P(B)-P(A∩B)"
+],
+questions:[
+"Define conditional probability.",
+"Define independent events.",
+"Define mutually exclusive events.",
+"State Bayes theorem.",
+"Use total probability theorem.",
+"Solve conditional probability problems."
+],
+mcqs:[
+["P(A') =", "1-P(A)"],
+["Independent events satisfy:", "P(A∩B)=P(A)P(B)"],
+["Probability lies between:", "0 and 1"]
+]
+},
+
+
+/* =====================================================
+   CHEMISTRY
+===================================================== */
+
+"Solutions":{
+notes:[
+"A solution is a homogeneous mixture of two or more components.",
+"The component present in larger amount is generally called solvent.",
+"The component dissolved in solvent is called solute.",
+"Molarity is the number of moles of solute present per litre of solution.",
+"Molality is the number of moles of solute per kilogram of solvent.",
+"Mole fraction represents the ratio of moles of a component to total moles.",
+"Concentration can also be expressed in terms of mass percentage and volume percentage.",
+"Colligative properties depend on the number of solute particles rather than their chemical identity.",
+"Relative lowering of vapour pressure, elevation of boiling point and depression of freezing point are colligative properties.",
+"Osmotic pressure is another important colligative property.",
+"Raoult's law describes vapour pressure of ideal solutions."
+],
+formulas:[
+"Molarity = moles/volume(L)",
+"Molality = moles/mass(kg)",
+"χA = nA/(nA+nB)",
+"π = CRT",
+"ΔTᵦ = Kᵦm",
+"ΔT𝒻 = K𝒻m"
+],
+questions:[
+"Define molarity and molality.",
+"Define mole fraction.",
+"State Raoult's law.",
+"What are colligative properties?",
+"Explain osmotic pressure.",
+"Differentiate ideal and non-ideal solutions."
+],
+mcqs:[
+["Molarity unit:", "mol/L"],
+["Molality depends on:", "Mass of solvent"],
+["Osmotic pressure formula:", "π=CRT"]
+]
+},
+
+
+"Electrochemistry":{
+notes:[
+"Electrochemistry deals with the relationship between chemical reactions and electrical energy.",
+"Oxidation occurs at the anode and reduction occurs at the cathode.",
+"A galvanic cell converts chemical energy into electrical energy.",
+"An electrolytic cell uses electrical energy to drive a chemical reaction.",
+"Electrode potential represents the tendency of an electrode to undergo reduction.",
+"Standard electrode potentials are measured under standard conditions.",
+"Cell potential is related to the electrode potentials of cathode and anode.",
+"Nernst equation gives electrode or cell potential under non-standard conditions.",
+"Faraday's laws relate the amount of substance deposited to electric charge.",
+"Conductance is reciprocal of resistance.",
+"Molar conductivity depends on concentration."
+],
+formulas:[
+"Ecell = Ecathode - Eanode",
+"ΔG = -nFE",
+"Q = It",
+"G = 1/R",
+"Λm = κ × 1000/C"
+],
+questions:[
+"Define electrochemical cell.",
+"Differentiate galvanic and electrolytic cells.",
+"Explain electrode potential.",
+"State Faraday's laws.",
+"Write Nernst equation.",
+"Define conductivity and molar conductivity."
+],
+mcqs:[
+["Cathode is the site of:", "Reduction"],
+["SI unit of conductance:", "Siemens"],
+["Faraday's law involves:", "Electric charge"]
+]
+},
+
+
+"Chemical Kinetics":{
+notes:[
+"Chemical kinetics deals with the rate and mechanism of chemical reactions.",
+"Rate of reaction is change in concentration per unit time.",
+"Rate law relates reaction rate to concentrations of reactants.",
+"Rate constant is represented by k.",
+"Order of reaction is the sum of powers of concentration terms in the rate law.",
+"Molecularity refers to the number of reacting species involved in an elementary reaction step.",
+"Activation energy is the minimum energy required for a reaction to occur.",
+"A catalyst changes reaction rate by providing an alternative pathway with lower activation energy.",
+"Temperature generally increases reaction rate.",
+"Half-life is the time required for the concentration of a reactant to become half its initial value."
+],
+formulas:[
+"Rate = k[A]ⁿ",
+"First order: t₁/₂=0.693/k",
+"k = rate/[A]ⁿ",
+"Arrhenius: k=Ae^(-Ea/RT)"
+],
+questions:[
+"Define rate of reaction.",
+"Define order of reaction.",
+"Differentiate order and molecularity.",
+"Define activation energy.",
+"Explain effect of temperature on reaction rate.",
+"Derive first-order integrated rate equation."
+],
+mcqs:[
+["Rate constant is represented by:", "k"],
+["First order half-life:", "0.693/k"],
+["Catalyst generally:", "Lowers activation energy"]
+]
+},
+
+
+"d and f Block Elements":{
+notes:[
+"Transition elements contain partially filled d orbitals in their atoms or ions.",
+"Transition elements show variable oxidation states.",
+"They often form coloured ions and compounds.",
+"Many transition metal ions are paramagnetic due to unpaired electrons.",
+"Transition metals can form coordination compounds.",
+"Transition elements often act as catalysts.",
+"Lanthanoids involve filling of 4f orbitals.",
+"Actinoids involve filling of 5f orbitals.",
+"Lanthanoids commonly show +3 oxidation state.",
+"Actinoids show greater range of oxidation states.",
+"Lanthanide contraction is the gradual decrease in atomic and ionic radii across the lanthanoid series."
+],
+formulas:[
+"General d-block configuration: (n-1)d¹⁻¹⁰ns⁰⁻²",
+"Lanthanoids → 4f filling",
+"Actinoids → 5f filling"
+],
+questions:[
+"Define transition elements.",
+"Explain variable oxidation states.",
+"Why are transition metal compounds coloured?",
+"Explain magnetic properties.",
+"Explain lanthanide contraction.",
+"Write properties of lanthanoids and actinoids."
+],
+mcqs:[
+["Lanthanoids involve:", "4f orbitals"],
+["Actinoids involve:", "5f orbitals"],
+["Transition compounds are often:", "Coloured"]
+]
+},
+
+
+"Coordination Compounds":{
+notes:[
+"Coordination compounds contain a central metal atom or ion surrounded by ligands.",
+"A ligand is an ion or molecule capable of donating an electron pair to the central metal.",
+"Coordination number is the number of donor atoms directly bonded to the central metal.",
+"Monodentate ligands donate through one donor atom.",
+"Bidentate ligands donate through two donor atoms.",
+"Coordination sphere contains the central metal and its directly attached ligands.",
+"Coordination compounds show different geometries depending on coordination number.",
+"Werner's theory explains primary and secondary valencies.",
+"Coordination compounds have applications in medicines, metallurgy and analytical chemistry."
+],
+formulas:[
+"Coordination number = number of donor atoms",
+"Complex ion = central metal + ligands"
+],
+questions:[
+"Define coordination compound.",
+"Define ligand.",
+"What is coordination number?",
+"Differentiate monodentate and bidentate ligands.",
+"Explain Werner's coordination theory.",
+"Write applications of coordination compounds."
+],
+mcqs:[
+["Ligand donates:", "Electron pair"],
+["Central atom is generally:", "Metal ion"],
+["A ligand with two donor atoms is:", "Bidentate"]
+]
+},
+
+
+"Haloalkanes and Haloarenes":{
+notes:[
+"Haloalkanes contain a halogen atom attached to an alkyl group.",
+"Haloarenes contain a halogen directly attached to an aromatic ring.",
+"Halogen atoms include F, Cl, Br and I.",
+"Nucleophilic substitution is an important reaction of haloalkanes.",
+"SN1 reaction proceeds through a carbocation intermediate.",
+"SN2 reaction occurs in a single step through backside attack.",
+"Reactivity depends on the nature of the carbon-halogen bond and substrate.",
+"Haloarenes are generally less reactive towards nucleophilic substitution than haloalkanes.",
+"Elimination reactions can produce alkenes.",
+"Organohalogen compounds have important industrial and synthetic applications."
+],
+formulas:[
+"R-X = Haloalkane",
+"Ar-X = Haloarene",
+"SN1 = Two-step",
+"SN2 = One-step"
+],
+questions:[
+"Define haloalkanes and haloarenes.",
+"Explain SN1 reaction.",
+"Explain SN2 reaction.",
+"Differentiate SN1 and SN2.",
+"Explain elimination reaction.",
+"Why are haloarenes less reactive towards nucleophilic substitution?"
+],
+mcqs:[
+["Haloalkane contains:", "R-X"],
+["SN2 reaction is:", "Bimolecular"],
+["Haloarene contains:", "Ar-X"]
+]
+},
+
+
+"Alcohols, Phenols and Ethers":{
+notes:[
+"Alcohols contain a hydroxyl group attached to a saturated carbon atom.",
+"Phenols contain hydroxyl group directly attached to an aromatic ring.",
+"Ethers contain an oxygen atom between two carbon groups.",
+"Alcohols can be classified as primary, secondary and tertiary.",
+"Phenol is more acidic than ordinary alcohols because its conjugate base is resonance stabilised.",
+"Alcohols can undergo dehydration to form alkenes.",
+"Alcohols can be oxidised depending on their type.",
+"Ethers can be cleaved by strong hydrogen halides.",
+"Phenols undergo electrophilic substitution reactions on the aromatic ring."
+],
+formulas:[
+"Alcohol = R-OH",
+"Phenol = Ar-OH",
+"Ether = R-O-R'",
+"Primary alcohol → aldehyde → acid (on suitable oxidation)"
+],
+questions:[
+"Define alcohol, phenol and ether.",
+"Differentiate primary, secondary and tertiary alcohols.",
+"Explain acidic nature of phenol.",
+"Explain dehydration of alcohols.",
+"Write important reactions of phenol.",
+"Explain cleavage of ethers."
+],
+mcqs:[
+["Alcohol group is:", "OH"],
+["Ether contains:", "R-O-R'"],
+["Phenol is:", "Ar-OH"]
+]
+},
+
+
+"Aldehydes, Ketones and Carboxylic Acids":{
+notes:[
+"Aldehydes contain the functional group -CHO.",
+"Ketones contain a carbonyl group bonded to two carbon groups.",
+"Carboxylic acids contain the -COOH functional group.",
+"The carbonyl group is polar because oxygen is more electronegative than carbon.",
+"Aldehydes are generally more easily oxidised than ketones.",
+"Carboxylic acids show acidic behaviour due to the carboxyl group.",
+"Aldehydes and ketones undergo nucleophilic addition reactions.",
+"Carboxylic acids can form esters with alcohols.",
+"Important tests include Tollens' test and Fehling's test for suitable aldehydes."
+],
+formulas:[
+"Aldehyde = R-CHO",
+"Ketone = R-CO-R'",
+"Carboxylic acid = R-COOH",
+"Acid + Alcohol ⇌ Ester + Water"
+],
+questions:[
+"Define aldehydes and ketones.",
+"Define carboxylic acids.",
+"Explain nucleophilic addition.",
+"Explain oxidation of aldehydes and ketones.",
+"Explain esterification.",
+"Write important tests for aldehydes."
+],
+mcqs:[
+["Aldehyde group is:", "CHO"],
+["Carboxylic acid group is:", "COOH"],
+["Ketone contains:", "Carbonyl group"]
+]
+},
+
+
+"Amines":{
+notes:[
+"Amines are derivatives of ammonia in which hydrogen atoms are replaced by organic groups.",
+"Primary amines contain one carbon group attached to nitrogen.",
+"Secondary amines contain two carbon groups.",
+"Tertiary amines contain three carbon groups.",
+"Amines are classified as aliphatic or aromatic.",
+"Amines show basic behaviour because nitrogen has a lone pair of electrons.",
+"Aniline is an aromatic amine.",
+"Primary aromatic amines can form diazonium salts under suitable conditions.",
+"Diazonium salts are useful in preparation of many aromatic compounds.",
+"Amines can form salts with acids."
+],
+formulas:[
+"Primary amine = RNH₂",
+"Secondary amine = R₂NH",
+"Tertiary amine = R₃N",
+"Amine + Acid → Ammonium salt"
+],
+questions:[
+"Define amines.",
+"Differentiate primary, secondary and tertiary amines.",
+"Explain basic nature of amines.",
+"What is aniline?",
+"Explain diazotisation.",
+"Write important reactions of amines."
+],
+mcqs:[
+["Amines are derivatives of:", "Ammonia"],
+["Primary amine is:", "RNH₂"],
+["Aniline is:", "Aromatic amine"]
+]
+},
+
+
+"Biomolecules":{
+notes:[
+"Biomolecules are naturally occurring molecules essential for living organisms.",
+"Carbohydrates are major sources of energy.",
+"Monosaccharides are the simplest carbohydrates.",
+"Glucose is an important monosaccharide.",
+"Proteins are polymers made from amino acids.",
+"Peptide bonds join amino acids in proteins.",
+"Enzymes are biological catalysts, mostly proteins.",
+"Vitamins are required in small amounts for normal growth and metabolism.",
+"Nucleic acids include DNA and RNA.",
+"DNA stores genetic information while RNA plays important roles in protein synthesis."
+],
+formulas:[
+"Glucose = C₆H₁₂O₆",
+"Proteins → Amino acids",
+"DNA → Genetic information",
+"RNA → Protein synthesis"
+],
+questions:[
+"Define biomolecules.",
+"Classify carbohydrates.",
+"What are proteins?",
+"Explain peptide bond.",
+"Write functions of vitamins.",
+"Differentiate DNA and RNA."
+],
+mcqs:[
+["Proteins are made of:", "Amino acids"],
+["Glucose formula:", "C₆H₁₂O₆"],
+["DNA stores:", "Genetic information"]
+]
+},
+
+
+/* =====================================================
+   ENGLISH
+===================================================== */
+
+"Reading Comprehension":{
+notes:[
+"Reading comprehension tests the ability to understand and interpret a given passage.",
+"Read the complete passage carefully before answering.",
+"Identify the central idea or main theme.",
+"Look for keywords and important details.",
+"Factual questions should be answered directly from the passage.",
+"Inference questions require understanding what is implied.",
+"Vocabulary questions should be answered using context.",
+"Do not add information that is not supported by the passage.",
+"Answers should be clear, relevant and grammatically correct.",
+"Time management is important during comprehension questions."
+],
+formulas:[
+"Read → Understand → Locate → Answer",
+"Main idea + Evidence + Correct wording"
+],
+questions:[
+"Find the central idea of a passage.",
+"Answer factual questions.",
+"Answer inference-based questions.",
+"Find meanings of words from context.",
+"Find suitable titles.",
+"Summarise the main points."
+],
+mcqs:[
+["Answers should be based on:", "Passage"],
+["First step is:", "Read carefully"],
+["Vocabulary should be understood using:", "Context"]
+]
+},
+
+
+"Writing Skills":{
+notes:[
+"Writing skills require correct format, relevant content and clear expression.",
+"Formal letters follow a specific format including sender's address, date, receiver's address, subject, salutation, body and closing.",
+"An article generally has a suitable title, introduction, main body and conclusion.",
+"Reports present information in an organised and objective manner.",
+"Notices should be brief, clear and informative.",
+"Formal writing should use appropriate language and avoid unnecessary slang.",
+"Paragraphs should be logically connected.",
+"Spelling, grammar and punctuation are important for good writing.",
+"The purpose and audience should be considered while writing.",
+"Word limit should be followed in examination answers."
+],
+formulas:[
+"Writing = Format + Content + Accuracy + Presentation",
+"Article = Title + Introduction + Body + Conclusion",
+"Formal Letter = Address + Date + Receiver + Subject + Body + Closing"
+],
+questions:[
+"Write a formal letter.",
+"Write an article on a given topic.",
+"Write a report.",
+"Write a notice.",
+"Write a speech.",
+"Write a paragraph using appropriate formal language."
+],
+mcqs:[
+["Formal writing uses:", "Formal language"],
+["Article needs:", "Title"],
+["Report should be:", "Organised and objective"]
+]
+},
+
+
+"Literature":{
+notes:[
+"Literature includes prose, drama and other forms of written artistic expression.",
+"Theme is the central idea or message of a literary work.",
+"Plot refers to the sequence of important events.",
+"Characters are the people or figures involved in a literary work.",
+"Characterisation explains the qualities and development of characters.",
+"Setting refers to the time and place of a work.",
+"Tone describes the writer's attitude.",
+"Context helps explain the meaning of an important passage.",
+"Long answers should include relevant points and explanation.",
+"Quotations should be used only when necessary and accurately."
+],
+formulas:[
+"Literary Answer = Context + Explanation + Evidence + Conclusion",
+"Character analysis = Traits + Actions + Development"
+],
+questions:[
+"Explain the central theme.",
+"Describe an important character.",
+"Explain an important event.",
+"Discuss the message of the chapter.",
+"Explain an important passage in context.",
+"Write a detailed character sketch."
+],
+mcqs:[
+["Central idea is called:", "Theme"],
+["Person in a story is:", "Character"],
+["Time and place are called:", "Setting"]
+]
+},
+
+
+"Poetry":{
+notes:[
+"Poetry expresses ideas and emotions through carefully chosen language.",
+"Theme is the central idea of a poem.",
+"Tone describes the poet's attitude or emotional quality.",
+"Imagery creates mental pictures through descriptive language.",
+"Simile is a comparison using words such as like or as.",
+"Metaphor makes a direct comparison between unlike things.",
+"Personification gives human qualities to non-human things.",
+"Alliteration is repetition of initial consonant sounds.",
+"Rhyme and rhythm contribute to the musical quality of poetry.",
+"Poetry questions often require explanation of theme, tone and poetic devices."
+],
+formulas:[
+"Poetry Analysis = Theme + Tone + Imagery + Devices + Meaning",
+"Simile = Comparison using like/as",
+"Metaphor = Direct comparison",
+"Personification = Human qualities to non-human things"
+],
+questions:[
+"Explain the central idea of the poem.",
+"Identify and explain poetic devices.",
+"Explain important lines in context.",
+"Describe the tone of the poem.",
+"Explain the use of imagery.",
+"Write a summary of the poem."
+],
+mcqs:[
+["Like/as comparison:", "Simile"],
+["Direct comparison:", "Metaphor"],
+["Human qualities:", "Personification"]
+]
+},
+
+
+"Grammar":{
+notes:[
+"Grammar provides rules for correct and meaningful language.",
+"Tenses indicate the time of an action or state.",
+"Present, past and future are the main time divisions.",
+"Active voice focuses on the person or thing performing an action.",
+"Passive voice focuses on the receiver of the action.",
+"Direct speech reports the exact words of a speaker.",
+"Indirect speech reports the meaning without quoting the exact words.",
+"Subject-verb agreement requires the verb to agree with its subject.",
+"Articles include a, an and the.",
+"Correct punctuation helps make meaning clear."
+],
+formulas:[
+"Active → Passive = Object + helping verb + V3 + by + subject",
+"Reported speech requires suitable changes in tense/pronouns/time expressions.",
+"Subject + Verb agreement"
+],
+questions:[
+"Change active voice into passive voice.",
+"Change direct speech into indirect speech.",
+"Correct grammatical errors.",
+"Practice all important tenses.",
+"Use articles correctly.",
+"Practice subject-verb agreement."
+],
+mcqs:[
+["Past participle is:", "V3"],
+["Passive voice focuses on:", "Receiver of action"],
+["Articles are:", "a, an, the"]
+]
+}
+
+};
+
+
+/* =====================================================
+   DISPLAY CHAPTER
+===================================================== */
+
+const data = chapterData[chapter];
+
+if(data){
+
+    document.getElementById("notes").innerHTML =
+    data.notes.map(function(note){
+        return `<div class="note">${note}</div>`;
+    }).join("");
+
+    document.getElementById("formulas").innerHTML =
+    data.formulas.map(function(formula){
+        return `<div class="formula">${formula}</div>`;
+    }).join("");
+
+    document.getElementById("questions").innerHTML =
+    data.questions.map(function(question,index){
+        return `
+        <div class="question">
+            <strong>Q${index+1}.</strong> ${question}
+        </div>
+        `;
+    }).join("");
+
+    document.getElementById("mcqs").innerHTML =
+    data.mcqs.map(function(mcq,index){
+
+        return `
+        <div class="mcq">
+
+            <strong>${index+1}. ${mcq[0]}</strong>
+
+            <div class="option"
+                 onclick="showAnswer('answer${index}')">
+                 👁️ Show Answer
+            </div>
+
+            <div class="answer" id="answer${index}">
+                ✅ Correct Answer: ${mcq[1]}
+            </div>
+
+        </div>
+        `;
+
+    }).join("");
+
+}else{
+
+    document.getElementById("notes").innerHTML =
+    `<div class="empty">❌ This chapter was not found.</div>`;
+
+    document.getElementById("formulas").innerHTML =
+    `<div class="empty">No formulas available.</div>`;
+
+    document.getElementById("questions").innerHTML =
+    `<div class="empty">No questions available.</div>`;
+
+    document.getElementById("mcqs").innerHTML =
+    `<div class="empty">No MCQs available.</div>`;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+const storageKey =
+"completed_" +
+subject.replace(/\s+/g,"_") +
+"_" +
+chapter.replace(/\s+/g,"_");
+
+if(localStorage.getItem(storageKey) === "true"){
+
+    document.getElementById("progressFill").style.width =
+    "100%";
+
+}
+
+
+/* =====================================================
+   SHOW ANSWER
+===================================================== */
+
+function showAnswer(id){
+
+    const answer = document.getElementById(id);
+
+    if(answer.style.display === "block"){
+        answer.style.display = "none";
+    }else{
+        answer.style.display = "block";
+    }
+
+}
+
+
+/* =====================================================
+   COMPLETE CHAPTER
+===================================================== */
+
+function completeChapter(){
+
+    const alreadyCompleted =
+    localStorage.getItem(storageKey) === "true";
+
+    if(!alreadyCompleted){
+
+        let oldXP =
+        Number(localStorage.getItem("studyXP")) || 0;
+
+        localStorage.setItem(
+            "studyXP",
+            oldXP + 50
+        );
+
+        alert(
+            "🎉 Chapter Completed!\n\n" +
+            chapter +
+            "\n\n+50 XP earned!"
+        );
+
+    }else{
+
+        alert(
+            "✅ This chapter is already completed!"
+        );
+
+    }
+
+    localStorage.setItem(
+        storageKey,
+        "true"
+    );
+
+    document.getElementById("progressFill").style.width =
+    "100%";
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+function goBack(){
+
+    window.location.href = "subjects.html";
+
+}
+
+</script>
+
+</body>
+</html>

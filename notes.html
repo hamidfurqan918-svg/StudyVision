@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Study Vision - Notes</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0b1020;
+    color:white;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    background:#11182d;
+    border-bottom:1px solid #202b48;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#7c5cff;
+}
+
+.back{
+    background:#1a2440;
+    color:white;
+    border:1px solid #2b395c;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.back:hover{
+    background:#253252;
+}
+
+
+/* MAIN */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:35px;
+}
+
+
+/* TOP */
+
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.title h1{
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.title p{
+    color:#8995b2;
+    font-size:14px;
+}
+
+.new-btn{
+    background:#7c5cff;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.new-btn:hover{
+    background:#6b4de0;
+}
+
+
+/* SEARCH */
+
+.search{
+    width:100%;
+    background:#11182d;
+    border:1px solid #202b48;
+    color:white;
+    padding:14px 16px;
+    border-radius:12px;
+    outline:none;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.search:focus{
+    border-color:#7c5cff;
+}
+
+
+/* NOTES GRID */
+
+.notes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.note{
+    background:#11182d;
+    border:1px solid #202b48;
+    border-radius:16px;
+    padding:20px;
+    position:relative;
+    transition:0.2s;
+}
+
+.note:hover{
+    transform:translateY(-3px);
+    border-color:#7c5cff;
+}
+
+.note.important{
+    border-color:#e4b94c;
+}
+
+.star{
+    position:absolute;
+    right:15px;
+    top:15px;
+    background:none;
+    border:none;
+    color:#59647e;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.note.important .star{
+    color:#e4b94c;
+}
+
+.note h3{
+    padding-right:30px;
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+.note p{
+    color:#aeb8d0;
+    line-height:1.6;
+    font-size:14px;
+    white-space:pre-wrap;
+}
+
+.note-date{
+    color:#69758f;
+    font-size:11px;
+    margin-top:15px;
+}
+
+.note-actions{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.note-actions button{
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    color:white;
+    font-size:12px;
+}
+
+.edit-btn{
+    background:#26365b;
+}
+
+.delete-btn{
+    background:#652d3b;
+}
+
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    color:#69758f;
+    padding:70px 20px;
+    display:none;
+}
+
+.empty-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:10;
+}
+
+.modal-box{
+    width:100%;
+    max-width:550px;
+    background:#11182d;
+    border:1px solid #2b395c;
+    border-radius:18px;
+    padding:25px;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.input,
+.textarea{
+    width:100%;
+    background:#0b1020;
+    border:1px solid #263354;
+    color:white;
+    border-radius:10px;
+    padding:13px;
+    outline:none;
+    margin-bottom:15px;
+}
+
+.input:focus,
+.textarea:focus{
+    border-color:#7c5cff;
+}
+
+.textarea{
+    height:180px;
+    resize:vertical;
+}
+
+.modal-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+.cancel{
+    background:#252e49;
+    color:white;
+    border:none;
+    padding:11px 18px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+.save{
+    background:#7c5cff;
+    color:white;
+    border:none;
+    padding:11px 20px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .notes{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .container{
+        padding:20px;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .notes{
+        grid-template-columns:1fr;
+    }
+
+    .top{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .new-btn{
+        width:100%;
+    }
+
+    header{
+        padding:0 18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🧠 Study <span>Vision</span>
+    </div>
+
+    <button class="back" onclick="goBack()">
+        ← Dashboard
+    </button>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TOP -->
+
+    <div class="top">
+
+        <div class="title">
+
+            <h1>📝 My Notes</h1>
+
+            <p>
+                Save your important Class 12th JKBOSE notes here.
+            </p>
+
+        </div>
+
+        <button
+            class="new-btn"
+            onclick="openNewNote()">
+            + New Note
+        </button>
+
+    </div>
+
+
+
+    <!-- SEARCH -->
+
+    <input
+        type="text"
+        class="search"
+        id="search"
+        placeholder="🔍 Search your notes..."
+        oninput="displayNotes()"
+    >
+
+
+
+    <!-- NOTES -->
+
+    <div
+        class="notes"
+        id="notes">
+    </div>
+
+
+
+    <!-- EMPTY -->
+
+    <div
+        class="empty"
+        id="empty">
+
+        <div class="empty-icon">
+            📝
+        </div>
+
+        <h3>
+            No notes found
+        </h3>
+
+        <p>
+            Create your first note using the + New Note button.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- MODAL -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="modal-box">
+
+        <h2 id="modalTitle">
+            📝 New Note
+        </h2>
+
+
+        <input
+            type="text"
+            class="input"
+            id="noteTitle"
+            placeholder="Note title..."
+        >
+
+
+        <textarea
+            class="textarea"
+            id="noteText"
+            placeholder="Write your note here..."
+        ></textarea>
+
+
+        <div class="modal-buttons">
+
+            <button
+                class="cancel"
+                onclick="closeModal()">
+                Cancel
+            </button>
+
+            <button
+                class="save"
+                onclick="saveNote()">
+                Save Note
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   NOTES DATA
+========================= */
+
+let notes =
+    JSON.parse(
+        localStorage.getItem("studyVisionNotes")
+    ) || [];
+
+
+let editingIndex = -1;
+
+
+
+/* =========================
+   OPEN NEW NOTE
+========================= */
+
+function openNewNote(){
+
+    editingIndex = -1;
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent = "📝 New Note";
+
+    document.getElementById(
+        "noteTitle"
+    ).value = "";
+
+    document.getElementById(
+        "noteText"
+    ).value = "";
+
+    document.getElementById(
+        "modal"
+    ).style.display = "flex";
+
+}
+
+
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+function closeModal(){
+
+    document.getElementById(
+        "modal"
+    ).style.display = "none";
+
+}
+
+
+
+/* =========================
+   SAVE NOTE
+========================= */
+
+function saveNote(){
+
+    const title =
+        document.getElementById(
+            "noteTitle"
+        ).value.trim();
+
+
+    const text =
+        document.getElementById(
+            "noteText"
+        ).value.trim();
+
+
+    if(title === "" || text === ""){
+
+        alert(
+            "Please enter both title and note."
+        );
+
+        return;
+
+    }
+
+
+    if(editingIndex === -1){
+
+        notes.unshift({
+
+            title:title,
+
+            text:text,
+
+            important:false,
+
+            date:new Date().toLocaleString()
+
+        });
+
+    }
+
+    else{
+
+        notes[editingIndex].title =
+            title;
+
+        notes[editingIndex].text =
+            text;
+
+        notes[editingIndex].date =
+            new Date().toLocaleString();
+
+    }
+
+
+    localStorage.setItem(
+        "studyVisionNotes",
+        JSON.stringify(notes)
+    );
+
+
+    closeModal();
+
+    displayNotes();
+
+}
+
+
+
+/* =========================
+   DISPLAY NOTES
+========================= */
+
+function displayNotes(){
+
+    const container =
+        document.getElementById(
+            "notes"
+        );
+
+
+    const empty =
+        document.getElementById(
+            "empty"
+        );
+
+
+    const search =
+        document.getElementById(
+            "search"
+        ).value.toLowerCase();
+
+
+    container.innerHTML = "";
+
+
+    const filtered =
+        notes.filter(function(note){
+
+            return (
+                note.title
+                    .toLowerCase()
+                    .includes(search)
+                ||
+                note.text
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        });
+
+
+    if(filtered.length === 0){
+
+        empty.style.display = "block";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    filtered.forEach(
+        function(note){
+
+            const realIndex =
+                notes.indexOf(note);
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.className =
+                "note" +
+                (note.important
+                    ? " important"
+                    : "");
+
+
+            div.innerHTML = `
+
+                <button
+                    class="star"
+                    onclick="toggleImportant(${realIndex})">
+
+                    ${note.important ? "★" : "☆"}
+
+                </button>
+
+
+                <h3>
+                    ${escapeHTML(note.title)}
+                </h3>
+
+
+                <p>
+                    ${escapeHTML(note.text)}
+                </p>
+
+
+                <div class="note-date">
+                    ${note.date}
+                </div>
+
+
+                <div class="note-actions">
+
+                    <button
+                        class="edit-btn"
+                        onclick="editNote(${realIndex})">
+                        ✏️ Edit
+                    </button>
+
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteNote(${realIndex})">
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   EDIT NOTE
+========================= */
+
+function editNote(index){
+
+    editingIndex = index;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent = "✏️ Edit Note";
+
+
+    document.getElementById(
+        "noteTitle"
+    ).value =
+        notes[index].title;
+
+
+    document.getElementById(
+        "noteText"
+    ).value =
+        notes[index].text;
+
+
+    document.getElementById(
+        "modal"
+    ).style.display = "flex";
+
+}
+
+
+
+/* =========================
+   DELETE NOTE
+========================= */
+
+function deleteNote(index){
+
+    const confirmDelete =
+        confirm(
+            "Are you sure you want to delete this note?"
+        );
+
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    notes.splice(index,1);
+
+
+    localStorage.setItem(
+        "studyVisionNotes",
+        JSON.stringify(notes)
+    );
+
+
+    displayNotes();
+
+}
+
+
+
+/* =========================
+   IMPORTANT NOTE
+========================= */
+
+function toggleImportant(index){
+
+    notes[index].important =
+        !notes[index].important;
+
+
+    localStorage.setItem(
+        "studyVisionNotes",
+        JSON.stringify(notes)
+    );
+
+
+    displayNotes();
+
+}
+
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+
+/* =========================
+   BACK TO DASHBOARD
+========================= */
+
+function goBack(){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =========================
+   START
+========================= */
+
+displayNotes();
+
+</script>
+
+
+</body>
+</html>

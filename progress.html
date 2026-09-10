@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress | Study Vision</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080d20;
+    color: white;
+}
+
+header {
+    padding: 20px 40px;
+    background: #111936;
+    border-bottom: 1px solid #293765;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.back {
+    background: #5865f2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 45px auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 34px;
+}
+
+.subtitle {
+    color: #9ca8d0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 35px;
+}
+
+.card {
+    background: #111936;
+    border: 1px solid #293765;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+}
+
+.icon {
+    font-size: 30px;
+}
+
+.label {
+    color: #9ca8d0;
+    margin-top: 10px;
+}
+
+.value {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.progress-box {
+    margin-top: 25px;
+    background: #111936;
+    border: 1px solid #293765;
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.progress-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 18px;
+    background: #202b50;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #5865f2;
+    border-radius: 20px;
+    transition: width 0.5s;
+}
+
+.percent {
+    margin-top: 10px;
+    color: #9ca8d0;
+}
+
+.subjects {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.subject {
+    background: #111936;
+    border: 1px solid #293765;
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.subject-name {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.subject-bar {
+    height: 10px;
+    background: #202b50;
+    border-radius: 20px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.subject-fill {
+    height: 100%;
+    background: #5865f2;
+    border-radius: 20px;
+}
+
+.subject-info {
+    color: #9ca8d0;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .subjects {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🧠 Study Vision</div>
+    <button class="back" onclick="goBack()">← Dashboard</button>
+</header>
+
+<div class="container">
+
+    <div class="title">
+        <h1>📊 My Progress</h1>
+        <p class="subtitle">
+            Track your study journey
+        </p>
+    </div>
+
+    <div class="stats">
+
+        <div class="card">
+            <div class="icon">⏱️</div>
+            <div class="label">Study Time</div>
+            <div class="value" id="studyTime">0 min</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎯</div>
+            <div class="label">Quiz Score</div>
+            <div class="value" id="quizScore">0</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">⭐</div>
+            <div class="label">Total XP</div>
+            <div class="value" id="totalXP">0 XP</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔥</div>
+            <div class="label">Streak</div>
+            <div class="value" id="streak">0 Days</div>
+        </div>
+
+    </div>
+
+    <div class="progress-box">
+
+        <div class="progress-title">
+            📈 Overall Progress
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="overallFill"></div>
+        </div>
+
+        <div class="percent" id="overallPercent">
+            0% Complete
+        </div>
+
+    </div>
+
+    <div class="subjects">
+
+        <div class="subject">
+            <div class="subject-name">📐 Mathematics</div>
+
+            <div class="subject-bar">
+                <div class="subject-fill" style="width: 0%"></div>
+            </div>
+
+            <div class="subject-info">
+                0% Complete
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-name">⚡ Physics</div>
+
+            <div class="subject-bar">
+                <div class="subject-fill" id="physicsFill"></div>
+            </div>
+
+            <div class="subject-info" id="physicsInfo">
+                0% Complete
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-name">🧪 Chemistry</div>
+
+            <div class="subject-bar">
+                <div class="subject-fill" style="width: 0%"></div>
+            </div>
+
+            <div class="subject-info">
+                0% Complete
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-name">📖 English</div>
+
+            <div class="subject-bar">
+                <div class="subject-fill" style="width: 0%"></div>
+            </div>
+
+            <div class="subject-info">
+                0% Complete
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let studyTime =
+    Number(localStorage.getItem("totalStudy")) || 0;
+
+let xp =
+    Number(localStorage.getItem("studyXP")) || 0;
+
+let revisionXP =
+    Number(localStorage.getItem("revisionXP")) || 0;
+
+let physicsCompleted =
+    localStorage.getItem("physicsCompleted") === "true";
+
+document.getElementById("studyTime").textContent =
+    studyTime + " min";
+
+document.getElementById("totalXP").textContent =
+    (xp + revisionXP) + " XP";
+
+let physicsProgress = physicsCompleted ? 100 : 0;
+
+document.getElementById("physicsFill").style.width =
+    physicsProgress + "%";
+
+document.getElementById("physicsInfo").textContent =
+    physicsProgress + "% Complete";
+
+let overallProgress =
+    physicsProgress / 4;
+
+document.getElementById("overallFill").style.width =
+    overallProgress + "%";
+
+document.getElementById("overallPercent").textContent =
+    Math.round(overallProgress) + "% Complete";
+
+function goBack() {
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>

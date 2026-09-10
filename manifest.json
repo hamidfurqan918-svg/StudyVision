@@ -1,0 +1,9 @@
+{
+  "name": "Study Vision",
+  "short_name": "Study Vision",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080b12",
+  "theme_color": "#080b12",
+  "description": "Class 12th JKBOSE Study App"
+}

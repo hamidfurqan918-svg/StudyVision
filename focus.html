@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Vision - Focus Timer</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#080b12;
+    color:white;
+    min-height:100vh;
+}
+
+header{
+    padding:20px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #202532;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.back{
+    background:#171c27;
+    color:white;
+    border:1px solid #303747;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.container{
+    max-width:800px;
+    margin:50px auto;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#8d96a8;
+    margin-bottom:40px;
+}
+
+.timer{
+    font-size:100px;
+    font-weight:bold;
+    margin:30px 0;
+    letter-spacing:4px;
+}
+
+.presets{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.presets button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#171c27;
+    color:white;
+    cursor:pointer;
+    border:1px solid #303747;
+}
+
+.presets button:hover{
+    background:#242b39;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.controls button{
+    padding:14px 30px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.start{
+    background:#ffffff;
+    color:#000;
+}
+
+.pause{
+    background:#252c39;
+    color:white;
+}
+
+.reset{
+    background:#252c39;
+    color:white;
+}
+
+.stats{
+    margin-top:45px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.stat{
+    background:#111620;
+    border:1px solid #242b38;
+    border-radius:15px;
+    padding:20px 35px;
+    min-width:180px;
+}
+
+.stat h3{
+    color:#8d96a8;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.stat p{
+    font-size:25px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🧠 Study Vision</div>
+    <button class="back" onclick="goBack()">← Dashboard</button>
+</header>
+
+<div class="container">
+
+    <h1>🎯 Focus Timer</h1>
+    <p class="subtitle">Stay focused. Study better.</p>
+
+    <div class="presets">
+        <button onclick="setTimer(15)">15 min</button>
+        <button onclick="setTimer(25)">25 min</button>
+        <button onclick="setTimer(45)">45 min</button>
+        <button onclick="setTimer(60)">60 min</button>
+    </div>
+
+    <div class="timer" id="timer">25:00</div>
+
+    <div class="controls">
+        <button class="start" onclick="startTimer()">▶ Start</button>
+        <button class="pause" onclick="pauseTimer()">⏸ Pause</button>
+        <button class="reset" onclick="resetTimer()">↻ Reset</button>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>Today's Study</h3>
+            <p id="todayStudy">0 min</p>
+        </div>
+
+        <div class="stat">
+            <h3>Total Study</h3>
+            <p id="totalStudy">0 min</p>
+        </div>
+
+        <div class="stat">
+            <h3>Study XP</h3>
+            <p id="studyXP">0 XP</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let sessionDuration = 25 * 60;
+let secondsLeft = sessionDuration;
+let timerInterval = null;
+let isRunning = false;
+
+let creditedMinutes = 0;
+let sessionCompleted = false;
+
+
+/* =========================
+   DATE CHECK
+========================= */
+
+function checkDate(){
+
+    let today = new Date().toISOString().split("T")[0];
+    let savedDate = localStorage.getItem("studyDate");
+
+    if(savedDate !== today){
+
+        localStorage.setItem("todayStudy","0");
+        localStorage.setItem("studyDate",today);
+    }
+}
+
+
+/* =========================
+   UPDATE DISPLAY
+========================= */
+
+function updateStats(){
+
+    checkDate();
+
+    let today = Number(localStorage.getItem("todayStudy")) || 0;
+    let total = Number(localStorage.getItem("totalStudy")) || 0;
+    let xp = Number(localStorage.getItem("studyXP")) || 0;
+
+    document.getElementById("todayStudy").innerText =
+        today + " min";
+
+    document.getElementById("totalStudy").innerText =
+        total + " min";
+
+    document.getElementById("studyXP").innerText =
+        xp + " XP";
+}
+
+
+/* =========================
+   TIMER DISPLAY
+========================= */
+
+function updateTimer(){
+
+    let minutes = Math.floor(secondsLeft / 60);
+    let seconds = secondsLeft % 60;
+
+    document.getElementById("timer").innerText =
+        String(minutes).padStart(2,"0") +
+        ":" +
+        String(seconds).padStart(2,"0");
+}
+
+
+/* =========================
+   SAVE ONE STUDY MINUTE
+========================= */
+
+function addStudyMinute(){
+
+    checkDate();
+
+    let today = Number(localStorage.getItem("todayStudy")) || 0;
+    let total = Number(localStorage.getItem("totalStudy")) || 0;
+    let xp = Number(localStorage.getItem("studyXP")) || 0;
+
+    today++;
+    total++;
+    xp += 5;
+
+    localStorage.setItem("todayStudy",today);
+    localStorage.setItem("totalStudy",total);
+    localStorage.setItem("studyXP",xp);
+
+    localStorage.setItem(
+        "lastStudyDate",
+        new Date().toISOString().split("T")[0]
+    );
+
+    updateStats();
+}
+
+
+/* =========================
+   START TIMER
+========================= */
+
+function startTimer(){
+
+    if(isRunning) return;
+
+    isRunning = true;
+
+    timerInterval = setInterval(function(){
+
+        if(secondsLeft > 0){
+
+            secondsLeft--;
+
+            let elapsed =
+                sessionDuration - secondsLeft;
+
+            let completedMinutes =
+                Math.floor(elapsed / 60);
+
+            while(
+                creditedMinutes < completedMinutes
+            ){
+
+                creditedMinutes++;
+
+                addStudyMinute();
+            }
+
+            updateTimer();
+
+        }else{
+
+            finishSession();
+        }
+
+    },1000);
+}
+
+
+/* =========================
+   PAUSE
+========================= */
+
+function pauseTimer(){
+
+    isRunning = false;
+
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetTimer(){
+
+    pauseTimer();
+
+    secondsLeft = sessionDuration;
+    creditedMinutes = 0;
+    sessionCompleted = false;
+
+    updateTimer();
+}
+
+
+/* =========================
+   CHANGE PRESET
+========================= */
+
+function setTimer(minutes){
+
+    pauseTimer();
+
+    sessionDuration = minutes * 60;
+    secondsLeft = sessionDuration;
+
+    creditedMinutes = 0;
+    sessionCompleted = false;
+
+    updateTimer();
+}
+
+
+/* =========================
+   SESSION COMPLETE
+========================= */
+
+function finishSession(){
+
+    if(sessionCompleted) return;
+
+    sessionCompleted = true;
+    isRunning = false;
+
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+    let xp =
+        Number(localStorage.getItem("studyXP")) || 0;
+
+    xp += 50;
+
+    localStorage.setItem("studyXP",xp);
+
+    updateStats();
+
+    alert(
+        "🎉 Focus Session Complete!\n\n" +
+        "Great job! +50 XP earned."
+    );
+}
+
+
+/* =========================
+   BACK TO DASHBOARD
+========================= */
+
+function goBack(){
+
+    window.location.href = "index.html";
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+checkDate();
+updateTimer();
+updateStats();
+
+</script>
+
+</body>
+</html>

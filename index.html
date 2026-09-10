@@ -1,22 +1,29 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Study Vision</title>
 
+<!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#080b12">
-<link rel="icon" href="./study-vision-icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- App Icon -->
+<link rel="icon" type="image/png" sizes="192x192" href="./study-vision-icon-192.png">
+<link rel="apple-touch-icon" href="./study-vision-icon-192.png">
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 body{
@@ -26,58 +33,85 @@ body{
 }
 
 header{
+    height:70px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    padding:18px 25px;
-    background:#101522;
-    border-bottom:1px solid #252c3a;
+    justify-content:space-between;
+    padding:0 25px;
+    border-bottom:1px solid #202532;
+    background:#0d111b;
 }
 
 .logo{
-    font-size:24px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
     font-weight:bold;
 }
 
-.header-buttons{
-    display:flex;
-    gap:10px;
+.logo img{
+    width:38px;
+    height:38px;
+    border-radius:10px;
 }
 
-.header-buttons button{
-    background:#1b2332;
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.clock{
+    color:#aeb6c7;
+    font-size:15px;
+}
+
+.settings-button{
+    background:#171d2b;
+    border:1px solid #30394d;
     color:white;
-    border:1px solid #3a465b;
-    padding:11px 15px;
+    padding:10px 15px;
     border-radius:10px;
     cursor:pointer;
     font-size:14px;
 }
 
-.header-buttons button:hover{
-    background:#29364b;
+.settings-button:hover{
+    background:#222a3b;
 }
 
 .container{
     max-width:1100px;
     margin:auto;
-    padding:25px;
+    padding:35px 20px;
 }
 
 .hero{
-    background:linear-gradient(135deg,#151d2d,#0e1420);
-    padding:30px;
+    background:linear-gradient(135deg,#121827,#0e1420);
+    border:1px solid #222b3d;
     border-radius:20px;
+    padding:30px;
     margin-bottom:25px;
 }
 
 .hero h1{
-    font-size:30px;
-    margin-bottom:8px;
+    font-size:32px;
+    margin-bottom:10px;
 }
 
 .hero p{
-    color:#aeb7c8;
+    color:#aeb6c7;
+    font-size:16px;
+}
+
+.class-box{
+    margin-top:20px;
+    display:inline-block;
+    padding:9px 14px;
+    border-radius:10px;
+    background:#1b2333;
+    color:#d8deea;
 }
 
 .stats{
@@ -87,142 +121,52 @@ header{
     margin-bottom:25px;
 }
 
-.stat{
-    background:#111722;
-    border:1px solid #252d3c;
-    padding:20px;
-    border-radius:16px;
+.card{
+    background:#101621;
+    border:1px solid #222b3d;
+    border-radius:17px;
+    padding:22px;
 }
 
-.stat h3{
+.card-title{
+    color:#8e98aa;
     font-size:14px;
-    color:#9da8ba;
     margin-bottom:10px;
 }
 
-.stat p{
-    font-size:25px;
+.card-value{
+    font-size:28px;
     font-weight:bold;
 }
 
-.mission{
-    background:#111722;
-    border:1px solid #252d3c;
-    padding:22px;
-    border-radius:18px;
-    margin-bottom:25px;
-}
-
-.mission h2{
-    margin-bottom:15px;
-}
-
-.mission-item{
-    background:#182131;
-    padding:15px;
-    border-radius:12px;
-    margin-top:10px;
-}
-
-.features{
+.sections{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
-.feature{
-    background:#111722;
-    border:1px solid #252d3c;
+.section{
+    background:#101621;
+    border:1px solid #222b3d;
+    border-radius:17px;
     padding:25px;
-    border-radius:18px;
     cursor:pointer;
     transition:.2s;
 }
 
-.feature:hover{
+.section:hover{
     transform:translateY(-3px);
-    background:#172031;
+    background:#141b28;
 }
 
-.feature h3{
+.section h2{
+    font-size:20px;
     margin-bottom:8px;
 }
 
-.feature p{
-    color:#9da8ba;
-    font-size:14px;
-}
-
-/* SETTINGS */
-
-#settingsPanel{
-    display:none;
-    position:fixed;
-    top:0;
-    right:0;
-    width:350px;
-    height:100%;
-    background:#101622;
-    border-left:1px solid #30394b;
-    padding:25px;
-    z-index:1000;
-    box-shadow:-10px 0 30px rgba(0,0,0,.5);
-    overflow-y:auto;
-}
-
-#settingsPanel h2{
-    margin-bottom:20px;
-}
-
-.setting-box{
-    background:#182131;
-    padding:16px;
-    border-radius:12px;
-    margin-bottom:15px;
-}
-
-.setting-box strong{
-    font-size:15px;
-}
-
-.setting-box p{
-    color:#aeb7c8;
-    font-size:14px;
-    margin-top:7px;
-    word-break:break-word;
-}
-
-.settings-btn{
-    width:100%;
-    padding:13px;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#273247;
-    color:white;
-    font-size:14px;
-}
-
-.settings-btn:hover{
-    background:#34425a;
-}
-
-.logout-btn{
-    background:#b42318;
-}
-
-.logout-btn:hover{
-    background:#d92d20;
-}
-
-.close-btn{
-    float:right;
-    background:none;
-    border:none;
-    color:white;
-    font-size:28px;
-    cursor:pointer;
+.section p{
+    color:#929cad;
+    line-height:1.5;
 }
 
 .overlay{
@@ -230,48 +174,122 @@ header{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.6);
-    z-index:999;
+    z-index:90;
+}
+
+#settingsPanel{
+    position:fixed;
+    right:-360px;
+    top:0;
+    width:350px;
+    max-width:90%;
+    height:100vh;
+    background:#0d121c;
+    border-left:1px solid #293246;
+    z-index:100;
+    padding:25px;
+    transition:.3s;
+    overflow-y:auto;
+}
+
+#settingsPanel.open{
+    right:0;
+}
+
+.settings-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.user-box{
+    background:#151c29;
+    border:1px solid #293246;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+    word-break:break-word;
+}
+
+.setting-item{
+    margin:15px 0;
+}
+
+.setting-label{
+    display:block;
+    color:#9ca6b8;
+    margin-bottom:8px;
+    font-size:14px;
+}
+
+.setting-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#192234;
+    color:white;
+    cursor:pointer;
+    margin-bottom:10px;
+}
+
+.setting-btn:hover{
+    background:#243047;
+}
+
+.logout-btn{
+    background:#4a1d25;
+}
+
+.logout-btn:hover{
+    background:#662530;
+}
+
+footer{
+    text-align:center;
+    color:#687286;
+    padding:35px 10px;
+    font-size:13px;
 }
 
 @media(max-width:800px){
-
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .features{
+    .sections{
         grid-template-columns:1fr;
     }
 }
 
 @media(max-width:500px){
-
     header{
-        padding:15px;
+        padding:0 12px;
     }
 
     .logo{
-        font-size:19px;
+        font-size:17px;
     }
 
-    .header-buttons button{
-        padding:9px 10px;
-    }
-
-    .container{
-        padding:15px;
-    }
-
-    .hero{
-        padding:22px;
+    .clock{
+        display:none;
     }
 
     .hero h1{
-        font-size:24px;
+        font-size:25px;
     }
 
-    #settingsPanel{
-        width:88%;
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
 }
 </style>
@@ -282,227 +300,198 @@ header{
 <header>
 
     <div class="logo">
-        📚 Study Vision
+        <img src="./study-vision-icon-192.png" alt="Study Vision">
+        <span>Study Vision</span>
     </div>
 
-    <div class="header-buttons">
+    <div class="header-right">
+        <div class="clock" id="clock">00:00:00</div>
 
-        <button onclick="openSettings()">
+        <button class="settings-button" onclick="openSettings()">
             ⚙️ Settings
         </button>
-
     </div>
 
 </header>
 
-
-<div class="container">
+<main class="container">
 
     <section class="hero">
 
-        <h1 id="greeting">
-            Good Morning Furqan Hamid 👋
-        </h1>
+        <h1 id="greeting">Good Morning Furqan Hamid</h1>
 
         <p>
-            🎓 Class 12th — JKBOSE
+            Welcome back! Keep learning and achieve your goals.
         </p>
 
-        <p style="margin-top:8px;">
-            Your personal study dashboard
-        </p>
+        <div class="class-box">
+            Class 12th • JKBOSE
+        </div>
 
     </section>
-
 
     <section class="stats">
 
-        <div class="stat">
-            <h3>Today's Goal</h3>
-            <p>3 Tasks</p>
+        <div class="card">
+            <div class="card-title">📚 Today Goals</div>
+            <div class="card-value" id="goals">0</div>
         </div>
 
-        <div class="stat">
-            <h3>Study Time</h3>
-            <p id="studyTime">0 min</p>
+        <div class="card">
+            <div class="card-title">⏱️ Study Time</div>
+            <div class="card-value" id="studyTime">0 min</div>
         </div>
 
-        <div class="stat">
-            <h3>🔥 Streak</h3>
-            <p id="streak">0 Days</p>
+        <div class="card">
+            <div class="card-title">🔥 Streak</div>
+            <div class="card-value" id="streak">0</div>
         </div>
 
-        <div class="stat">
-            <h3>⭐ Experience</h3>
-            <p id="experience">0 XP</p>
-        </div>
-
-    </section>
-
-
-    <section class="mission">
-
-        <h2>🎯 Today's Mission</h2>
-
-        <div class="mission-item">
-            ⚡ Physics — Electrostatics
-        </div>
-
-        <div class="mission-item">
-            📐 Maths — Exercise 6.1
-        </div>
-
-        <div class="mission-item">
-            🧪 Chemistry — Solutions
+        <div class="card">
+            <div class="card-title">⭐ Experience</div>
+            <div class="card-value" id="xp">0 XP</div>
         </div>
 
     </section>
 
+    <section class="sections">
 
-    <section class="features">
-
-        <div class="feature" onclick="location.href='notes.html'">
-            <h3>📖 Notes</h3>
-            <p>Read your Class 12th study notes.</p>
+        <div class="section" onclick="location.href='subjects.html'">
+            <h2>📚 Subjects</h2>
+            <p>
+                Physics, Mathematics, Chemistry and English.
+            </p>
         </div>
 
-        <div class="feature" onclick="location.href='subjects.html'">
-            <h3>📚 Subjects</h3>
-            <p>Physics, Maths, Chemistry and English.</p>
+        <div class="section" onclick="location.href='notes.html'">
+            <h2>📝 Notes</h2>
+            <p>
+                Read your chapter notes and important concepts.
+            </p>
         </div>
 
-        <div class="feature" onclick="location.href='focus.html'">
-            <h3>🎯 Focus</h3>
-            <p>Start a focused study session.</p>
+        <div class="section" onclick="location.href='focus.html'">
+            <h2>🎯 Focus Study</h2>
+            <p>
+                Start a focused study session and track your time.
+            </p>
         </div>
 
-        <div class="feature" onclick="location.href='quiz.html'">
-            <h3>🧠 Quiz</h3>
-            <p>Test your knowledge.</p>
+        <div class="section" onclick="location.href='quiz.html'">
+            <h2>🧠 Quiz</h2>
+            <p>
+                Test your knowledge with chapter-wise questions.
+            </p>
         </div>
 
-        <div class="feature" onclick="location.href='revision.html'">
-            <h3>🔄 Revision</h3>
-            <p>Revise important topics.</p>
+        <div class="section" onclick="location.href='revision.html'">
+            <h2>🔄 Revision</h2>
+            <p>
+                Revise important topics before your board exams.
+            </p>
         </div>
 
-        <div class="feature" onclick="location.href='progress.html'">
-            <h3>📊 Progress</h3>
-            <p>Check your study progress.</p>
+        <div class="section" onclick="location.href='progress.html'">
+            <h2>📊 Progress</h2>
+            <p>
+                Check your study progress and achievements.
+            </p>
         </div>
 
     </section>
 
-</div>
+</main>
 
+<footer>
+    Study Vision • Class 12th JKBOSE
+</footer>
 
-<!-- OVERLAY -->
-
-<div
-    class="overlay"
-    id="overlay"
-    onclick="closeSettings()">
-</div>
-
-
-<!-- SETTINGS PANEL -->
+<div class="overlay" id="overlay" onclick="closeSettings()"></div>
 
 <div id="settingsPanel">
 
-    <button
-        class="close-btn"
-        onclick="closeSettings()">
-        ×
-    </button>
+    <div class="settings-title">
+        <h2>⚙️ Settings</h2>
 
-    <h2>⚙️ Settings</h2>
+        <button class="close-btn" onclick="closeSettings()">
+            ×
+        </button>
+    </div>
 
+    <div class="user-box">
+        <div class="setting-label">Logged in as</div>
+        <div id="userEmail">Loading...</div>
+    </div>
 
-    <div class="setting-box">
+    <div class="setting-item">
 
-        <strong>👤 Account</strong>
+        <span class="setting-label">
+            Class
+        </span>
 
-        <p id="userEmail">
-            Checking login...
-        </p>
+        <div class="user-box">
+            Class 12th JKBOSE
+        </div>
 
     </div>
 
+    <div class="setting-item">
 
-    <div class="setting-box">
+        <span class="setting-label">
+            Appearance
+        </span>
 
-        <strong>📚 Class</strong>
-
-        <p>
-            Class 12th — JKBOSE
-        </p>
-
-    </div>
-
-
-    <div class="setting-box">
-
-        <strong>🌙 Appearance</strong>
-
-        <p>
-            Dark Mode
-        </p>
+        <button class="setting-btn" onclick="toggleDarkMode()">
+            🌙 Dark Mode
+        </button>
 
     </div>
 
+    <div class="setting-item">
 
-    <button
-        class="settings-btn"
-        onclick="location.href='subjects.html'">
+        <span class="setting-label">
+            Subjects
+        </span>
 
-        📚 Manage Subjects
+        <button class="setting-btn" onclick="location.href='subjects.html'">
+            📚 Manage Subjects
+        </button>
 
-    </button>
+    </div>
 
+    <div class="setting-item">
 
-    <button
-        class="settings-btn logout-btn"
-        onclick="logout()">
+        <button class="setting-btn logout-btn" onclick="logout()">
+            🚪 Logout
+        </button>
 
-        🚪 Logout
-
-    </button>
+    </div>
 
 </div>
 
-
 <script type="module">
 
-import { createClient }
-from
+import { createClient } from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
 
 const SUPABASE_URL =
 'https://qnjfvoskjnyzrvrebdna.supabase.co';
 
-
 const SUPABASE_KEY =
 'sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9';
 
-
 const supabase =
-createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+createClient(SUPABASE_URL, SUPABASE_KEY);
 
 
-/* CHECK LOGIN */
+/* LOGIN CHECK */
 
 async function checkLogin(){
 
-    const {
-        data: { session }
-    } = await supabase.auth.getSession();
+    const { data } =
+    await supabase.auth.getSession();
 
-
-    if(!session){
+    if(!data.session){
 
         window.location.href =
         'login.html';
@@ -510,18 +499,10 @@ async function checkLogin(){
         return;
     }
 
-
-    const email =
-    session.user.email ||
-    "Logged in user";
-
-
-    document.getElementById(
-        "userEmail"
-    ).textContent = email;
+    document.getElementById("userEmail").textContent =
+    data.session.user.email || "User";
 
 }
-
 
 checkLogin();
 
@@ -530,19 +511,7 @@ checkLogin();
 
 window.logout = async function(){
 
-    const { error } =
     await supabase.auth.signOut();
-
-
-    if(error){
-
-        alert(
-            "Logout failed. Please try again."
-        );
-
-        return;
-    }
-
 
     window.location.href =
     'login.html';
@@ -550,148 +519,127 @@ window.logout = async function(){
 };
 
 
-/* SETTINGS OPEN */
+/* SETTINGS */
 
 window.openSettings = function(){
 
-    document.getElementById(
-        "settingsPanel"
-    ).style.display = "block";
+    document
+    .getElementById("settingsPanel")
+    .classList.add("open");
 
-
-    document.getElementById(
-        "overlay"
-    ).style.display = "block";
+    document
+    .getElementById("overlay")
+    .style.display="block";
 
 };
-
-
-/* SETTINGS CLOSE */
 
 window.closeSettings = function(){
 
-    document.getElementById(
-        "settingsPanel"
-    ).style.display = "none";
+    document
+    .getElementById("settingsPanel")
+    .classList.remove("open");
 
-
-    document.getElementById(
-        "overlay"
-    ).style.display = "none";
+    document
+    .getElementById("overlay")
+    .style.display="none";
 
 };
+
+
+/* DARK MODE */
+
+window.toggleDarkMode = function(){
+
+    document.body.classList.toggle("light-mode");
+
+};
+
+
+/* CLOCK */
+
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById("clock").textContent =
+    now.toLocaleTimeString();
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
 
 
 /* GREETING */
 
-const hour =
-new Date().getHours();
+function updateGreeting(){
 
+    const hour = new Date().getHours();
 
-let greeting;
+    let greeting = "Good Morning";
 
+    if(hour >= 12 && hour < 17){
+        greeting = "Good Afternoon";
+    }
+    else if(hour >= 17){
+        greeting = "Good Evening";
+    }
 
-if(hour < 12){
-
-    greeting =
-    "Good Morning Furqan Hamid 👋";
-
-}
-else if(hour < 17){
-
-    greeting =
-    "Good Afternoon Furqan Hamid 👋";
-
-}
-else{
-
-    greeting =
-    "Good Evening Furqan Hamid 👋";
+    document.getElementById("greeting").textContent =
+    greeting + " Furqan Hamid";
 
 }
 
-
-document.getElementById(
-    "greeting"
-).textContent = greeting;
+updateGreeting();
 
 
-/* STUDY TIME */
+/* STUDY DATA */
 
 let studyTime =
-parseInt(
-    localStorage.getItem(
-        "studyTime"
-    ) || "0"
-);
-
-
-document.getElementById(
-    "studyTime"
-).textContent =
-studyTime + " min";
-
-
-/* STREAK */
+Number(localStorage.getItem("studyTime") || 0);
 
 let streak =
-parseInt(
-    localStorage.getItem(
-        "streak"
-    ) || "0"
-);
+Number(localStorage.getItem("streak") || 0);
+
+let xp =
+Number(localStorage.getItem("xp") || 0);
+
+let goals =
+Number(localStorage.getItem("goals") || 0);
 
 
-document.getElementById(
-    "streak"
-).textContent =
-streak + " Days";
+function updateStats(){
 
+    document.getElementById("studyTime").textContent =
+    studyTime + " min";
 
-/* EXPERIENCE */
+    document.getElementById("streak").textContent =
+    streak;
 
-let experience =
-parseInt(
-    localStorage.getItem(
-        "experience"
-    ) || "0"
-);
+    document.getElementById("xp").textContent =
+    xp + " XP";
 
+    document.getElementById("goals").textContent =
+    goals;
 
-document.getElementById(
-    "experience"
-).textContent =
-experience + " XP";
+}
+
+updateStats();
 
 
 /* SERVICE WORKER */
 
 if("serviceWorker" in navigator){
 
-    window.addEventListener(
-        "load",
-        function(){
+    window.addEventListener("load",()=>{
 
-            navigator.serviceWorker
-            .register("./sw.js")
-            .then(function(){
+        navigator.serviceWorker.register("./sw.js")
+        .catch(error=>{
+            console.log("Service Worker Error:",error);
+        });
 
-                console.log(
-                    "Study Vision Service Worker Registered"
-                );
-
-            })
-            .catch(function(error){
-
-                console.log(
-                    "Service Worker Error:",
-                    error
-                );
-
-            });
-
-        }
-    );
+    });
 
 }
 
@@ -699,4 +647,3 @@ if("serviceWorker" in navigator){
 
 </body>
 </html>
-```

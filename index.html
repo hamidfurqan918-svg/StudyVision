@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,7 @@
 
 <!-- PWA -->
 <link rel="manifest" href="./manifest.json">
+
 <meta name="theme-color" content="#080b12">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,11 +21,12 @@
 <link rel="apple-touch-icon" href="./study-vision-icon-192.png">
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -32,12 +35,14 @@ body{
     min-height:100vh;
 }
 
+/* HEADER */
+
 header{
-    height:70px;
+    min-height:70px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 25px;
+    padding:10px 25px;
     border-bottom:1px solid #202532;
     background:#0d111b;
 }
@@ -54,17 +59,21 @@ header{
     width:38px;
     height:38px;
     border-radius:10px;
+    object-fit:cover;
 }
 
 .header-right{
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .clock{
     color:#aeb6c7;
     font-size:15px;
+    margin-right:5px;
 }
 
 .settings-button{
@@ -81,11 +90,29 @@ header{
     background:#222a3b;
 }
 
+/* INSTALL BUTTON */
+
+#installButton{
+    display:block;
+    background:white;
+    color:#080b12;
+    border:1px solid white;
+    font-weight:bold;
+}
+
+#installButton:hover{
+    background:#dfe4ec;
+}
+
+/* MAIN */
+
 .container{
     max-width:1100px;
     margin:auto;
     padding:35px 20px;
 }
+
+/* HERO */
 
 .hero{
     background:linear-gradient(135deg,#121827,#0e1420);
@@ -114,6 +141,8 @@ header{
     color:#d8deea;
 }
 
+/* STATS */
+
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -138,6 +167,8 @@ header{
     font-size:28px;
     font-weight:bold;
 }
+
+/* SECTIONS */
 
 .sections{
     display:grid;
@@ -169,6 +200,8 @@ header{
     line-height:1.5;
 }
 
+/* SETTINGS OVERLAY */
+
 .overlay{
     display:none;
     position:fixed;
@@ -176,6 +209,8 @@ header{
     background:rgba(0,0,0,.6);
     z-index:90;
 }
+
+/* SETTINGS PANEL */
 
 #settingsPanel{
     position:fixed;
@@ -254,6 +289,21 @@ header{
     background:#662530;
 }
 
+/* INSTALL INFO */
+
+.install-info{
+    background:#151c29;
+    border:1px solid #293246;
+    border-radius:12px;
+    padding:15px;
+    margin-top:15px;
+    color:#aeb6c7;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* FOOTER */
+
 footer{
     text-align:center;
     color:#687286;
@@ -261,7 +311,10 @@ footer{
     font-size:13px;
 }
 
+/* MOBILE */
+
 @media(max-width:800px){
+
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
@@ -269,19 +322,51 @@ footer{
     .sections{
         grid-template-columns:1fr;
     }
+
+}
+
+@media(max-width:650px){
+
+    header{
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .header-right{
+        gap:6px;
+    }
+
+    .clock{
+        display:none;
+    }
+
+    #installButton{
+        padding:9px 11px;
+    }
+
+    .settings-button{
+        padding:9px 11px;
+    }
+
 }
 
 @media(max-width:500px){
+
     header{
-        padding:0 12px;
+        padding:10px 12px;
     }
 
     .logo{
         font-size:17px;
     }
 
-    .clock{
-        display:none;
+    .logo img{
+        width:32px;
+        height:32px;
+    }
+
+    .hero{
+        padding:22px;
     }
 
     .hero h1{
@@ -291,34 +376,77 @@ footer{
     .stats{
         grid-template-columns:1fr 1fr;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
     <div class="logo">
-        <img src="./study-vision-icon-192.png" alt="Study Vision">
+
+        <img
+            src="./study-vision-icon-192.png"
+            alt="Study Vision"
+        >
+
         <span>Study Vision</span>
+
     </div>
 
-    <div class="header-right">
-        <div class="clock" id="clock">00:00:00</div>
 
-        <button class="settings-button" onclick="openSettings()">
+    <div class="header-right">
+
+        <div
+            class="clock"
+            id="clock"
+        >
+            00:00:00
+        </div>
+
+
+        <!-- INSTALL APP BUTTON -->
+
+        <button
+            class="settings-button"
+            id="installButton"
+            onclick="installApp()"
+        >
+            📲 Install App
+        </button>
+
+
+        <!-- SETTINGS -->
+
+        <button
+            class="settings-button"
+            onclick="openSettings()"
+        >
             ⚙️ Settings
         </button>
+
     </div>
 
 </header>
 
+
+<!-- MAIN -->
+
 <main class="container">
+
+
+    <!-- HERO -->
 
     <section class="hero">
 
-        <h1 id="greeting">Good Morning Furqan Hamid</h1>
+        <h1 id="greeting">
+            Good Morning Furqan Hamid
+        </h1>
 
         <p>
             Welcome back! Keep learning and achieve your goals.
@@ -330,98 +458,223 @@ footer{
 
     </section>
 
+
+    <!-- STATS -->
+
     <section class="stats">
 
-        <div class="card">
-            <div class="card-title">📚 Today Goals</div>
-            <div class="card-value" id="goals">0</div>
-        </div>
 
         <div class="card">
-            <div class="card-title">⏱️ Study Time</div>
-            <div class="card-value" id="studyTime">0 min</div>
+
+            <div class="card-title">
+                📚 Today Goals
+            </div>
+
+            <div
+                class="card-value"
+                id="goals"
+            >
+                0
+            </div>
+
         </div>
 
-        <div class="card">
-            <div class="card-title">🔥 Streak</div>
-            <div class="card-value" id="streak">0</div>
-        </div>
 
         <div class="card">
-            <div class="card-title">⭐ Experience</div>
-            <div class="card-value" id="xp">0 XP</div>
+
+            <div class="card-title">
+                ⏱️ Study Time
+            </div>
+
+            <div
+                class="card-value"
+                id="studyTime"
+            >
+                0 min
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                🔥 Streak
+            </div>
+
+            <div
+                class="card-value"
+                id="streak"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                ⭐ Experience
+            </div>
+
+            <div
+                class="card-value"
+                id="xp"
+            >
+                0 XP
+            </div>
+
         </div>
 
     </section>
 
+
+    <!-- APP SECTIONS -->
+
     <section class="sections">
 
-        <div class="section" onclick="location.href='subjects.html'">
+
+        <div
+            class="section"
+            onclick="location.href='subjects.html'"
+        >
+
             <h2>📚 Subjects</h2>
+
             <p>
                 Physics, Mathematics, Chemistry and English.
             </p>
+
         </div>
 
-        <div class="section" onclick="location.href='notes.html'">
+
+        <div
+            class="section"
+            onclick="location.href='notes.html'"
+        >
+
             <h2>📝 Notes</h2>
+
             <p>
                 Read your chapter notes and important concepts.
             </p>
+
         </div>
 
-        <div class="section" onclick="location.href='focus.html'">
+
+        <div
+            class="section"
+            onclick="location.href='focus.html'"
+        >
+
             <h2>🎯 Focus Study</h2>
+
             <p>
                 Start a focused study session and track your time.
             </p>
+
         </div>
 
-        <div class="section" onclick="location.href='quiz.html'">
+
+        <div
+            class="section"
+            onclick="location.href='quiz.html'"
+        >
+
             <h2>🧠 Quiz</h2>
+
             <p>
                 Test your knowledge with chapter-wise questions.
             </p>
+
         </div>
 
-        <div class="section" onclick="location.href='revision.html'">
+
+        <div
+            class="section"
+            onclick="location.href='revision.html'"
+        >
+
             <h2>🔄 Revision</h2>
+
             <p>
                 Revise important topics before your board exams.
             </p>
+
         </div>
 
-        <div class="section" onclick="location.href='progress.html'">
+
+        <div
+            class="section"
+            onclick="location.href='progress.html'"
+        >
+
             <h2>📊 Progress</h2>
+
             <p>
                 Check your study progress and achievements.
             </p>
+
         </div>
+
 
     </section>
 
 </main>
 
+
 <footer>
     Study Vision • Class 12th JKBOSE
 </footer>
 
-<div class="overlay" id="overlay" onclick="closeSettings()"></div>
+
+<!-- OVERLAY -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeSettings()"
+></div>
+
+
+<!-- SETTINGS PANEL -->
 
 <div id="settingsPanel">
 
-    <div class="settings-title">
-        <h2>⚙️ Settings</h2>
 
-        <button class="close-btn" onclick="closeSettings()">
+    <div class="settings-title">
+
+        <h2>
+            ⚙️ Settings
+        </h2>
+
+        <button
+            class="close-btn"
+            onclick="closeSettings()"
+        >
             ×
         </button>
+
     </div>
 
+
+    <!-- USER -->
+
     <div class="user-box">
-        <div class="setting-label">Logged in as</div>
-        <div id="userEmail">Loading...</div>
+
+        <div class="setting-label">
+            Logged in as
+        </div>
+
+        <div id="userEmail">
+            Loading...
+        </div>
+
     </div>
+
+
+    <!-- CLASS -->
 
     <div class="setting-item">
 
@@ -435,17 +688,26 @@ footer{
 
     </div>
 
+
+    <!-- APPEARANCE -->
+
     <div class="setting-item">
 
         <span class="setting-label">
             Appearance
         </span>
 
-        <button class="setting-btn" onclick="toggleDarkMode()">
+        <button
+            class="setting-btn"
+            onclick="toggleDarkMode()"
+        >
             🌙 Dark Mode
         </button>
 
     </div>
+
+
+    <!-- SUBJECTS -->
 
     <div class="setting-item">
 
@@ -453,15 +715,47 @@ footer{
             Subjects
         </span>
 
-        <button class="setting-btn" onclick="location.href='subjects.html'">
+        <button
+            class="setting-btn"
+            onclick="location.href='subjects.html'"
+        >
             📚 Manage Subjects
         </button>
 
     </div>
 
+
+    <!-- INSTALL -->
+
     <div class="setting-item">
 
-        <button class="setting-btn logout-btn" onclick="logout()">
+        <span class="setting-label">
+            App Installation
+        </span>
+
+        <button
+            class="setting-btn"
+            onclick="installApp()"
+        >
+            📲 Install Study Vision
+        </button>
+
+        <div class="install-info">
+            Install Study Vision on your computer like a normal app.
+            After installation, you can open it directly from your desktop or Start Menu.
+        </div>
+
+    </div>
+
+
+    <!-- LOGOUT -->
+
+    <div class="setting-item">
+
+        <button
+            class="setting-btn logout-btn"
+            onclick="logout()"
+        >
             🚪 Logout
         </button>
 
@@ -469,27 +763,42 @@ footer{
 
 </div>
 
+
 <script type="module">
+
+
+/* =========================================
+   SUPABASE
+========================================= */
 
 import { createClient } from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+
 const SUPABASE_URL =
 'https://qnjfvoskjnyzrvrebdna.supabase.co';
+
 
 const SUPABASE_KEY =
 'sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9';
 
+
 const supabase =
-createClient(SUPABASE_URL, SUPABASE_KEY);
+createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-/* LOGIN CHECK */
+/* =========================================
+   LOGIN CHECK
+========================================= */
 
 async function checkLogin(){
 
     const { data } =
-    await supabase.auth.getSession();
+        await supabase.auth.getSession();
+
 
     if(!data.session){
 
@@ -497,149 +806,305 @@ async function checkLogin(){
         'login.html';
 
         return;
+
     }
 
+
     document.getElementById("userEmail").textContent =
-    data.session.user.email || "User";
+        data.session.user.email || "User";
 
 }
+
 
 checkLogin();
 
 
-/* LOGOUT */
+/* =========================================
+   LOGOUT
+========================================= */
 
 window.logout = async function(){
 
     await supabase.auth.signOut();
 
     window.location.href =
-    'login.html';
+        'login.html';
 
 };
 
 
-/* SETTINGS */
+/* =========================================
+   SETTINGS
+========================================= */
 
 window.openSettings = function(){
 
     document
-    .getElementById("settingsPanel")
-    .classList.add("open");
+        .getElementById("settingsPanel")
+        .classList.add("open");
+
 
     document
-    .getElementById("overlay")
-    .style.display="block";
+        .getElementById("overlay")
+        .style.display = "block";
 
 };
+
 
 window.closeSettings = function(){
 
     document
-    .getElementById("settingsPanel")
-    .classList.remove("open");
+        .getElementById("settingsPanel")
+        .classList.remove("open");
+
 
     document
-    .getElementById("overlay")
-    .style.display="none";
+        .getElementById("overlay")
+        .style.display = "none";
 
 };
 
 
-/* DARK MODE */
+/* =========================================
+   DARK MODE
+========================================= */
 
 window.toggleDarkMode = function(){
 
-    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle(
+        "light-mode"
+    );
 
 };
 
 
-/* CLOCK */
+/* =========================================
+   CLOCK
+========================================= */
 
 function updateClock(){
 
-    const now = new Date();
+    const now =
+        new Date();
+
 
     document.getElementById("clock").textContent =
-    now.toLocaleTimeString();
+        now.toLocaleTimeString();
 
 }
 
-setInterval(updateClock,1000);
+
+setInterval(
+    updateClock,
+    1000
+);
+
 
 updateClock();
 
 
-/* GREETING */
+/* =========================================
+   GREETING
+========================================= */
 
 function updateGreeting(){
 
-    const hour = new Date().getHours();
+    const hour =
+        new Date().getHours();
 
-    let greeting = "Good Morning";
+
+    let greeting =
+        "Good Morning";
+
 
     if(hour >= 12 && hour < 17){
-        greeting = "Good Afternoon";
+
+        greeting =
+            "Good Afternoon";
+
     }
     else if(hour >= 17){
-        greeting = "Good Evening";
+
+        greeting =
+            "Good Evening";
+
     }
 
+
     document.getElementById("greeting").textContent =
-    greeting + " Furqan Hamid";
+        greeting + " Furqan Hamid";
 
 }
+
 
 updateGreeting();
 
 
-/* STUDY DATA */
+/* =========================================
+   STUDY DATA
+========================================= */
 
 let studyTime =
-Number(localStorage.getItem("studyTime") || 0);
+    Number(
+        localStorage.getItem("studyTime") || 0
+    );
+
 
 let streak =
-Number(localStorage.getItem("streak") || 0);
+    Number(
+        localStorage.getItem("streak") || 0
+    );
+
 
 let xp =
-Number(localStorage.getItem("xp") || 0);
+    Number(
+        localStorage.getItem("xp") || 0
+    );
+
 
 let goals =
-Number(localStorage.getItem("goals") || 0);
+    Number(
+        localStorage.getItem("goals") || 0
+    );
 
 
 function updateStats(){
 
     document.getElementById("studyTime").textContent =
-    studyTime + " min";
+        studyTime + " min";
+
 
     document.getElementById("streak").textContent =
-    streak;
+        streak;
+
 
     document.getElementById("xp").textContent =
-    xp + " XP";
+        xp + " XP";
+
 
     document.getElementById("goals").textContent =
-    goals;
+        goals;
 
 }
+
 
 updateStats();
 
 
-/* SERVICE WORKER */
+/* =========================================
+   PWA INSTALL
+========================================= */
+
+let deferredPrompt = null;
+
+
+const installButton =
+    document.getElementById("installButton");
+
+
+/*
+   Browser sends this event when
+   Study Vision is installable.
+*/
+
+window.addEventListener(
+    "beforeinstallprompt",
+    function(event){
+
+        event.preventDefault();
+
+        deferredPrompt = event;
+
+        installButton.style.display =
+            "block";
+
+    }
+);
+
+
+/*
+   Install button
+*/
+
+window.installApp = async function(){
+
+    if(!deferredPrompt){
+
+        alert(
+            "Study Vision is not ready to install yet. " +
+            "Please refresh the live Study Vision website once."
+        );
+
+        return;
+
+    }
+
+
+    deferredPrompt.prompt();
+
+
+    const result =
+        await deferredPrompt.userChoice;
+
+
+    if(result.outcome === "accepted"){
+
+        installButton.style.display =
+            "none";
+
+    }
+
+
+    deferredPrompt = null;
+
+};
+
+
+/*
+   When app is installed
+*/
+
+window.addEventListener(
+    "appinstalled",
+    function(){
+
+        installButton.style.display =
+            "none";
+
+    }
+);
+
+
+/* =========================================
+   SERVICE WORKER
+========================================= */
 
 if("serviceWorker" in navigator){
 
-    window.addEventListener("load",()=>{
+    window.addEventListener(
+        "load",
+        function(){
 
-        navigator.serviceWorker.register("./sw.js")
-        .catch(error=>{
-            console.log("Service Worker Error:",error);
-        });
+            navigator.serviceWorker
+                .register("./sw.js")
+                .then(function(){
 
-    });
+                    console.log(
+                        "Study Vision Service Worker Registered"
+                    );
+
+                })
+                .catch(function(error){
+
+                    console.log(
+                        "Service Worker Error:",
+                        error
+                    );
+
+                });
+
+        }
+    );
 
 }
 

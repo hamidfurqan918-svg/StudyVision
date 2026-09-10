@@ -1,21 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0">
 
 <title>Study Vision - Login</title>
 
-<link rel="manifest"
-      href="./manifest.json">
+<link rel="manifest" href="./manifest.json">
 
-<meta name="theme-color"
-      content="#080b12">
+<meta name="theme-color" content="#080b12">
 
 <link rel="icon"
       type="image/png"
@@ -31,290 +28,171 @@
 }
 
 body{
-
     min-height:100vh;
-
     background:#080b12;
-
     color:white;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
 
 .container{
-
     width:100%;
-
     max-width:400px;
-
 }
 
 .logo{
-
     width:85px;
-
     height:85px;
-
     display:block;
-
     margin:0 auto 18px;
-
     border-radius:20px;
-
 }
 
 .title{
-
     text-align:center;
-
     font-size:30px;
-
     margin-bottom:8px;
-
 }
 
 .subtitle{
-
     text-align:center;
-
     color:#8c95a8;
-
     margin-bottom:28px;
-
 }
 
 .box{
-
     background:#111722;
-
     border:1px solid #202636;
-
     border-radius:20px;
-
     padding:25px;
-
 }
 
 .tabs{
-
     display:flex;
-
     gap:8px;
-
     margin-bottom:20px;
-
 }
 
 .tabs button{
-
     flex:1;
-
     padding:11px;
-
     border:0;
-
     border-radius:10px;
-
     background:#202636;
-
     color:white;
-
     cursor:pointer;
-
 }
 
 .tabs button.active{
-
     background:#6c5ce7;
-
 }
 
 .form{
-
     display:none;
-
 }
 
 .form.active{
-
     display:block;
-
 }
 
 label{
-
     display:block;
-
     margin-bottom:7px;
-
     color:#c7ccda;
-
     font-size:14px;
-
 }
 
 input{
-
     width:100%;
-
     padding:13px;
-
     border-radius:10px;
-
     border:1px solid #293145;
-
     background:#080b12;
-
     color:white;
-
     outline:none;
-
     margin-bottom:15px;
-
 }
 
 input:focus{
-
     border-color:#6c5ce7;
-
 }
 
 .password-box{
-
     position:relative;
-
 }
 
 .password-box input{
-
     padding-right:50px;
-
 }
 
 .eye-btn{
-
     position:absolute;
-
     right:8px;
-
     top:0;
-
     height:42px;
-
     width:40px;
-
     background:transparent;
-
     color:white;
-
     border:0;
-
     cursor:pointer;
-
     font-size:18px;
-
 }
 
 .main-btn{
-
     width:100%;
-
     padding:13px;
-
     border:0;
-
     border-radius:10px;
-
     background:#6c5ce7;
-
     color:white;
-
     font-size:15px;
-
     font-weight:bold;
-
     cursor:pointer;
-
     margin-top:5px;
-
 }
 
 .secondary-btn{
-
     width:100%;
-
     padding:11px;
-
     border:0;
-
     border-radius:10px;
-
     background:#202636;
-
     color:white;
-
     cursor:pointer;
-
     margin-top:10px;
-
 }
 
 .message{
-
     margin-top:15px;
-
     text-align:center;
-
     font-size:13px;
-
     color:#8c95a8;
-
     min-height:20px;
-
 }
 
 .forgot{
-
     text-align:right;
-
     margin-top:-7px;
-
     margin-bottom:12px;
-
 }
 
 .forgot button{
-
     background:none;
-
     border:0;
-
     color:#8f82ff;
-
     cursor:pointer;
-
 }
 
 #resetBox{
-
     display:none;
-
 }
 
 </style>
-
 </head>
 
-
 <body>
-
 
 <div class="container">
 
@@ -331,9 +209,7 @@ input:focus{
         Class 12th JKBOSE Study App
     </p>
 
-
     <div class="box">
-
 
         <div class="tabs">
 
@@ -368,7 +244,6 @@ input:focus{
                 autocomplete="email"
             >
 
-
             <label>Password</label>
 
             <div class="password-box">
@@ -383,32 +258,25 @@ input:focus{
                 <button
                     class="eye-btn"
                     type="button"
-                    onclick="togglePassword(
-                        'loginPassword',
-                        this
-                    )">
+                    onclick="togglePassword('loginPassword',this)">
                     👁️
                 </button>
 
             </div>
 
-
             <div class="forgot">
 
-                <button
-                    onclick="showForgot()">
+                <button onclick="showForgot()">
                     Forgot Password?
                 </button>
 
             </div>
-
 
             <button
                 class="main-btn"
                 onclick="login()">
                 Login
             </button>
-
 
             <div
                 class="message"
@@ -418,11 +286,20 @@ input:focus{
         </div>
 
 
-        <!-- SIGNUP -->
+        <!-- SIGN UP -->
 
         <div
             id="signupForm"
             class="form">
+
+            <label>Your Name</label>
+
+            <input
+                id="signupName"
+                type="text"
+                placeholder="Enter your name"
+                autocomplete="name"
+            >
 
             <label>Email</label>
 
@@ -432,7 +309,6 @@ input:focus{
                 placeholder="Enter your email"
                 autocomplete="email"
             >
-
 
             <label>Password</label>
 
@@ -448,22 +324,17 @@ input:focus{
                 <button
                     class="eye-btn"
                     type="button"
-                    onclick="togglePassword(
-                        'signupPassword',
-                        this
-                    )">
+                    onclick="togglePassword('signupPassword',this)">
                     👁️
                 </button>
 
             </div>
-
 
             <button
                 class="main-btn"
                 onclick="signup()">
                 Create Account
             </button>
-
 
             <div
                 class="message"
@@ -491,20 +362,17 @@ input:focus{
                 placeholder="Enter your email"
             >
 
-
             <button
                 class="main-btn"
                 onclick="sendReset()">
                 Send Reset Email
             </button>
 
-
             <button
                 class="secondary-btn"
                 onclick="showLogin()">
                 ← Back to Login
             </button>
-
 
             <div
                 class="message"
@@ -524,7 +392,6 @@ input:focus{
                 Create New Password
             </h3>
 
-
             <label>New Password</label>
 
             <div class="password-box">
@@ -538,15 +405,11 @@ input:focus{
                 <button
                     class="eye-btn"
                     type="button"
-                    onclick="togglePassword(
-                        'newPassword',
-                        this
-                    )">
+                    onclick="togglePassword('newPassword',this)">
                     👁️
                 </button>
 
             </div>
-
 
             <label>Confirm Password</label>
 
@@ -561,22 +424,17 @@ input:focus{
                 <button
                     class="eye-btn"
                     type="button"
-                    onclick="togglePassword(
-                        'confirmPassword',
-                        this
-                    )">
+                    onclick="togglePassword('confirmPassword',this)">
                     👁️
                 </button>
 
             </div>
-
 
             <button
                 class="main-btn"
                 onclick="updatePassword()">
                 Update Password
             </button>
-
 
             <div
                 class="message"
@@ -594,13 +452,11 @@ input:focus{
 
 <script>
 
-
 const SUPABASE_URL =
 "https://qnjfvoskjnyzrvrebdna.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9";
-
 
 const supabaseClient =
 supabase.createClient(
@@ -609,24 +465,15 @@ supabase.createClient(
 );
 
 
-/* TABS */
-
-function hideAll(){
-
-    document
-        .querySelectorAll(".form")
-        .forEach(function(form){
-
-            form.classList.remove("active");
-
-        });
-
-}
-
+/* SHOW LOGIN */
 
 function showLogin(){
 
-    hideAll();
+    document
+        .querySelectorAll(".form")
+        .forEach(form => {
+            form.classList.remove("active");
+        });
 
     document
         .getElementById("loginForm")
@@ -639,13 +486,18 @@ function showLogin(){
     document
         .getElementById("signupTab")
         .classList.remove("active");
-
 }
 
 
+/* SHOW SIGNUP */
+
 function showSignup(){
 
-    hideAll();
+    document
+        .querySelectorAll(".form")
+        .forEach(form => {
+            form.classList.remove("active");
+        });
 
     document
         .getElementById("signupForm")
@@ -658,18 +510,22 @@ function showSignup(){
     document
         .getElementById("loginTab")
         .classList.remove("active");
-
 }
 
 
+/* FORGOT */
+
 function showForgot(){
 
-    hideAll();
+    document
+        .querySelectorAll(".form")
+        .forEach(form => {
+            form.classList.remove("active");
+        });
 
     document
         .getElementById("forgotForm")
         .classList.add("active");
-
 }
 
 
@@ -691,9 +547,7 @@ function togglePassword(inputId,button){
         input.type = "password";
 
         button.innerText = "👁️";
-
     }
-
 }
 
 
@@ -702,19 +556,15 @@ function togglePassword(inputId,button){
 async function login(){
 
     const email =
-        document.getElementById(
-            "loginEmail"
-        ).value.trim();
+        document.getElementById("loginEmail")
+        .value.trim();
 
     const password =
-        document.getElementById(
-            "loginPassword"
-        ).value;
+        document.getElementById("loginPassword")
+        .value;
 
     const message =
-        document.getElementById(
-            "loginMessage"
-        );
+        document.getElementById("loginMessage");
 
 
     if(!email || !password){
@@ -730,17 +580,14 @@ async function login(){
         "Logging in...";
 
 
-    const {
-        data,
-        error
-    } =
-    await supabaseClient.auth.signInWithPassword({
+    const { data, error } =
+        await supabaseClient.auth
+        .signInWithPassword({
 
-        email:email,
+            email:email,
+            password:password
 
-        password:password
-
-    });
+        });
 
 
     if(error){
@@ -749,7 +596,6 @@ async function login(){
             error.message;
 
         return;
-
     }
 
 
@@ -760,29 +606,36 @@ async function login(){
     window.location.replace(
         "index.html"
     );
-
 }
 
 
-/* SIGN UP */
+/* SIGN UP WITH NAME */
 
 async function signup(){
 
+    const name =
+        document.getElementById("signupName")
+        .value.trim();
+
     const email =
-        document.getElementById(
-            "signupEmail"
-        ).value.trim();
+        document.getElementById("signupEmail")
+        .value.trim();
 
     const password =
-        document.getElementById(
-            "signupPassword"
-        ).value;
-
+        document.getElementById("signupPassword")
+        .value;
 
     const message =
-        document.getElementById(
-            "signupMessage"
-        );
+        document.getElementById("signupMessage");
+
+
+    if(!name){
+
+        message.innerText =
+            "Please enter your name.";
+
+        return;
+    }
 
 
     if(!email || !password){
@@ -791,7 +644,6 @@ async function signup(){
             "Please enter email and password.";
 
         return;
-
     }
 
 
@@ -801,7 +653,6 @@ async function signup(){
             "Password must be at least 6 characters.";
 
         return;
-
     }
 
 
@@ -809,17 +660,20 @@ async function signup(){
         "Creating account...";
 
 
-    const {
-        data,
-        error
-    } =
-    await supabaseClient.auth.signUp({
+    const { data, error } =
+        await supabaseClient.auth.signUp({
 
-        email:email,
+            email:email,
 
-        password:password
+            password:password,
 
-    });
+            options:{
+                data:{
+                    full_name:name
+                }
+            }
+
+        });
 
 
     if(error){
@@ -828,7 +682,6 @@ async function signup(){
             error.message;
 
         return;
-
     }
 
 
@@ -844,7 +697,6 @@ async function signup(){
             "Account created! Check your email to verify your account.";
 
     }
-
 }
 
 
@@ -853,14 +705,11 @@ async function signup(){
 async function sendReset(){
 
     const email =
-        document.getElementById(
-            "forgotEmail"
-        ).value.trim();
+        document.getElementById("forgotEmail")
+        .value.trim();
 
     const message =
-        document.getElementById(
-            "forgotMessage"
-        );
+        document.getElementById("forgotMessage");
 
 
     if(!email){
@@ -869,7 +718,6 @@ async function sendReset(){
             "Please enter your email.";
 
         return;
-
     }
 
 
@@ -877,10 +725,8 @@ async function sendReset(){
         "Sending reset email...";
 
 
-    const {
-        error
-    } =
-    await supabaseClient.auth
+    const { error } =
+        await supabaseClient.auth
         .resetPasswordForEmail(
             email,
             {
@@ -896,34 +742,28 @@ async function sendReset(){
             error.message;
 
         return;
-
     }
 
 
     message.innerText =
         "Password reset email sent.";
-
 }
 
 
-/* PASSWORD UPDATE */
+/* UPDATE PASSWORD */
 
 async function updatePassword(){
 
     const password =
-        document.getElementById(
-            "newPassword"
-        ).value;
+        document.getElementById("newPassword")
+        .value;
 
     const confirm =
-        document.getElementById(
-            "confirmPassword"
-        ).value;
+        document.getElementById("confirmPassword")
+        .value;
 
     const message =
-        document.getElementById(
-            "resetMessage"
-        );
+        document.getElementById("resetMessage");
 
 
     if(!password || !confirm){
@@ -932,7 +772,6 @@ async function updatePassword(){
             "Please fill both fields.";
 
         return;
-
     }
 
 
@@ -942,14 +781,11 @@ async function updatePassword(){
             "Passwords do not match.";
 
         return;
-
     }
 
 
-    const {
-        error
-    } =
-    await supabaseClient.auth
+    const { error } =
+        await supabaseClient.auth
         .updateUser({
             password:password
         });
@@ -961,12 +797,12 @@ async function updatePassword(){
             error.message;
 
         return;
-
     }
 
 
     message.innerText =
         "Password updated successfully.";
+
 
     setTimeout(
         function(){
@@ -978,18 +814,21 @@ async function updatePassword(){
         },
         1200
     );
-
 }
 
 
-/* RESET SESSION CHECK */
+/* PASSWORD RECOVERY */
 
 supabaseClient.auth.onAuthStateChange(
-    function(event,session){
+    function(event){
 
         if(event === "PASSWORD_RECOVERY"){
 
-            hideAll();
+            document
+                .querySelectorAll(".form")
+                .forEach(form => {
+                    form.classList.remove("active");
+                });
 
             document
                 .getElementById("resetBox")
@@ -998,9 +837,7 @@ supabaseClient.auth.onAuthStateChange(
             document
                 .getElementById("resetBox")
                 .classList.add("active");
-
         }
-
     }
 );
 
@@ -1015,18 +852,15 @@ if("serviceWorker" in navigator){
 
             navigator.serviceWorker
                 .register("./sw.js")
-                .catch(function(error){
-
+                .catch(error => {
                     console.log(
                         "Service Worker Error:",
                         error
                     );
-
                 });
 
         }
     );
-
 }
 
 </script>

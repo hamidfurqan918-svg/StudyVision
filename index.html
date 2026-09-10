@@ -1,32 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
 
-<title>Study Vision</title>
+<title>Study Vision - Dashboard</title>
 
-<!-- PWA -->
 <link rel="manifest" href="./manifest.json">
 
 <meta name="theme-color" content="#080b12">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<!-- App Icon -->
-<link rel="icon" type="image/png" sizes="192x192" href="./study-vision-icon-192.png">
-<link rel="apple-touch-icon" href="./study-vision-icon-192.png">
+<link rel="icon"
+      type="image/png"
+      href="./study-vision-icon-192.png">
+
+<link rel="apple-touch-icon"
+      href="./study-vision-icon-192.png">
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 body{
@@ -35,286 +37,201 @@ body{
     min-height:100vh;
 }
 
-/* HEADER */
-
 header{
-    min-height:70px;
+    padding:20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:10px 25px;
-    border-bottom:1px solid #202532;
-    background:#0d111b;
+    border-bottom:1px solid #202636;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .logo{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+}
+
+.logo-area h2{
+    font-size:20px;
+}
+
+.logo-area p{
+    color:#8c95a8;
+    font-size:12px;
+    margin-top:3px;
+}
+
+.header-buttons{
     display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:22px;
-    font-weight:bold;
+    gap:8px;
 }
 
-.logo img{
-    width:38px;
-    height:38px;
-    border-radius:10px;
-    object-fit:cover;
-}
-
-.header-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:flex-end;
-}
-
-.clock{
-    color:#aeb6c7;
-    font-size:15px;
-    margin-right:5px;
-}
-
-.settings-button{
-    background:#171d2b;
-    border:1px solid #30394d;
-    color:white;
-    padding:10px 15px;
-    border-radius:10px;
+button{
+    border:0;
     cursor:pointer;
-    font-size:14px;
 }
 
-.settings-button:hover{
-    background:#222a3b;
+.icon-btn{
+    background:#151b28;
+    color:white;
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:18px;
 }
 
-/* INSTALL BUTTON */
-
-#installButton{
-    display:block;
-    background:white;
-    color:#080b12;
-    border:1px solid white;
+.install-btn{
+    background:#6c5ce7;
+    color:white;
+    border-radius:10px;
+    padding:10px 14px;
     font-weight:bold;
 }
-
-#installButton:hover{
-    background:#dfe4ec;
-}
-
-/* MAIN */
 
 .container{
     max-width:1100px;
     margin:auto;
-    padding:35px 20px;
+    padding:25px 20px;
 }
 
-/* HERO */
-
-.hero{
-    background:linear-gradient(135deg,#121827,#0e1420);
-    border:1px solid #222b3d;
-    border-radius:20px;
-    padding:30px;
+.greeting{
     margin-bottom:25px;
 }
 
-.hero h1{
-    font-size:32px;
-    margin-bottom:10px;
+.greeting h1{
+    font-size:30px;
+    margin-bottom:8px;
 }
 
-.hero p{
-    color:#aeb6c7;
-    font-size:16px;
+.greeting p{
+    color:#8c95a8;
 }
-
-.class-box{
-    margin-top:20px;
-    display:inline-block;
-    padding:9px 14px;
-    border-radius:10px;
-    background:#1b2333;
-    color:#d8deea;
-}
-
-/* STATS */
 
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:15px;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
-.card{
-    background:#101621;
-    border:1px solid #222b3d;
-    border-radius:17px;
-    padding:22px;
+.stat{
+    background:#111722;
+    border:1px solid #202636;
+    padding:20px;
+    border-radius:16px;
 }
 
-.card-title{
-    color:#8e98aa;
-    font-size:14px;
+.stat-title{
+    color:#8c95a8;
+    font-size:13px;
     margin-bottom:10px;
 }
 
-.card-value{
-    font-size:28px;
+.stat-value{
+    font-size:25px;
     font-weight:bold;
 }
 
-/* SECTIONS */
-
 .sections{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
 }
 
-.section{
-    background:#101621;
-    border:1px solid #222b3d;
-    border-radius:17px;
-    padding:25px;
+.card{
+    background:#111722;
+    border:1px solid #202636;
+    border-radius:18px;
+    padding:22px;
     cursor:pointer;
     transition:.2s;
 }
 
-.section:hover{
+.card:hover{
     transform:translateY(-3px);
-    background:#141b28;
+    border-color:#6c5ce7;
 }
 
-.section h2{
-    font-size:20px;
-    margin-bottom:8px;
+.card-icon{
+    font-size:32px;
+    margin-bottom:12px;
 }
 
-.section p{
-    color:#929cad;
-    line-height:1.5;
+.card h3{
+    margin-bottom:7px;
 }
 
-/* SETTINGS OVERLAY */
+.card p{
+    color:#8c95a8;
+    font-size:13px;
+}
 
-.overlay{
+.settings{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:90;
-}
-
-/* SETTINGS PANEL */
-
-#settingsPanel{
-    position:fixed;
-    right:-360px;
-    top:0;
-    width:350px;
-    max-width:90%;
-    height:100vh;
-    background:#0d121c;
-    border-left:1px solid #293246;
+    background:rgba(0,0,0,.75);
     z-index:100;
+}
+
+.settings-box{
+    width:min(420px,92%);
+    background:#111722;
+    border:1px solid #293145;
+    border-radius:20px;
     padding:25px;
-    transition:.3s;
-    overflow-y:auto;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 
-#settingsPanel.open{
-    right:0;
-}
-
-.settings-title{
+.settings-head{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
-.close-btn{
-    background:none;
-    border:none;
+.close{
+    background:#202636;
     color:white;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.user-box{
-    background:#151c29;
-    border:1px solid #293246;
-    padding:15px;
-    border-radius:12px;
-    margin-bottom:20px;
-    word-break:break-word;
+    border-radius:8px;
+    padding:8px 12px;
 }
 
 .setting-item{
-    margin:15px 0;
-}
-
-.setting-label{
-    display:block;
-    color:#9ca6b8;
-    margin-bottom:8px;
-    font-size:14px;
-}
-
-.setting-btn{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#192234;
-    color:white;
-    cursor:pointer;
-    margin-bottom:10px;
-}
-
-.setting-btn:hover{
-    background:#243047;
-}
-
-.logout-btn{
-    background:#4a1d25;
-}
-
-.logout-btn:hover{
-    background:#662530;
-}
-
-/* INSTALL INFO */
-
-.install-info{
-    background:#151c29;
-    border:1px solid #293246;
+    background:#080b12;
     border-radius:12px;
     padding:15px;
-    margin-top:15px;
-    color:#aeb6c7;
-    font-size:13px;
-    line-height:1.5;
+    margin-bottom:12px;
 }
 
-/* FOOTER */
-
-footer{
-    text-align:center;
-    color:#687286;
-    padding:35px 10px;
-    font-size:13px;
+.setting-item small{
+    color:#8c95a8;
+    display:block;
+    margin-bottom:5px;
 }
 
-/* MOBILE */
+.setting-item button{
+    margin-top:8px;
+}
 
-@media(max-width:800px){
+.logout{
+    width:100%;
+    background:#d63031;
+    color:white;
+    padding:13px;
+    border-radius:10px;
+    font-weight:bold;
+}
 
+@media(max-width:750px){
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
@@ -323,439 +240,165 @@ footer{
         grid-template-columns:1fr;
     }
 
-}
-
-@media(max-width:650px){
-
-    header{
-        align-items:flex-start;
-        gap:10px;
-    }
-
-    .header-right{
-        gap:6px;
-    }
-
-    .clock{
+    .install-btn{
         display:none;
     }
 
-    #installButton{
-        padding:9px 11px;
+    .greeting h1{
+        font-size:24px;
     }
-
-    .settings-button{
-        padding:9px 11px;
-    }
-
 }
-
-@media(max-width:500px){
-
-    header{
-        padding:10px 12px;
-    }
-
-    .logo{
-        font-size:17px;
-    }
-
-    .logo img{
-        width:32px;
-        height:32px;
-    }
-
-    .hero{
-        padding:22px;
-    }
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
 
-    <div class="logo">
+    <div class="logo-area">
+        <img class="logo"
+             src="./study-vision-icon-192.png">
 
-        <img
-            src="./study-vision-icon-192.png"
-            alt="Study Vision"
-        >
-
-        <span>Study Vision</span>
-
+        <div>
+            <h2>Study Vision</h2>
+            <p>Class 12th JKBOSE</p>
+        </div>
     </div>
 
-
-    <div class="header-right">
-
-        <div
-            class="clock"
-            id="clock"
-        >
-            00:00:00
-        </div>
-
-
-        <!-- INSTALL APP BUTTON -->
-
-        <button
-            class="settings-button"
-            id="installButton"
-            onclick="installApp()"
-        >
+    <div class="header-buttons">
+        <button id="installButton"
+                class="install-btn"
+                onclick="installApp()">
             📲 Install App
         </button>
 
-
-        <!-- SETTINGS -->
-
-        <button
-            class="settings-button"
-            onclick="openSettings()"
-        >
-            ⚙️ Settings
+        <button class="icon-btn"
+                onclick="openSettings()">
+            ⚙️
         </button>
-
     </div>
 
 </header>
 
 
-<!-- MAIN -->
-
-<main class="container">
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <h1 id="greeting">
-            Good Morning Furqan Hamid
-        </h1>
-
-        <p>
-            Welcome back! Keep learning and achieve your goals.
-        </p>
-
-        <div class="class-box">
-            Class 12th • JKBOSE
-        </div>
-
-    </section>
-
-
-    <!-- STATS -->
-
-    <section class="stats">
-
-
-        <div class="card">
-
-            <div class="card-title">
-                📚 Today Goals
-            </div>
-
-            <div
-                class="card-value"
-                id="goals"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-title">
-                ⏱️ Study Time
-            </div>
-
-            <div
-                class="card-value"
-                id="studyTime"
-            >
-                0 min
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-title">
-                🔥 Streak
-            </div>
-
-            <div
-                class="card-value"
-                id="streak"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-title">
-                ⭐ Experience
-            </div>
-
-            <div
-                class="card-value"
-                id="xp"
-            >
-                0 XP
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- APP SECTIONS -->
-
-    <section class="sections">
-
-
-        <div
-            class="section"
-            onclick="location.href='subjects.html'"
-        >
-
-            <h2>📚 Subjects</h2>
-
-            <p>
-                Physics, Mathematics, Chemistry and English.
-            </p>
-
-        </div>
-
-
-        <div
-            class="section"
-            onclick="location.href='notes.html'"
-        >
-
-            <h2>📝 Notes</h2>
-
-            <p>
-                Read your chapter notes and important concepts.
-            </p>
-
-        </div>
-
-
-        <div
-            class="section"
-            onclick="location.href='focus.html'"
-        >
-
-            <h2>🎯 Focus Study</h2>
-
-            <p>
-                Start a focused study session and track your time.
-            </p>
-
-        </div>
-
-
-        <div
-            class="section"
-            onclick="location.href='quiz.html'"
-        >
-
-            <h2>🧠 Quiz</h2>
-
-            <p>
-                Test your knowledge with chapter-wise questions.
-            </p>
-
-        </div>
-
-
-        <div
-            class="section"
-            onclick="location.href='revision.html'"
-        >
-
-            <h2>🔄 Revision</h2>
-
-            <p>
-                Revise important topics before your board exams.
-            </p>
-
-        </div>
-
-
-        <div
-            class="section"
-            onclick="location.href='progress.html'"
-        >
-
-            <h2>📊 Progress</h2>
-
-            <p>
-                Check your study progress and achievements.
-            </p>
-
-        </div>
-
-
-    </section>
-
-</main>
-
-
-<footer>
-    Study Vision • Class 12th JKBOSE
-</footer>
-
-
-<!-- OVERLAY -->
-
-<div
-    class="overlay"
-    id="overlay"
-    onclick="closeSettings()"
-></div>
-
-
-<!-- SETTINGS PANEL -->
-
-<div id="settingsPanel">
-
-
-    <div class="settings-title">
-
-        <h2>
-            ⚙️ Settings
-        </h2>
-
-        <button
-            class="close-btn"
-            onclick="closeSettings()"
-        >
-            ×
-        </button>
-
+<div class="container">
+
+    <div class="greeting">
+        <h1 id="greetingText">Good Morning 👋</h1>
+        <p id="dateText"></p>
     </div>
 
 
-    <!-- USER -->
+    <div class="stats">
 
-    <div class="user-box">
-
-        <div class="setting-label">
-            Logged in as
+        <div class="stat">
+            <div class="stat-title">🎯 Today Goals</div>
+            <div class="stat-value" id="goals">0</div>
         </div>
 
-        <div id="userEmail">
-            Loading...
+        <div class="stat">
+            <div class="stat-title">⏱️ Study Time</div>
+            <div class="stat-value" id="studyTime">0 min</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">🔥 Streak</div>
+            <div class="stat-value" id="streak">0 days</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-title">⭐ Experience</div>
+            <div class="stat-value" id="xp">0 XP</div>
         </div>
 
     </div>
 
 
-    <!-- CLASS -->
+    <div class="sections">
 
-    <div class="setting-item">
+        <div class="card"
+             onclick="location.href='subjects.html'">
+            <div class="card-icon">📚</div>
+            <h3>Subjects</h3>
+            <p>Physics, Chemistry, Maths and English</p>
+        </div>
 
-        <span class="setting-label">
-            Class
-        </span>
+        <div class="card"
+             onclick="location.href='notes.html'">
+            <div class="card-icon">📝</div>
+            <h3>Quick Notes</h3>
+            <p>Important notes and revision material</p>
+        </div>
 
-        <div class="user-box">
-            Class 12th JKBOSE
+        <div class="card"
+             onclick="location.href='focus.html'">
+            <div class="card-icon">🎯</div>
+            <h3>Focus</h3>
+            <p>Study with focused sessions</p>
+        </div>
+
+        <div class="card"
+             onclick="location.href='quiz.html'">
+            <div class="card-icon">🧠</div>
+            <h3>Quiz</h3>
+            <p>Test your knowledge</p>
+        </div>
+
+        <div class="card"
+             onclick="location.href='revision.html'">
+            <div class="card-icon">🔄</div>
+            <h3>Revision</h3>
+            <p>Revise important chapters</p>
+        </div>
+
+        <div class="card"
+             onclick="location.href='progress.html'">
+            <div class="card-icon">📊</div>
+            <h3>Progress</h3>
+            <p>Check your study progress</p>
         </div>
 
     </div>
 
-
-    <!-- APPEARANCE -->
-
-    <div class="setting-item">
-
-        <span class="setting-label">
-            Appearance
-        </span>
-
-        <button
-            class="setting-btn"
-            onclick="toggleDarkMode()"
-        >
-            🌙 Dark Mode
-        </button>
-
-    </div>
+</div>
 
 
-    <!-- SUBJECTS -->
+<!-- SETTINGS -->
 
-    <div class="setting-item">
+<div class="settings" id="settings">
 
-        <span class="setting-label">
-            Subjects
-        </span>
+    <div class="settings-box">
 
-        <button
-            class="setting-btn"
-            onclick="location.href='subjects.html'"
-        >
-            📚 Manage Subjects
-        </button>
+        <div class="settings-head">
+            <h2>⚙️ Settings</h2>
 
-    </div>
-
-
-    <!-- INSTALL -->
-
-    <div class="setting-item">
-
-        <span class="setting-label">
-            App Installation
-        </span>
-
-        <button
-            class="setting-btn"
-            onclick="installApp()"
-        >
-            📲 Install Study Vision
-        </button>
-
-        <div class="install-info">
-            Install Study Vision on your computer like a normal app.
-            After installation, you can open it directly from your desktop or Start Menu.
+            <button class="close"
+                    onclick="closeSettings()">
+                ✕
+            </button>
         </div>
 
-    </div>
+        <div class="setting-item">
+            <small>Account</small>
+            <span id="userEmail">Checking...</span>
+        </div>
 
+        <div class="setting-item">
+            <small>Class</small>
+            <strong>Class 12th JKBOSE</strong>
+        </div>
 
-    <!-- LOGOUT -->
+        <div class="setting-item">
+            <small>Install Study Vision</small>
 
-    <div class="setting-item">
+            <button class="install-btn"
+                    onclick="installApp()">
+                📲 Install Study Vision
+            </button>
+        </div>
 
-        <button
-            class="setting-btn logout-btn"
-            onclick="logout()"
-        >
+        <button class="logout"
+                onclick="logout()">
             🚪 Logout
         </button>
 
@@ -764,248 +407,113 @@ footer{
 </div>
 
 
-<script type="module">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-/* =========================================
-   SUPABASE
-========================================= */
-
-import { createClient } from
-'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
+<script>
 
 const SUPABASE_URL =
-'https://qnjfvoskjnyzrvrebdna.supabase.co';
-
+"https://qnjfvoskjnyzrvrebdna.supabase.co";
 
 const SUPABASE_KEY =
-'sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9';
+"sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9";
 
-
-const supabase =
-createClient(
+const supabaseClient =
+supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
 
-/* =========================================
-   LOGIN CHECK
-========================================= */
+/* LOGIN CHECK */
 
 async function checkLogin(){
 
-    const { data } =
-        await supabase.auth.getSession();
+    const {
+        data:{
+            session
+        }
+    } = await supabaseClient.auth.getSession();
 
+    if(!session){
 
-    if(!data.session){
-
-        window.location.href =
-        'login.html';
-
+        window.location.replace("login.html");
         return;
-
     }
 
-
-    document.getElementById("userEmail").textContent =
-        data.session.user.email || "User";
-
+    document.getElementById("userEmail")
+        .innerText = session.user.email;
 }
-
 
 checkLogin();
 
 
-/* =========================================
-   LOGOUT
-========================================= */
-
-window.logout = async function(){
-
-    await supabase.auth.signOut();
-
-    window.location.href =
-        'login.html';
-
-};
-
-
-/* =========================================
-   SETTINGS
-========================================= */
-
-window.openSettings = function(){
-
-    document
-        .getElementById("settingsPanel")
-        .classList.add("open");
-
-
-    document
-        .getElementById("overlay")
-        .style.display = "block";
-
-};
-
-
-window.closeSettings = function(){
-
-    document
-        .getElementById("settingsPanel")
-        .classList.remove("open");
-
-
-    document
-        .getElementById("overlay")
-        .style.display = "none";
-
-};
-
-
-/* =========================================
-   DARK MODE
-========================================= */
-
-window.toggleDarkMode = function(){
-
-    document.body.classList.toggle(
-        "light-mode"
-    );
-
-};
-
-
-/* =========================================
-   CLOCK
-========================================= */
-
-function updateClock(){
-
-    const now =
-        new Date();
-
-
-    document.getElementById("clock").textContent =
-        now.toLocaleTimeString();
-
-}
-
-
-setInterval(
-    updateClock,
-    1000
-);
-
-
-updateClock();
-
-
-/* =========================================
-   GREETING
-========================================= */
+/* GREETING */
 
 function updateGreeting(){
 
-    const hour =
-        new Date().getHours();
+    const hour = new Date().getHours();
 
+    let greeting;
 
-    let greeting =
-        "Good Morning";
-
-
-    if(hour >= 12 && hour < 17){
-
-        greeting =
-            "Good Afternoon";
-
+    if(hour < 12){
+        greeting = "Good Morning 👋";
     }
-    else if(hour >= 17){
-
-        greeting =
-            "Good Evening";
-
+    else if(hour < 17){
+        greeting = "Good Afternoon 👋";
+    }
+    else{
+        greeting = "Good Evening 👋";
     }
 
+    document.getElementById("greetingText")
+        .innerText = greeting + " Furqan Hamid";
 
-    document.getElementById("greeting").textContent =
-        greeting + " Furqan Hamid";
-
+    document.getElementById("dateText")
+        .innerText =
+        new Date().toLocaleDateString(
+            "en-IN",
+            {
+                weekday:"long",
+                day:"numeric",
+                month:"long",
+                year:"numeric"
+            }
+        );
 }
-
 
 updateGreeting();
 
 
-/* =========================================
-   STUDY DATA
-========================================= */
+/* SETTINGS */
 
-let studyTime =
-    Number(
-        localStorage.getItem("studyTime") || 0
-    );
+function openSettings(){
+    document.getElementById("settings")
+        .style.display = "block";
+}
 
-
-let streak =
-    Number(
-        localStorage.getItem("streak") || 0
-    );
-
-
-let xp =
-    Number(
-        localStorage.getItem("xp") || 0
-    );
-
-
-let goals =
-    Number(
-        localStorage.getItem("goals") || 0
-    );
-
-
-function updateStats(){
-
-    document.getElementById("studyTime").textContent =
-        studyTime + " min";
-
-
-    document.getElementById("streak").textContent =
-        streak;
-
-
-    document.getElementById("xp").textContent =
-        xp + " XP";
-
-
-    document.getElementById("goals").textContent =
-        goals;
-
+function closeSettings(){
+    document.getElementById("settings")
+        .style.display = "none";
 }
 
 
-updateStats();
+/* LOGOUT */
+
+async function logout(){
+
+    await supabaseClient.auth.signOut();
+
+    window.location.replace("login.html");
+}
 
 
-/* =========================================
-   PWA INSTALL
-========================================= */
+/* PWA INSTALL */
 
 let deferredPrompt = null;
 
-
 const installButton =
-    document.getElementById("installButton");
+document.getElementById("installButton");
 
-
-/*
-   Browser sends this event when
-   Study Vision is installable.
-*/
 
 window.addEventListener(
     "beforeinstallprompt",
@@ -1015,69 +523,48 @@ window.addEventListener(
 
         deferredPrompt = event;
 
-        installButton.style.display =
-            "block";
-
+        installButton.style.display = "block";
     }
 );
 
 
-/*
-   Install button
-*/
-
-window.installApp = async function(){
+async function installApp(){
 
     if(!deferredPrompt){
 
         alert(
-            "Study Vision is not ready to install yet. " +
-            "Please refresh the live Study Vision website once."
+            "Install option abhi browser ne ready nahi kiya. " +
+            "Live Study Vision website ko ek baar refresh karo."
         );
 
         return;
-
     }
 
-
     deferredPrompt.prompt();
-
 
     const result =
         await deferredPrompt.userChoice;
 
-
     if(result.outcome === "accepted"){
 
-        installButton.style.display =
-            "none";
-
+        installButton.style.display = "none";
     }
 
-
     deferredPrompt = null;
+}
 
-};
-
-
-/*
-   When app is installed
-*/
 
 window.addEventListener(
     "appinstalled",
     function(){
 
-        installButton.style.display =
-            "none";
+        installButton.style.display = "none";
 
     }
 );
 
 
-/* =========================================
-   SERVICE WORKER
-========================================= */
+/* SERVICE WORKER */
 
 if("serviceWorker" in navigator){
 
@@ -1087,13 +574,6 @@ if("serviceWorker" in navigator){
 
             navigator.serviceWorker
                 .register("./sw.js")
-                .then(function(){
-
-                    console.log(
-                        "Study Vision Service Worker Registered"
-                    );
-
-                })
                 .catch(function(error){
 
                     console.log(

@@ -5,163 +5,307 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0">
 
 <title>Study Vision - Login</title>
+
+<link rel="manifest"
+      href="./manifest.json">
+
+<meta name="theme-color"
+      content="#080b12">
+
+<link rel="icon"
+      type="image/png"
+      href="./study-vision-icon-192.png">
 
 <style>
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
 
 body{
+
     min-height:100vh;
+
     background:#080b12;
+
     color:white;
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
+
+    justify-content:center;
+
     padding:20px;
+
 }
 
-.box{
+.container{
+
     width:100%;
-    max-width:420px;
-    background:#111620;
-    border:1px solid #252d3a;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+    max-width:400px;
+
 }
 
 .logo{
+
+    width:85px;
+
+    height:85px;
+
+    display:block;
+
+    margin:0 auto 18px;
+
+    border-radius:20px;
+
+}
+
+.title{
+
     text-align:center;
+
     font-size:30px;
-    font-weight:bold;
+
     margin-bottom:8px;
+
 }
 
 .subtitle{
+
     text-align:center;
-    color:#8d96a8;
-    margin-bottom:30px;
+
+    color:#8c95a8;
+
+    margin-bottom:28px;
+
 }
 
-h2{
+.box{
+
+    background:#111722;
+
+    border:1px solid #202636;
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+.tabs{
+
+    display:flex;
+
+    gap:8px;
+
     margin-bottom:20px;
+
+}
+
+.tabs button{
+
+    flex:1;
+
+    padding:11px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#202636;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.tabs button.active{
+
+    background:#6c5ce7;
+
+}
+
+.form{
+
+    display:none;
+
+}
+
+.form.active{
+
+    display:block;
+
 }
 
 label{
+
     display:block;
-    color:#bfc8d8;
-    font-size:14px;
+
     margin-bottom:7px;
+
+    color:#c7ccda;
+
+    font-size:14px;
+
 }
 
 input{
+
     width:100%;
-    padding:14px;
-    margin-bottom:15px;
+
+    padding:13px;
+
     border-radius:10px;
-    border:1px solid #2b3445;
-    background:#171d29;
+
+    border:1px solid #293145;
+
+    background:#080b12;
+
     color:white;
+
     outline:none;
-    font-size:15px;
+
+    margin-bottom:15px;
+
 }
 
 input:focus{
-    border-color:#7d8799;
+
+    border-color:#6c5ce7;
+
 }
 
-/* PASSWORD */
-
 .password-box{
+
     position:relative;
-    width:100%;
+
 }
 
 .password-box input{
-    padding-right:52px;
+
+    padding-right:50px;
+
 }
 
 .eye-btn{
+
     position:absolute;
-    right:7px;
-    top:50%;
-    transform:translateY(-50%);
+
+    right:8px;
+
+    top:0;
+
+    height:42px;
+
     width:40px;
-    height:40px;
-    padding:0;
-    margin:0;
+
     background:transparent;
-    border:none;
-    color:#aeb7c8;
+
+    color:white;
+
+    border:0;
+
     cursor:pointer;
+
     font-size:18px;
+
 }
 
-.eye-btn:hover{
-    background:transparent;
-    color:white;
-    opacity:1;
-}
+.main-btn{
 
-button{
     width:100%;
-    padding:14px;
-    border:none;
+
+    padding:13px;
+
+    border:0;
+
     border-radius:10px;
-    background:white;
-    color:#080b12;
-    font-size:16px;
+
+    background:#6c5ce7;
+
+    color:white;
+
+    font-size:15px;
+
     font-weight:bold;
+
     cursor:pointer;
+
+    margin-top:5px;
+
 }
 
-button:hover{
-    opacity:.9;
-}
+.secondary-btn{
 
-.link{
-    color:#bfc8d8;
-    cursor:pointer;
-    font-size:14px;
-    text-align:center;
-    margin-top:18px;
-}
+    width:100%;
 
-.link:hover{
+    padding:11px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#202636;
+
     color:white;
-}
 
-.forgot{
-    text-align:right;
-    color:#aeb7c8;
-    font-size:13px;
     cursor:pointer;
-    margin-top:-4px;
-    margin-bottom:18px;
-}
 
-.forgot:hover{
-    color:white;
+    margin-top:10px;
+
 }
 
 .message{
-    min-height:22px;
+
+    margin-top:15px;
+
     text-align:center;
-    margin-top:16px;
-    color:#d8deea;
-    font-size:14px;
+
+    font-size:13px;
+
+    color:#8c95a8;
+
+    min-height:20px;
+
 }
 
-.logout-btn{
-    margin-top:10px;
+.forgot{
+
+    text-align:right;
+
+    margin-top:-7px;
+
+    margin-bottom:12px;
+
+}
+
+.forgot button{
+
+    background:none;
+
+    border:0;
+
+    color:#8f82ff;
+
+    cursor:pointer;
+
+}
+
+#resetBox{
+
+    display:none;
+
 }
 
 </style>
@@ -171,414 +315,370 @@ button:hover{
 
 <body>
 
-<div class="box">
+
+<div class="container">
+
+    <img
+        class="logo"
+        src="./study-vision-icon-192.png"
+    >
+
+    <h1 class="title">
+        Study Vision
+    </h1>
+
+    <p class="subtitle">
+        Class 12th JKBOSE Study App
+    </p>
 
 
-    <!-- LOGO -->
-
-    <div class="logo">
-        🧠 Study Vision
-    </div>
-
-    <div class="subtitle">
-        Class 12th — JKBOSE
-    </div>
+    <div class="box">
 
 
-    <!-- ================= LOGIN ================= -->
-
-    <div id="loginBox">
-
-        <h2>
-            Login
-        </h2>
-
-
-        <label>
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="loginEmail"
-            placeholder="Enter your email"
-        >
-
-
-        <label>
-            Password
-        </label>
-
-        <div class="password-box">
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter your password"
-            >
+        <div class="tabs">
 
             <button
-                type="button"
-                class="eye-btn"
-                onclick="togglePassword('loginPassword', this)"
-            >
-                👁️
+                id="loginTab"
+                class="active"
+                onclick="showLogin()">
+                Login
+            </button>
+
+            <button
+                id="signupTab"
+                onclick="showSignup()">
+                Sign Up
             </button>
 
         </div>
 
 
-        <div
-            class="forgot"
-            onclick="showForgot()"
-        >
-            Forgot password?
-        </div>
-
-
-        <button onclick="loginUser()">
-            Login
-        </button>
-
+        <!-- LOGIN -->
 
         <div
-            class="link"
-            onclick="showSignup()"
-        >
-            Don't have an account? Sign Up
-        </div>
+            id="loginForm"
+            class="form active">
 
-    </div>
-
-
-    <!-- ================= SIGN UP ================= -->
-
-    <div
-        id="signupBox"
-        style="display:none;"
-    >
-
-        <h2>
-            Create Account
-        </h2>
-
-
-        <label>
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="signupEmail"
-            placeholder="Enter your email"
-        >
-
-
-        <label>
-            Password
-        </label>
-
-        <div class="password-box">
+            <label>Email</label>
 
             <input
-                type="password"
-                id="signupPassword"
-                placeholder="Create password"
+                id="loginEmail"
+                type="email"
+                placeholder="Enter your email"
+                autocomplete="email"
             >
 
+
+            <label>Password</label>
+
+            <div class="password-box">
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    class="eye-btn"
+                    type="button"
+                    onclick="togglePassword(
+                        'loginPassword',
+                        this
+                    )">
+                    👁️
+                </button>
+
+            </div>
+
+
+            <div class="forgot">
+
+                <button
+                    onclick="showForgot()">
+                    Forgot Password?
+                </button>
+
+            </div>
+
+
             <button
-                type="button"
-                class="eye-btn"
-                onclick="togglePassword('signupPassword', this)"
-            >
-                👁️
+                class="main-btn"
+                onclick="login()">
+                Login
             </button>
+
+
+            <div
+                class="message"
+                id="loginMessage">
+            </div>
 
         </div>
 
 
-        <button onclick="signupUser()">
-            Create Account
-        </button>
-
+        <!-- SIGNUP -->
 
         <div
-            class="link"
-            onclick="showLogin()"
-        >
-            Already have an account? Login
+            id="signupForm"
+            class="form">
+
+            <label>Email</label>
+
+            <input
+                id="signupEmail"
+                type="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+            >
+
+
+            <label>Password</label>
+
+            <div class="password-box">
+
+                <input
+                    id="signupPassword"
+                    type="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                >
+
+                <button
+                    class="eye-btn"
+                    type="button"
+                    onclick="togglePassword(
+                        'signupPassword',
+                        this
+                    )">
+                    👁️
+                </button>
+
+            </div>
+
+
+            <button
+                class="main-btn"
+                onclick="signup()">
+                Create Account
+            </button>
+
+
+            <div
+                class="message"
+                id="signupMessage">
+            </div>
+
         </div>
 
-    </div>
 
-
-    <!-- ================= FORGOT PASSWORD ================= -->
-
-    <div
-        id="forgotBox"
-        style="display:none;"
-    >
-
-        <h2>
-            Forgot Password
-        </h2>
-
-
-        <label>
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="forgotEmail"
-            placeholder="Enter your account email"
-        >
-
-
-        <button onclick="sendResetLink()">
-            Send Reset Link
-        </button>
-
+        <!-- FORGOT PASSWORD -->
 
         <div
-            class="link"
-            onclick="showLogin()"
-        >
-            ← Back to Login
-        </div>
+            id="forgotForm"
+            class="form">
 
-    </div>
+            <h3 style="margin-bottom:15px;">
+                Reset Password
+            </h3>
 
-
-    <!-- ================= NEW PASSWORD ================= -->
-
-    <div
-        id="resetBox"
-        style="display:none;"
-    >
-
-        <h2>
-            New Password
-        </h2>
-
-
-        <label>
-            New Password
-        </label>
-
-        <div class="password-box">
+            <label>Email</label>
 
             <input
-                type="password"
-                id="newPassword"
-                placeholder="Enter new password"
+                id="forgotEmail"
+                type="email"
+                placeholder="Enter your email"
             >
 
+
             <button
-                type="button"
-                class="eye-btn"
-                onclick="togglePassword('newPassword', this)"
-            >
-                👁️
+                class="main-btn"
+                onclick="sendReset()">
+                Send Reset Email
             </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="showLogin()">
+                ← Back to Login
+            </button>
+
+
+            <div
+                class="message"
+                id="forgotMessage">
+            </div>
 
         </div>
 
 
-        <label>
-            Confirm Password
-        </label>
+        <!-- NEW PASSWORD -->
 
-        <div class="password-box">
+        <div
+            id="resetBox"
+            class="form">
 
-            <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Confirm new password"
-            >
+            <h3 style="margin-bottom:15px;">
+                Create New Password
+            </h3>
+
+
+            <label>New Password</label>
+
+            <div class="password-box">
+
+                <input
+                    id="newPassword"
+                    type="password"
+                    placeholder="New password"
+                >
+
+                <button
+                    class="eye-btn"
+                    type="button"
+                    onclick="togglePassword(
+                        'newPassword',
+                        this
+                    )">
+                    👁️
+                </button>
+
+            </div>
+
+
+            <label>Confirm Password</label>
+
+            <div class="password-box">
+
+                <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm password"
+                >
+
+                <button
+                    class="eye-btn"
+                    type="button"
+                    onclick="togglePassword(
+                        'confirmPassword',
+                        this
+                    )">
+                    👁️
+                </button>
+
+            </div>
+
 
             <button
-                type="button"
-                class="eye-btn"
-                onclick="togglePassword('confirmPassword', this)"
-            >
-                👁️
+                class="main-btn"
+                onclick="updatePassword()">
+                Update Password
             </button>
+
+
+            <div
+                class="message"
+                id="resetMessage">
+            </div>
 
         </div>
 
-
-        <button onclick="updatePassword()">
-            Update Password
-        </button>
-
     </div>
-
-
-    <!-- ================= LOGOUT ================= -->
-
-    <div
-        id="logoutBox"
-        style="display:none;"
-    >
-
-        <h2>
-            You're Logged In
-        </h2>
-
-
-        <button onclick="goDashboard()">
-            Open Dashboard
-        </button>
-
-
-        <button
-            class="logout-btn"
-            onclick="logoutUser()"
-        >
-            Logout
-        </button>
-
-    </div>
-
-
-    <!-- MESSAGE -->
-
-    <div
-        class="message"
-        id="message"
-    ></div>
-
 
 </div>
 
 
-<script type="module">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-/* =========================================
-   SUPABASE
-========================================= */
-
-import { createClient } from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+<script>
 
 
 const SUPABASE_URL =
 "https://qnjfvoskjnyzrvrebdna.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9";
 
 
-const supabase =
-createClient(
+const supabaseClient =
+supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
 
-const message =
-document.getElementById("message");
-
-
-/* =========================================
-   HIDE ALL BOXES
-========================================= */
+/* TABS */
 
 function hideAll(){
 
-    document.getElementById("loginBox")
-        .style.display = "none";
+    document
+        .querySelectorAll(".form")
+        .forEach(function(form){
 
-    document.getElementById("signupBox")
-        .style.display = "none";
+            form.classList.remove("active");
 
-    document.getElementById("forgotBox")
-        .style.display = "none";
-
-    document.getElementById("resetBox")
-        .style.display = "none";
-
-    document.getElementById("logoutBox")
-        .style.display = "none";
+        });
 
 }
 
 
-/* =========================================
-   LOGIN PAGE
-========================================= */
-
-window.showLogin = function(){
+function showLogin(){
 
     hideAll();
 
-    document.getElementById("loginBox")
-        .style.display = "block";
+    document
+        .getElementById("loginForm")
+        .classList.add("active");
 
-    message.innerText = "";
+    document
+        .getElementById("loginTab")
+        .classList.add("active");
 
-};
+    document
+        .getElementById("signupTab")
+        .classList.remove("active");
 
-
-/* =========================================
-   SIGN UP PAGE
-========================================= */
-
-window.showSignup = function(){
-
-    hideAll();
-
-    document.getElementById("signupBox")
-        .style.display = "block";
-
-    message.innerText = "";
-
-};
+}
 
 
-/* =========================================
-   FORGOT PASSWORD PAGE
-========================================= */
-
-window.showForgot = function(){
+function showSignup(){
 
     hideAll();
 
-    document.getElementById("forgotBox")
-        .style.display = "block";
+    document
+        .getElementById("signupForm")
+        .classList.add("active");
 
-    message.innerText = "";
+    document
+        .getElementById("signupTab")
+        .classList.add("active");
 
-};
+    document
+        .getElementById("loginTab")
+        .classList.remove("active");
 
-
-/* =========================================
-   OPEN DASHBOARD
-========================================= */
-
-window.goDashboard = function(){
-
-    window.location.href =
-        "index.html";
-
-};
+}
 
 
-/* =========================================
-   PASSWORD SHOW / HIDE
-========================================= */
+function showForgot(){
 
-window.togglePassword = function(
-    inputId,
-    button
-){
+    hideAll();
+
+    document
+        .getElementById("forgotForm")
+        .classList.add("active");
+
+}
+
+
+/* PASSWORD EYE */
+
+function togglePassword(inputId,button){
 
     const input =
         document.getElementById(inputId);
-
 
     if(input.type === "password"){
 
@@ -586,8 +686,7 @@ window.togglePassword = function(
 
         button.innerText = "🙈";
 
-    }
-    else{
+    }else{
 
         input.type = "password";
 
@@ -595,24 +694,27 @@ window.togglePassword = function(
 
     }
 
-};
+}
 
 
-/* =========================================
-   LOGIN
-========================================= */
+/* LOGIN */
 
-window.loginUser = async function(){
+async function login(){
 
     const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
-
+        document.getElementById(
+            "loginEmail"
+        ).value.trim();
 
     const password =
-        document.getElementById("loginPassword")
-        .value;
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
 
 
     if(!email || !password){
@@ -621,7 +723,6 @@ window.loginUser = async function(){
             "Please enter email and password.";
 
         return;
-
     }
 
 
@@ -629,14 +730,17 @@ window.loginUser = async function(){
         "Logging in...";
 
 
-    const { error } =
-        await supabase.auth.signInWithPassword({
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth.signInWithPassword({
 
-            email: email,
+        email:email,
 
-            password: password
+        password:password
 
-        });
+    });
 
 
     if(error){
@@ -653,31 +757,32 @@ window.loginUser = async function(){
         "Login successful!";
 
 
-    setTimeout(function(){
+    window.location.replace(
+        "index.html"
+    );
 
-        window.location.href =
-            "index.html";
-
-    },500);
-
-};
+}
 
 
-/* =========================================
-   SIGN UP
-========================================= */
+/* SIGN UP */
 
-window.signupUser = async function(){
+async function signup(){
 
     const email =
-        document.getElementById("signupEmail")
-        .value
-        .trim();
-
+        document.getElementById(
+            "signupEmail"
+        ).value.trim();
 
     const password =
-        document.getElementById("signupPassword")
-        .value;
+        document.getElementById(
+            "signupPassword"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "signupMessage"
+        );
 
 
     if(!email || !password){
@@ -704,14 +809,17 @@ window.signupUser = async function(){
         "Creating account...";
 
 
-    const { data, error } =
-        await supabase.auth.signUp({
+    const {
+        data,
+        error
+    } =
+    await supabaseClient.auth.signUp({
 
-            email: email,
+        email:email,
 
-            password: password
+        password:password
 
-        });
+    });
 
 
     if(error){
@@ -726,30 +834,33 @@ window.signupUser = async function(){
 
     if(data.session){
 
-        window.location.href =
-            "index.html";
+        window.location.replace(
+            "index.html"
+        );
 
-    }
-    else{
+    }else{
 
         message.innerText =
-            "Account created! Check your email to verify it.";
+            "Account created! Check your email to verify your account.";
 
     }
 
-};
+}
 
 
-/* =========================================
-   FORGOT PASSWORD
-========================================= */
+/* FORGOT PASSWORD */
 
-window.sendResetLink = async function(){
+async function sendReset(){
 
     const email =
-        document.getElementById("forgotEmail")
-        .value
-        .trim();
+        document.getElementById(
+            "forgotEmail"
+        ).value.trim();
+
+    const message =
+        document.getElementById(
+            "forgotMessage"
+        );
 
 
     if(!email){
@@ -763,21 +874,19 @@ window.sendResetLink = async function(){
 
 
     message.innerText =
-        "Sending reset link...";
+        "Sending reset email...";
 
 
-    const { error } =
-        await supabase.auth.resetPasswordForEmail(
-
+    const {
+        error
+    } =
+    await supabaseClient.auth
+        .resetPasswordForEmail(
             email,
-
             {
-
                 redirectTo:
                 "https://hamidfurqan918-svg.github.io/StudyVision/login.html"
-
             }
-
         );
 
 
@@ -792,41 +901,35 @@ window.sendResetLink = async function(){
 
 
     message.innerText =
-        "Reset link sent! Check your email.";
+        "Password reset email sent.";
 
-};
+}
 
 
-/* =========================================
-   UPDATE PASSWORD
-========================================= */
+/* PASSWORD UPDATE */
 
-window.updatePassword = async function(){
+async function updatePassword(){
 
     const password =
-        document.getElementById("newPassword")
-        .value;
-
+        document.getElementById(
+            "newPassword"
+        ).value;
 
     const confirm =
-        document.getElementById("confirmPassword")
-        .value;
+        document.getElementById(
+            "confirmPassword"
+        ).value;
+
+    const message =
+        document.getElementById(
+            "resetMessage"
+        );
 
 
     if(!password || !confirm){
 
         message.innerText =
-            "Please fill both password fields.";
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        message.innerText =
-            "Password must be at least 6 characters.";
+            "Please fill both fields.";
 
         return;
 
@@ -843,15 +946,12 @@ window.updatePassword = async function(){
     }
 
 
-    message.innerText =
-        "Updating password...";
-
-
-    const { error } =
-        await supabase.auth.updateUser({
-
-            password: password
-
+    const {
+        error
+    } =
+    await supabaseClient.auth
+        .updateUser({
+            password:password
         });
 
 
@@ -866,96 +966,70 @@ window.updatePassword = async function(){
 
 
     message.innerText =
-        "Password updated successfully!";
+        "Password updated successfully.";
+
+    setTimeout(
+        function(){
+
+            window.location.replace(
+                "index.html"
+            );
+
+        },
+        1200
+    );
+
+}
 
 
-    setTimeout(function(){
+/* RESET SESSION CHECK */
 
-        showLogin();
-
-    },1500);
-
-};
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-window.logoutUser = async function(){
-
-    message.innerText =
-        "Logging out...";
-
-
-    const { error } =
-        await supabase.auth.signOut();
-
-
-    if(error){
-
-        message.innerText =
-            error.message;
-
-        return;
-
-    }
-
-
-    showLogin();
-
-
-    message.innerText =
-        "Logged out successfully.";
-
-};
-
-
-/* =========================================
-   PASSWORD RECOVERY
-========================================= */
-
-supabase.auth.onAuthStateChange(
-
-    function(event){
+supabaseClient.auth.onAuthStateChange(
+    function(event,session){
 
         if(event === "PASSWORD_RECOVERY"){
 
             hideAll();
 
-            document.getElementById("resetBox")
+            document
+                .getElementById("resetBox")
                 .style.display = "block";
 
-
-            message.innerText =
-                "Enter your new password.";
+            document
+                .getElementById("resetBox")
+                .classList.add("active");
 
         }
 
     }
-
 );
 
 
-/* =========================================
-   CHECK CURRENT SESSION
-========================================= */
+/* SERVICE WORKER */
 
-const { data } =
-    await supabase.auth.getSession();
+if("serviceWorker" in navigator){
 
+    window.addEventListener(
+        "load",
+        function(){
 
-if(data.session){
+            navigator.serviceWorker
+                .register("./sw.js")
+                .catch(function(error){
 
-    hideAll();
+                    console.log(
+                        "Service Worker Error:",
+                        error
+                    );
 
-    document.getElementById("logoutBox")
-        .style.display = "block";
+                });
+
+        }
+    );
 
 }
 
 </script>
 
 </body>
-
 </html>

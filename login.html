@@ -79,7 +79,7 @@ button{
     padding:14px;
     border:0;
     border-radius:10px;
-    background:#ffffff;
+    background:white;
     color:#080b12;
     font-size:16px;
     font-weight:bold;
@@ -103,6 +103,19 @@ button:hover{
     font-weight:bold;
 }
 
+.forgot{
+    text-align:right;
+    margin-top:-5px;
+    margin-bottom:18px;
+    color:#aeb7c8;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.forgot:hover{
+    color:white;
+}
+
 .message{
     text-align:center;
     margin-top:15px;
@@ -122,11 +135,15 @@ button:hover{
         Class 12th — JKBOSE
     </div>
 
+
+    <!-- LOGIN -->
+
     <div id="loginSection">
 
         <h2>Login</h2>
 
         <label>Email</label>
+
         <input
             type="email"
             id="loginEmail"
@@ -134,11 +151,16 @@ button:hover{
         >
 
         <label>Password</label>
+
         <input
             type="password"
             id="loginPassword"
             placeholder="Enter your password"
         >
+
+        <div class="forgot" onclick="showForgot()">
+            Forgot password?
+        </div>
 
         <button onclick="loginUser()">
             Login
@@ -152,11 +174,14 @@ button:hover{
     </div>
 
 
+    <!-- SIGN UP -->
+
     <div id="signupSection" style="display:none;">
 
         <h2>Create Account</h2>
 
         <label>Email</label>
+
         <input
             type="email"
             id="signupEmail"
@@ -164,6 +189,7 @@ button:hover{
         >
 
         <label>Password</label>
+
         <input
             type="password"
             id="signupPassword"
@@ -181,6 +207,62 @@ button:hover{
 
     </div>
 
+
+    <!-- FORGOT PASSWORD -->
+
+    <div id="forgotSection" style="display:none;">
+
+        <h2>Reset Password</h2>
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="forgotEmail"
+            placeholder="Enter your account email"
+        >
+
+        <button onclick="sendResetLink()">
+            Send Reset Link
+        </button>
+
+        <div class="switch">
+            Remember your password?
+            <span onclick="showLogin()">Login</span>
+        </div>
+
+    </div>
+
+
+    <!-- NEW PASSWORD -->
+
+    <div id="resetSection" style="display:none;">
+
+        <h2>Set New Password</h2>
+
+        <label>New Password</label>
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="Enter new password"
+        >
+
+        <label>Confirm Password</label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm new password"
+        >
+
+        <button onclick="updatePassword()">
+            Update Password
+        </button>
+
+    </div>
+
+
     <div class="message" id="message"></div>
 
 </div>
@@ -196,7 +278,7 @@ const SUPABASE_URL =
 "https://qnjfvoskjnyzrvrebdna.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_O1zIFLt53T-puwRyg9a4MA_czXQn8G9";
+SJPvAzLJKKxJ90CO
 
 
 const supabase =
@@ -206,25 +288,46 @@ createClient(
 );
 
 
-window.showSignup = function(){
-
-    document.getElementById("loginSection").style.display = "none";
-
-    document.getElementById("signupSection").style.display = "block";
-
-    document.getElementById("message").innerText = "";
-};
-
+// SHOW LOGIN
 
 window.showLogin = function(){
 
-    document.getElementById("signupSection").style.display = "none";
-
     document.getElementById("loginSection").style.display = "block";
+    document.getElementById("signupSection").style.display = "none";
+    document.getElementById("forgotSection").style.display = "none";
+    document.getElementById("resetSection").style.display = "none";
 
     document.getElementById("message").innerText = "";
 };
 
+
+// SHOW SIGNUP
+
+window.showSignup = function(){
+
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("signupSection").style.display = "block";
+    document.getElementById("forgotSection").style.display = "none";
+    document.getElementById("resetSection").style.display = "none";
+
+    document.getElementById("message").innerText = "";
+};
+
+
+// SHOW FORGOT PASSWORD
+
+window.showForgot = function(){
+
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("signupSection").style.display = "none";
+    document.getElementById("forgotSection").style.display = "block";
+    document.getElementById("resetSection").style.display = "none";
+
+    document.getElementById("message").innerText = "";
+};
+
+
+// SIGN UP
 
 window.signupUser = async function(){
 
@@ -293,6 +396,8 @@ window.signupUser = async function(){
 };
 
 
+// LOGIN
+
 window.loginUser = async function(){
 
     const email =
@@ -300,7 +405,6 @@ window.loginUser = async function(){
 
     const password =
         document.getElementById("loginPassword").value;
-
 
     const message =
         document.getElementById("message");
@@ -342,6 +446,154 @@ window.loginUser = async function(){
 
 };
 
+
+// SEND PASSWORD RESET LINK
+
+window.sendResetLink = async function(){
+
+    const email =
+        document.getElementById("forgotEmail").value.trim();
+
+    const message =
+        document.getElementById("message");
+
+
+    if(!email){
+
+        message.innerText =
+            "Please enter your email.";
+
+        return;
+    }
+
+
+    message.innerText =
+        "Sending reset link...";
+
+
+    const { error } =
+        await supabase.auth.resetPasswordForEmail(
+            email,
+            {
+                redirectTo:
+                "https://hamidfurqan918-svg.github.io/StudyVision/login.html"
+            }
+        );
+
+
+    if(error){
+
+        message.innerText =
+            error.message;
+
+        return;
+    }
+
+
+    message.innerText =
+        "Reset link sent! Check your email.";
+
+};
+
+
+// PASSWORD RECOVERY
+
+supabase.auth.onAuthStateChange(
+    async function(event){
+
+        if(event === "PASSWORD_RECOVERY"){
+
+            document.getElementById("loginSection").style.display = "none";
+            document.getElementById("signupSection").style.display = "none";
+            document.getElementById("forgotSection").style.display = "none";
+            document.getElementById("resetSection").style.display = "block";
+
+            document.getElementById("message").innerText =
+                "Enter your new password.";
+
+        }
+
+    }
+);
+
+
+// UPDATE PASSWORD
+
+window.updatePassword = async function(){
+
+    const newPassword =
+        document.getElementById("newPassword").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if(!newPassword || !confirmPassword){
+
+        message.innerText =
+            "Please fill both password fields.";
+
+        return;
+    }
+
+
+    if(newPassword.length < 6){
+
+        message.innerText =
+            "Password must be at least 6 characters.";
+
+        return;
+    }
+
+
+    if(newPassword !== confirmPassword){
+
+        message.innerText =
+            "Passwords do not match.";
+
+        return;
+    }
+
+
+    message.innerText =
+        "Updating password...";
+
+
+    const { error } =
+        await supabase.auth.updateUser({
+
+            password:newPassword
+
+        });
+
+
+    if(error){
+
+        message.innerText =
+            error.message;
+
+        return;
+    }
+
+
+    message.innerText =
+        "Password updated successfully!";
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "index.html";
+
+    },1500);
+
+};
+
+
+// CHECK SESSION
 
 const { data } =
     await supabase.auth.getSession();
